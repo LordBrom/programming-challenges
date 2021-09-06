@@ -1,6 +1,6 @@
 """
 ID: mills.n2
-LANG: PYTHON2
+LANG: PYTHON3
 TASK: ride
 """
 
