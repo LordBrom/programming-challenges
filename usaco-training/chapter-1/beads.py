@@ -4,116 +4,113 @@ LANG: PYTHON3
 TASK: beads
 """
 
-def rotate_necklace(necklace):
-	firstIndex = 0
-	firstBead = necklace[firstIndex]
-	while firstBead == 'w':
-		firstIndex += 1
-		firstBead = necklace[firstIndex]
-
-	index = firstIndex + 1
-	nextBead = necklace[index]
-	while firstBead == nextBead or nextBead == 'w':
-		index += 1
-		nextBead = necklace[index]
-	return necklace[index:] + necklace[0:index]
-
-def color_beads(necklace):
-	wPos = necklace.find('w', 0)
-	while wPos != -1:
-		lIndex = 1
-		leftColor = necklace[wPos - lIndex]
-		while leftColor == 'w':
-			lIndex -= 1
-			if wPos - lIndex == len(necklace):
-				lIndex = 0
-			leftColor = necklace[lIndex]
-
-		rIndex = wPos + 1
-		if rIndex == len(necklace):
-			rIndex = 0
-		rightColor = necklace[rIndex]
-		while rightColor == 'w':
-			rIndex += 1
-			if rIndex == len(necklace):
-				rIndex = 0
-			rightColor = necklace[rIndex]
-		if leftColor == rightColor:
-			necklace = necklace[0:wPos] + leftColor + necklace[wPos+1:]
-		wPos = necklace.find('w', wPos + 1)
-	return necklace
-
-def count_beads(necklace):
-	result = []
-	currentBead = necklace[0]
-	currentCount = 0
-	for b in necklace:
-		if b == currentBead:
-			currentCount += 1
+class Necklace:
+	def __init__(self, beads):
+		self.beads = beads
+		self.oneColor = False
+		if self.beads.find('r') == -1 or self.beads.find('b') == -1:
+			self.oneColor = True
 		else:
-			if currentBead == 'w':
-				result.append('w' + str(currentCount))
+			self.color_white_beads()
+			self.rotate()
+
+	def next_bead_pos(self, pos):
+		if pos + 1 >= len(self.beads):
+			return 0
+		return pos + 1
+
+	def prev_bead_pos(self, pos):
+		if pos - 1 == 0:
+			return len(self.beads) - 1
+		return pos - 1
+
+	def next_non_white_bead_pos(self, pos):
+		index = self.next_bead_pos(pos)
+		while index != pos:
+			if (self.beads[index] != 'w'):
+				return index
+			index = self.next_bead_pos(index)
+		return -1
+
+	def prev_non_white_bead_pos(self, pos):
+		index = self.prev_bead_pos(pos)
+		while index != pos:
+			if (self.beads[index] != 'w'):
+				return index
+			index = self.prev_bead_pos(index)
+		return -1
+
+	def next_diff_color_bead_pos(self, pos):
+		color = self.beads[pos]
+		index = self.next_bead_pos(pos)
+		while index != pos:
+			if (self.beads[index] != color):
+				return index
+			index = self.next_bead_pos(index)
+		return -1
+
+	def color_white_beads(self):
+		wPos = self.beads.find('w', 0)
+		while wPos != -1:
+			leftColor = self.beads[self.prev_non_white_bead_pos(wPos)]
+			rightColor = self.beads[self.next_non_white_bead_pos(wPos)]
+
+			if leftColor == rightColor:
+				self.beads = self.beads[0:wPos] + leftColor + self.beads[wPos+1:]
+			wPos = self.beads.find('w', wPos + 1)
+
+	def rotate(self):
+		firstIndex = self.next_non_white_bead_pos(-1)
+		index = self.next_diff_color_bead_pos(firstIndex)
+		while self.beads[index] == 'w':
+			index = self.next_diff_color_bead_pos(index)
+		self.beads = self.beads[index:] + self.beads[0:index]
+
+	def count_beads_from_pos(self, startPos):
+		result = 0
+		nonWhiteCount = 0
+		nextPos = startPos
+		while nonWhiteCount < 2:
+			color = self.beads[nextPos]
+			lastPos = nextPos
+			nextPos = self.next_diff_color_bead_pos(lastPos)
+			if color != 'w':
+				nonWhiteCount += 1
+			if (nextPos < lastPos):
+				result += len(self.beads) - lastPos
 			else:
-				result.append(currentCount)
-			currentBead = b
-			currentCount = 1
+				result += abs(nextPos - lastPos)
 
-	if currentBead == 'w':
-		result.append('w' + str(currentCount))
-	else:
-		result.append(currentCount)
-	return result
+		if (self.beads[nextPos] == 'w'):
+			lastPos = nextPos
+			nextPos = self.next_diff_color_bead_pos(lastPos)
+			if (nextPos < lastPos):
+				result += len(self.beads) - lastPos
+			else:
+				result += abs(nextPos - lastPos)
 
+		return result
+
+	def count_beads(self):
+		index = 0
+		result = 0
+		if self.oneColor:
+			return len(self.beads)
+		while 1:
+			result = max(result, self.count_beads_from_pos(index))
+			nextIndex = self.next_diff_color_bead_pos(index)
+			if nextIndex < index:
+				break
+			index = nextIndex
+
+		return min(result, len(self.beads))
 
 inFile = open("beads.in", "r").read().split("\n")
 inFile.pop()
 outFile = open("beads.out", "w")
 beadCount = int(inFile[0])
-necklace = inFile[1]
 
-if necklace.find('r') == -1 or necklace.find('b') == -1:
-	result = beadCount
-else:
-	result = 0
+necklace = Necklace(inFile[1])
 
-	necklace = color_beads(necklace)
-
-	necklace = rotate_necklace(necklace)
-
-	countedBeads = count_beads(necklace)
-
-	for i in range(len(countedBeads)):
-		counted = 0
-
-		firstI = i
-		if str(countedBeads[firstI])[0] == 'w':
-			counted += int(countedBeads[firstI][1:])
-			firstI += 1
-
-		if firstI == len(countedBeads):
-			firstI = 0
-
-		counted += countedBeads[firstI]
-
-		nextI = firstI + 1
-		if nextI == len(countedBeads):
-			nextI = 0
-		while str(countedBeads[nextI])[0] == 'w':
-			counted += int(countedBeads[nextI][1:])
-			nextI += 1
-			if nextI == len(countedBeads):
-				nextI = 0
-
-		lastI = nextI + 1
-		if lastI == len(countedBeads):
-			lastI = 0
-
-		while str(countedBeads[lastI])[0] == 'w':
-			counted += int(countedBeads[lastI][1:])
-			lastI += 1
-			if lastI == len(countedBeads):
-				lastI = 0
-		result = max(result, counted + countedBeads[nextI])
-
-outFile.write(str(min(result, beadCount)) + "\n")
+outFile.write(str(necklace.count_beads()) + "\n")
 outFile.close()
