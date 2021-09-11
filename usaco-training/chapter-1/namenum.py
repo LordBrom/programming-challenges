@@ -4,7 +4,7 @@ LANG: PYTHON3
 TASK: namenum
 """
 
-NAMES = open("dict.txt", "r").read().split("\n")
+names = open("dict.txt", "r").read().split("\n")
 inFile = open("namenum.in", "r").read().split("\n")
 inFile.pop()
 outFile = open("namenum.out", "w")
@@ -13,28 +13,27 @@ tagNumber = inFile[0]
 
 lookUp = [[], [], ['A','B','C'], ['D','E','F'], ['G','H','I'], ['J','K','L'], ['M','N','O'], ['P','R','S'], ['T','U','V'], ['W','X','Y']]
 
-letterOptions = []
-AVAILABLENAMES = []
+LETTEROPTIONS = []
 
 for num in tagNumber:
-	letterOptions.append(lookUp[int(num)])
+	LETTEROPTIONS.append(lookUp[int(num)])
 
-def get_names(letterOptions, index = 0, name=""):
-	if (index >= len(letterOptions)):
-		if name in NAMES:
-			AVAILABLENAMES.append(name)
-		return
+def filterNames(name):
+	if (len(LETTEROPTIONS) != len(name)):
+		return False
 
-	for l in letterOptions[index]:
-		get_names(letterOptions, index + 1, name + l)
+	for i in range(len(name)):
+		if (not name[i] in LETTEROPTIONS[i]):
+			return False
+	return True
 
-	return
+namesAvailable = filter(filterNames, names)
 
-get_names(letterOptions)
-
-for name in sorted(AVAILABLENAMES):
+found = False
+for name in sorted(namesAvailable):
+	found = True
 	outFile.write(name.upper() + '\n')
-if len(AVAILABLENAMES) == 0:
+if not found:
 	outFile.write('NONE\n')
 
 outFile.close()
