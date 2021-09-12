@@ -25,6 +25,7 @@ def filterNames(name):
 	for i in range(len(name)):
 		if (not name[i] in LETTEROPTIONS[i]):
 			return False
+
 	return True
 
 namesAvailable = filter(filterNames, names)
