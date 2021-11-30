@@ -1,9 +1,12 @@
 import day2 as Day
 
 
-inFile = open("testInputs/test1.in", "r").read()
-# print(str(Day.part1(inFile)))
+inFile = open("testInputs/test1.in", "r").read().split("\n")
+inFile.pop()
+# print(str(Day.part2(inFile)))
 
+
+# exit()
 
 day = "2"
 inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
