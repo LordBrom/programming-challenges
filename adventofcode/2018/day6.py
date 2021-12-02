@@ -18,6 +18,24 @@ class Grid:
         for p in range(len(self.points)):
             self.grid[self.points[p][0]][self.points[p][1]] = [p, 0]
 
+    def print_grid(self, part1=True):
+        nearPoints = self.count_near_points()
+        for x in range(len(self.grid)):
+            rowStr = ""
+            for y in range(len(self.grid[x])):
+                if part1:
+                    if (self.grid[x][y][1] == -1):
+                        rowStr += " ."
+                    else:
+                        rowStr += " " + str(self.grid[x][y][0]) + ""
+                else:
+                    if not [x, y] in nearPoints:
+                        rowStr += " ."
+                    else:
+                        rowStr += " #"
+
+            print(rowStr)
+
     def fill_areas(self):
         for i in range(len(self.grid)):
             for j in range(len(self.grid[i])):
@@ -31,16 +49,6 @@ class Grid:
                         self.grid[i][j][1] = dist
                     elif self.grid[i][j][1] == dist:
                         self.grid[i][j][0] = "x"
-
-    def print_grid(self):
-        for x in self.grid:
-            rowStr = ""
-            for y in x:
-                if (y[1] == -1):
-                    rowStr += " ."
-                else:
-                    rowStr += " " + str(y[0]) + ""
-            print(rowStr)
 
     def count_points(self):
         results = {}
@@ -59,6 +67,17 @@ class Grid:
         for i in infResults:
             results.pop(i, None)
 
+        return results
+
+    def count_near_points(self, threshold=10000):
+        results = []
+        for x in range(len(self.grid)):
+            for y in range(len(self.grid[x])):
+                pointDistTotal = 0
+                for p in self.points:
+                    pointDistTotal += distance(p, [x, y])
+                if pointDistTotal < threshold:
+                    results.append([x, y])
         return results
 
 
@@ -82,4 +101,5 @@ def part1(input):
 
 
 def part2(input):
-    return "not implemented"
+    grid = Grid(parseInput(input))
+    return len(grid.count_near_points())
