@@ -1,7 +1,7 @@
-import day1 as Day
+import day2 as Day
 
 
-day = "1"
+day = "2"
 
 #inFile = open("testInputs/test1.in", "r").read().split("\n")
 inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
