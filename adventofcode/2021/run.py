@@ -1,10 +1,9 @@
 import time
-import day7 as Day
+import day3 as Day
 
-day = "7"
+day = "3"
 
 runTest = input("(1) Run actual; (2/else) Run test: ")
-
 runPart1 = input("Run part 1 (y)/else: ")
 
 if runTest == "1":
@@ -17,22 +16,26 @@ inFile.pop()
 def outputAnswer(part, answer, time):
     timeStr = str("{:,.0f}".format(time)) + " ms"
     print("| Part {} | {} | {} |".format(
-        part, answer.ljust(50, " "), timeStr.ljust(30, " ")))
+        part, answer.ljust(50, " "), timeStr.rjust(15, " ")))
 
 
 def timeMs():
     return int(round(time.time() * 1000))
 
 
-print("-" * 96)
-print("| Day {}  | Answer{} | Run Time{} |".format(day, " " * 44, " " * 22))
-print("-" * 96)
+def printLine():
+    print("-" * 81)
+
+
+printLine()
+print("| Day {}  | Answer{} | Run Time{} |".format(day, " " * 44, " " * 7))
+printLine()
 
 if runPart1 == "":
     startTime = timeMs()
     outputAnswer("1", str(Day.part1(inFile.copy())), timeMs() - startTime)
-    print("-" * 96)
+    printLine()
 
 startTime = timeMs()
 outputAnswer("2", str(Day.part2(inFile.copy())), timeMs() - startTime)
-print("-" * 96)
+printLine()
