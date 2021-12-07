@@ -47,11 +47,13 @@ def part2(input):
         increaseTarget = minPos + increase
 
         result = 0
-        for h in input:
-            if h > reduceTarget:
-                result += sum(range((h - reduceTarget) + 1))
-            if h < increaseTarget:
-                result += sum(range((increaseTarget - h) + 1))
+        for i in input:
+            if i > reduceTarget:
+                n = (i - reduceTarget)
+                result += int((n*(n+1))/2)
+            if i < increaseTarget:
+                n = (increaseTarget - i)
+                result += int((n*(n+1))/2)
         minResult = min(minResult, result)
 
     return minResult
