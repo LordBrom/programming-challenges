@@ -1,7 +1,7 @@
 import time
-import day7 as Day
+import day2 as Day
 
-day = "7"
+day = "2"
 
 runTest = input("(1) Run actual; (2/else) Run test: ")
 runPart1 = input("Run part 1 (y)/else: ")
@@ -9,7 +9,7 @@ runPart1 = input("Run part 1 (y)/else: ")
 if runTest == "1":
     inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
 else:
-    inFile = open("testInputs/test1.in", "r").read().split("\n")
+    inFile = open("testInputs/day" + day + ".in", "r").read().split("\n")
 inFile.pop()
 
 
