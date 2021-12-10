@@ -1,7 +1,7 @@
 import time
-import day9 as Day
+import day10 as Day
 
-day = "9"
+day = "10"
 
 runTest = input("(1) Run actual; (2/else) Run test: ")
 runPart1 = input("Run part 1 (y)/else: ")
@@ -28,7 +28,7 @@ def printLine():
 
 
 printLine()
-print("| Day {}  | Answer{} | Run Time{} |".format(day, " " * 44, " " * 7))
+print("| Day {} | Answer{} | Run Time{} |".format(day, " " * 44, " " * 7))
 printLine()
 
 if runPart1 == "":
