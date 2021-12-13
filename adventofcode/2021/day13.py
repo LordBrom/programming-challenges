@@ -1,4 +1,18 @@
 
+def parseInput(data):
+    points = []
+    folds = []
+
+    for i in data:
+        if len(i) == 0:
+            continue
+        if i[0] == "f":
+            folds.append(i.split("along ")[1].split("="))
+        else:
+            points.append(i.split(","))
+    return [points, folds]
+
+
 def makeFold(paper, fold):
 
     for x in range(len(paper)):
@@ -50,19 +64,12 @@ def part1(data):
     for x in range(paperSize):
         paper.append([False for x in range(paperSize)])
 
-    for i in data:
-        if (i == ""):
-            break
-        point = i.split(",")
+    dataParsed = parseInput(data)
+
+    for point in dataParsed[0]:
         paper[int(point[1])][int(point[0])] = True
 
-    for i in data:
-        if (i == "" or i[0] != "f"):
-            continue
-        foldLine = i.split("along ")[1].split("=")
-        paper = makeFold(paper, foldLine)
-
-        break
+    paper = makeFold(paper, dataParsed[1][0])
 
     return countMarks(paper)
 
@@ -73,17 +80,13 @@ def part2(data):
     for x in range(paperSize):
         paper.append([False for x in range(paperSize)])
 
-    for i in data:
-        if (i == ""):
-            break
-        point = i.split(",")
+    dataParsed = parseInput(data)
+
+    for point in dataParsed[0]:
         paper[int(point[1])][int(point[0])] = True
 
-    for i in data:
-        if (i == "" or i[0] != "f"):
-            continue
-        foldLine = i.split("along ")[1].split("=")
-        paper = makeFold(paper, foldLine)
+    for fold in dataParsed[1]:
+        paper = makeFold(paper, fold)
 
     printPaper(paper)
     return "See Above"
