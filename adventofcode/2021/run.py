@@ -28,7 +28,10 @@ def printLine():
 
 
 printLine()
-print("| Day {} | Answer{} | Run Time{} |".format(day, " " * 44, " " * 7))
+dayDsp = day
+if len(day) == 1:
+    dayDsp += " "
+print("| Day {} | Answer{} | Run Time{} |".format(dayDsp, " " * 44, " " * 7))
 printLine()
 
 if runPart1 == "":

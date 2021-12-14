@@ -1,7 +1,12 @@
 
+from intcode import IntcodeComputer
+
+
 def part1(data):
-    return "not implemented"
+    comp = IntcodeComputer(data[0].split(","))
+    return comp.run(1)
 
 
 def part2(data):
-    return "not implemented"
+    comp = IntcodeComputer(data[0].split(","))
+    return comp.run(2)
