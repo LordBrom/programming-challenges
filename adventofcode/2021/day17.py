@@ -40,8 +40,8 @@ def part1(data):
 
     result = 0
 
-    for x in range(0, 100):
-        for y in range(yRange[0], 100):
+    for x in range(0, xRange[1] + 1):
+        for y in range(yRange[0], -yRange[0]):
             success, maxY = trackProbe([x, y], [xRange, yRange])
             if success:
                 result = max(result, maxY)
@@ -54,8 +54,9 @@ def part2(data):
     yRange = (int(reResult.group(3)), int(reResult.group(4)))
 
     results = 0
-    for x in range(0, 350):
-        for y in range(yRange[0], 350):
+
+    for x in range(0, xRange[1] + 1):
+        for y in range(yRange[0], -yRange[0]):
             if trackProbe([x, y], [xRange, yRange])[0]:
                 results += 1
     return results
