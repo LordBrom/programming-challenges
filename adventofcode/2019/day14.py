@@ -32,12 +32,53 @@ class Recipe():
 
         reOutStr = "([0-9]+) ([A-Z]+)"
         reOutput = re.search(reOutStr, splitLine[1])
-
         self.output = [int(reOutput.group(1)), reOutput.group(2)]
+
+    def produceAmount(self, dictionary, amount, inventory={}, space=""):
+        timesProduced = math.ceil(amount / self.output[0])
+        self.debugPrint([space, "producing", amount, self.output[1]])
+        self.debugPrint([space, "start inventory", inventory])
+
+        requirements = {}
+        newRequirements = {}
+        for i in self.input:
+
+            self.debugPrint([space, "needs", i[0] * timesProduced, i[1]])
+
+            if i[1] == "ORE":
+                newRequirements["ORE"] = i[0] * timesProduced
+            else:
+                inputNeeded = i[0] * timesProduced
+                if i[1] in inventory and inventory[i[1]] != 0:
+                    leftOversUsed = min(inputNeeded, inventory[i[1]])
+                    inputNeeded -= leftOversUsed
+                    inventory[i[1]] -= leftOversUsed
+                    self.debugPrint([space, "Using", leftOversUsed, "from inventory",
+                                    inventory[i[1]], "leftovers remain"])
+
+                if inputNeeded != 0:
+                    newRequirements, inventory = dictionary[i[1]].produceAmount(
+                        dictionary, inputNeeded, inventory.copy(), space + "    ")
+
+            for r in newRequirements:
+                if not r in requirements:
+                    requirements[r] = 0
+                requirements[r] += newRequirements[r]
+
+        if not self.output[1] in inventory:
+            inventory[self.output[1]] = 0
+        remainder = (self.output[0] * timesProduced) - amount
+        inventory[self.output[1]] += remainder
+
+        self.debugPrint([space, "needs", requirements, "with",
+                        remainder, "left over"])
+
+        self.debugPrint([space, "end inventory", inventory])
+
+        return requirements, inventory
 
     def printRecipe(self):
         outStr = ""
-
         first = True
         for r in self.input:
             if not first:
@@ -46,71 +87,7 @@ class Recipe():
             first = False
         outStr += " => "
         outStr += str(self.output[0]) + " " + self.output[1]
-
         print(outStr)
-
-    def produceAmount(self, dictionary, amount, leftOvers={}, space=""):
-        timesProduced = math.ceil(amount / self.output[0])
-        self.debugPrint([space, "producing", amount, self.output[1]])
-
-        self.debugPrint([space, "total before leftOvers", leftOvers])
-
-        requirements = {}
-        resultLeftOvers = {}
-        newRequirements = {}
-        for i in self.input:
-
-            self.debugPrint([space, "needs", i[0] * timesProduced, i[1]])
-
-            leftOversUsed = 0
-            newLeftOvers = {}
-            if i[1] == "ORE":
-                newRequirements["ORE"] = i[0] * timesProduced
-            else:
-                inputNeeded = i[0] * timesProduced
-                if i[1] in leftOvers and leftOvers[i[1]] != 0:
-                    leftOversUsed = min(inputNeeded, leftOvers[i[1]])
-                    inputNeeded -= leftOversUsed
-                    leftOvers[i[1]] -= leftOversUsed
-                    if not i[1] in resultLeftOvers:
-                        resultLeftOvers[i[1]] = 0
-                    resultLeftOvers[i[1]] -= leftOversUsed
-                    self.debugPrint([space, "Using", leftOversUsed, "leftovers",
-                                    leftOvers[i[1]], "leftovers remain"])
-
-                if not i[1] in leftOvers:
-                    leftOvers[i[1]] = 0
-
-                if inputNeeded != 0:
-                    newRequirements, newLeftOvers = dictionary[i[1]].produceAmount(
-                        dictionary, inputNeeded, leftOvers.copy(), space + "  ")
-
-                for l in newLeftOvers:
-                    if not l in leftOvers:
-                        leftOvers[l] = 0
-                    if not l in resultLeftOvers:
-                        resultLeftOvers[l] = 0
-                    self.debugPrint(
-                        [space, 'Adding', newLeftOvers[l], l, "to left overs"])
-                    leftOvers[l] += newLeftOvers[l]
-                    resultLeftOvers[l] += newLeftOvers[l]
-
-            for r in newRequirements:
-                if not r in requirements:
-                    requirements[r] = 0
-                requirements[r] += newRequirements[r]
-
-        self.debugPrint([space, "total after leftOvers", leftOvers])
-
-        if not self.output[1] in resultLeftOvers:
-            resultLeftOvers[self.output[1]] = 0
-        resultLeftOvers[self.output[1]
-                        ] += (self.output[0] * timesProduced) - amount
-        self.debugPrint([space, "needs", requirements, "with",
-                        (self.output[0] * timesProduced) - amount, "left over"])
-        self.debugPrint([space, "total after leftOvers",
-                        leftOvers, resultLeftOvers])
-        return requirements, resultLeftOvers
 
     def debugPrint(self, debugstr):
         if self.debug:
@@ -121,10 +98,10 @@ class Recipe():
 
 
 def part1(data):
-    recipeDictionary = RecipeDictionary(data)
+    recipeDictionary = RecipeDictionary(data, True)
     # recipeDictionary.printDictionary()
     result, leftOvers = recipeDictionary.produceOutput(["FUEL", 1])
-    # print(leftOvers)
+    print(leftOvers)
     return result["ORE"]
 
 
