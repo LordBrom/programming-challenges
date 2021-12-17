@@ -3,10 +3,11 @@ import math
 
 
 class RecipeDictionary():
-    def __init__(self, data):
+    def __init__(self, data, debug=False):
+        self.debug = debug
         self.dictionary = {}
         for d in data:
-            newRecipe = Recipe(d)
+            newRecipe = Recipe(d, debug)
             self.dictionary[newRecipe.output[1]] = newRecipe
 
     def printDictionary(self):
@@ -18,7 +19,8 @@ class RecipeDictionary():
 
 
 class Recipe():
-    def __init__(self, inLine):
+    def __init__(self, inLine, debug):
+        self.debug = debug
         self.input = []
         self.output = []
 
@@ -49,13 +51,16 @@ class Recipe():
 
     def produceAmount(self, dictionary, amount, leftOvers={}, space=""):
         timesProduced = math.ceil(amount / self.output[0])
-        print(space, "producing", amount, self.output[1])
+        self.debugPrint([space, "producing", amount, self.output[1]])
+
+        self.debugPrint([space, "total before leftOvers", leftOvers])
 
         requirements = {}
+        resultLeftOvers = {}
         newRequirements = {}
         for i in self.input:
 
-            #print(space, "needs", i[0] * timesProduced, i[1])
+            self.debugPrint([space, "needs", i[0] * timesProduced, i[1]])
 
             leftOversUsed = 0
             newLeftOvers = {}
@@ -65,10 +70,13 @@ class Recipe():
                 inputNeeded = i[0] * timesProduced
                 if i[1] in leftOvers and leftOvers[i[1]] != 0:
                     leftOversUsed = min(inputNeeded, leftOvers[i[1]])
-                    print(space, "Using", leftOversUsed, "leftovers")
                     inputNeeded -= leftOversUsed
                     leftOvers[i[1]] -= leftOversUsed
-                    print(space, leftOvers[i[1]], "leftovers remain")
+                    if not i[1] in resultLeftOvers:
+                        resultLeftOvers[i[1]] = 0
+                    resultLeftOvers[i[1]] -= leftOversUsed
+                    self.debugPrint([space, "Using", leftOversUsed, "leftovers",
+                                    leftOvers[i[1]], "leftovers remain"])
 
                 if not i[1] in leftOvers:
                     leftOvers[i[1]] = 0
@@ -80,19 +88,36 @@ class Recipe():
                 for l in newLeftOvers:
                     if not l in leftOvers:
                         leftOvers[l] = 0
+                    if not l in resultLeftOvers:
+                        resultLeftOvers[l] = 0
+                    self.debugPrint(
+                        [space, 'Adding', newLeftOvers[l], l, "to left overs"])
                     leftOvers[l] += newLeftOvers[l]
+                    resultLeftOvers[l] += newLeftOvers[l]
 
             for r in newRequirements:
                 if not r in requirements:
                     requirements[r] = 0
                 requirements[r] += newRequirements[r]
 
-        if not self.output[1] in leftOvers:
-            leftOvers[self.output[1]] = 0
-        leftOvers[self.output[1]] += (self.output[0] * timesProduced) - amount
-        print(space, "needs", requirements, "with",
-              (self.output[0] * timesProduced) - amount, "left over")
-        return requirements, leftOvers
+        self.debugPrint([space, "total after leftOvers", leftOvers])
+
+        if not self.output[1] in resultLeftOvers:
+            resultLeftOvers[self.output[1]] = 0
+        resultLeftOvers[self.output[1]
+                        ] += (self.output[0] * timesProduced) - amount
+        self.debugPrint([space, "needs", requirements, "with",
+                        (self.output[0] * timesProduced) - amount, "left over"])
+        self.debugPrint([space, "total after leftOvers",
+                        leftOvers, resultLeftOvers])
+        return requirements, resultLeftOvers
+
+    def debugPrint(self, debugstr):
+        if self.debug:
+            outStr = ""
+            for i in debugstr:
+                outStr += str(i) + " "
+            print(outStr)
 
 
 def part1(data):
