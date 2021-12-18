@@ -1,8 +1,10 @@
 import math
+import random
 
 
 class SnailNum():
     def __init__(self, data, depth=0, parent=None):
+        self.randID = random.randint(1, 10000)
         self.first = None
         self.firstIsNum = None
         self.last = None
@@ -11,7 +13,7 @@ class SnailNum():
         self.parentSnailNum = parent
 
         data = data[1:-1]
-        lastStart = 1
+        lastStart = data.find(",", 1)
         if data[0] == "[":
             openPos = 1
             closePos = 1
@@ -22,13 +24,15 @@ class SnailNum():
                 closePos = nextClose + 1
                 nextOpen = data.find("[", openPos)
                 nextClose = data.find("]", closePos)
-            lastStart = nextClose + 1
+            lastStart = data.find(",", nextClose)
             self.first = SnailNum(data[0:nextClose + 1], depth + 1, self)
             self.firstIsNum = False
         else:
-            self.first = int(data[0])
+            # print(data[0:lastStart])
+            self.first = int(data[0:lastStart])
             self.firstIsNum = True
 
+        lastEnd = data.find("]", lastStart)
         if data[lastStart + 1] == "[":
             openPos = lastStart + 2
             closePos = lastStart + 2
@@ -43,7 +47,8 @@ class SnailNum():
                 data[lastStart + 1:nextClose + 1], depth + 1, self)
             self.lastIsNum = False
         else:
-            self.last = int(data[lastStart + 1])
+            # print(data[lastStart + 1:])
+            self.last = int(data[lastStart + 1:])
             self.lastIsNum = True
 
         pass
@@ -51,54 +56,120 @@ class SnailNum():
     def addition(self, snailNum):
         return SnailNum('[' + self.printNum(False) + ',' + snailNum.printNum(False) + ']')
 
-    def addFirst(self, amount):
+    def addFirst(self, amount, sameSide=True, goingUp=False):
         if self.firstIsNum:
             self.first += amount
         else:
-            self.first.addFirst(amount)
+            if goingUp:
+                self.first.addFirst(amount, sameSide, goingUp)
+            elif self.depth != 0 and sameSide:
+                newSameSide = (
+                    not self.parentSnailNum.firstIsNum) and self.parentSnailNum.first.randID == self.randID
 
-    def addLast(self, amount):
+                self.parentSnailNum.addFirst(
+                    amount, newSameSide)
+            elif self.depth == 0:
+                pass
+            else:
+                self.first.addLast(
+                    amount, True, True)
+
+    def addLast(self, amount, sameSide=True, goingUp=False):
         if self.lastIsNum:
             self.last += amount
         else:
-            self.last.addLast(amount)
+            if goingUp:
+                self.last.addLast(amount, sameSide, goingUp)
+            elif self.depth != 0 and sameSide:
+                newSameSide = (
+                    not self.parentSnailNum.lastIsNum) and self.parentSnailNum.last.randID == self.randID
+                self.parentSnailNum.addLast(
+                    amount, newSameSide)
+            elif self.depth == 0:
+                pass
+            else:
+                self.last.addFirst(
+                    amount, True, True)
 
     def reduce(self):
+        current = self.printNum(False)
+        last = ""
+        step = 0
+        while True:
+            self.printNum()
+            step += 1
+            last = current
+            self.expload()
+            current = self.printNum(False)
+
+            if last != current:
+                continue
+
+            last = current
+            self.split()
+            # print("before", last)
+            current = self.printNum(False)
+
+            if last == current:
+                break
+
+    def expload(self):
         if not self.firstIsNum:
-            exp = self.first.reduce()
-            if exp != None and exp[1] != 0:
-                self.addLast(exp[1])
+            firstExploaded = self.first.expload()
+            if firstExploaded != None:
+                self.addLast(firstExploaded[1], False)
+                self.addFirst(firstExploaded[0])
                 self.firstIsNum = True
                 self.first = 0
-                return (exp[0], 0)
 
         if not self.lastIsNum:
-            exp = self.last.reduce()
-            if exp != None and exp[0] != 0:
-                self.addFirst(exp[0])
+            lastExploaded = self.last.expload()
+            if lastExploaded != None:
+                self.addLast(lastExploaded[1])
+                self.addFirst(lastExploaded[0], False)
                 self.lastIsNum = True
                 self.last = 0
-                return (0, exp[1])
 
         if self.depth >= 4:
-            firstResult = 0
-            lastResult = 0
-            if self.firstIsNum:
-                firstResult = self.first
-            else:
-                pass
-
-            return (firstResult, lastResult)
+            return (self.first, self.last)
 
     def split(self):
-        if self.firstIsNum and self.first >= 10:
+        didSplit = False
+        if not didSplit and self.firstIsNum and self.first >= 10:
             self.firstIsNum = False
             self.first = SnailNum(
-                "[" + str(math.floor(self.first / 2)) + "," + str(math.floor(self.first / 2)) + "]")
-        if self.lastIsNum and self.last >= 10:
+                "[" + str(math.floor(self.first / 2)) + "," + str(math.ceil(self.first / 2)) + "]")
+            self.first.depth = self.depth + 1
+            self.first.parentSnailNum = self
+            didSplit = True
+        elif not didSplit and not self.firstIsNum:
+            didSplit = self.first.split()
+
+        if not didSplit and self.lastIsNum and self.last >= 10:
             self.lastIsNum = False
             self.last = SnailNum(
-                "[" + str(math.floor(self.last / 2)) + "," + str(math.floor(self.last / 2)) + "]")
+                "[" + str(math.floor(self.last / 2)) + "," + str(math.ceil(self.last / 2)) + "]")
+            self.last.depth = self.depth + 1
+            self.last.parentSnailNum = self
+            didSplit = True
+        elif not didSplit and not self.lastIsNum:
+            didSplit = self.last.split()
+        return didSplit
+
+    def getMagnitude(self):
+        lastNum = 0
+        firstNum = 0
+        if self.firstIsNum:
+            firstNum = self.first
+        else:
+            firstNum = self.first.getMagnitude()
+
+        if self.lastIsNum:
+            lastNum = self.last
+        else:
+            lastNum = self.last.getMagnitude()
+
+        return (3 * firstNum) + (2 * lastNum)
 
     def printNum(self, printStr=True):
         outStr = "["
@@ -122,13 +193,16 @@ class SnailNum():
 
 def part1(data):
     result = SnailNum(data[0])
+
     for i in range(1, len(data)):
-        result.printNum()
+        startNum = result.printNum(False)
+        newNum = SnailNum(data[i])
         result = result.addition(SnailNum(data[i]))
-        result.printNum()
         result.reduce()
-    result.reduce()
-    result.printNum()
+        print(startNum, " + ", newNum.printNum(False),
+              " = ", result.printNum(False))
+
+    return result.getMagnitude()
 
 
 def part2(data):
