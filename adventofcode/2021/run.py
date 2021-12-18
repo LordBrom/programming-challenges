@@ -1,7 +1,7 @@
 import time
-import day17 as Day
+import day18 as Day
 
-day = "17"
+day = "18"
 
 runTest = input("(1) Run actual; (2/else) Run test: ")
 runPart1 = input("Run part 1 (y)/else: ")
