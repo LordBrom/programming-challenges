@@ -153,13 +153,19 @@ class Scanner():
                 for beacon in self.beacons:
                     offset = otherBeacon.diff(beacon)
                     count = 0
+                    checked = 0
+                    minToCheck = (
+                        len(otherScanner.beaconRotations[rotation]) - 12) + 1
                     for check in otherScanner.beaconRotations[rotation]:
+                        checked += 1
                         if check.point(offset) in self.beacons:
                             count += 1
                             if count >= 12:
                                 self.addBeacons(
                                     otherScanner.beaconRotations[rotation], offset)
                                 return True, offset
+                        if checked >= minToCheck + count:
+                            break
         return False, None
 
     def addBeacons(self, beacons, offset=[0, 0, 0]):
@@ -172,13 +178,21 @@ class Scanner():
 def part1(data):
     scanners = parseData(data)
     scannersFound = [0]
+    noneFound = True
     while len(scannersFound) < len(scanners):
+        print("Starting new loop", end="", flush=True)
         for i in range(1, len(scanners)):
             if not i in scannersFound:
+                print(". ", end="", flush=True)
                 scannerOffset = scanners[0].countOverlap(scanners[i])
                 if scannerOffset[0]:
+                    print()
+                    print("adding", i, "at", scannerOffset[1])
+                    noneFound = False
                     scannersFound.append(i)
                     break
+        if noneFound:
+            print("none found")
 
     return len(scanners[0].beacons)
 
