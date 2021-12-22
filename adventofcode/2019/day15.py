@@ -2,7 +2,7 @@ from intcode import IntcodeComputer
 import sys
 
 
-class Droid():
+class Droid:
     def __init__(self, intCode) -> None:
         self.comp = IntcodeComputer(intCode)
         self.x = 0
@@ -119,8 +119,7 @@ class Droid():
                 if lastPos == [0, 0]:
                     return
 
-                diff = [lastPos[0] - self.path[-1][0],
-                        lastPos[1] - self.path[-1][1]]
+                diff = [lastPos[0] - self.path[-1][0], lastPos[1] - self.path[-1][1]]
 
                 if diff[1] > 0:
                     self.takeStep(1)
@@ -186,7 +185,7 @@ def part1(data):
         stepByStep = input("Show each step(y/)?")
         displayMap = input("Display end map(y/)?")
         droid.mapFloor(stepByStep)
-        if (displayMap.lower() == "y" or displayMap.lower() == "1"):
+        if displayMap.lower() == "y" or displayMap.lower() == "1":
             print(droid)
     return len(droid.pathToO2) - 1
 

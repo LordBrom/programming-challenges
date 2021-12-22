@@ -1,7 +1,7 @@
 import time
-import day15 as Day
+import day16 as Day
 
-day = "15"
+day = "16"
 
 runTest = input("(1) Run test; (2/else) Run actual: ")
 runPart1 = input("Run part 1 (y)/else: ")
@@ -12,11 +12,21 @@ else:
     inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
 inFile.pop()
 
+if len(inFile) == 1:
+    inPart1 = inFile.copy()[0]
+    inPart2 = inFile.copy()[0]
+else:
+    inPart1 = inFile.copy()
+    inPart2 = inFile.copy()
+
 
 def outputAnswer(part, answer, time):
     timeStr = str("{:,.0f}".format(time)) + " ms"
-    print("| Part {} | {} | {} |".format(
-        part, answer.ljust(50, " "), timeStr.rjust(15, " ")))
+    print(
+        "| Part {} | {} | {} |".format(
+            part, answer.ljust(50, " "), timeStr.rjust(15, " ")
+        )
+    )
 
 
 def timeMs():
@@ -36,9 +46,9 @@ printLine()
 
 if runPart1 == "":
     startTime = timeMs()
-    outputAnswer("1", str(Day.part1(inFile.copy())), timeMs() - startTime)
+    outputAnswer("1", str(Day.part1(inPart1)), timeMs() - startTime)
     printLine()
 
 startTime = timeMs()
-outputAnswer("2", str(Day.part2(inFile.copy())), timeMs() - startTime)
+outputAnswer("2", str(Day.part2(inPart2)), timeMs() - startTime)
 printLine()
