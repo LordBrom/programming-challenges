@@ -1,7 +1,7 @@
 
 def part1(data):
-    return "not implemented"
+    return "pen and paper..."
 
 
 def part2(data):
-    return "not implemented"
+    return "pen and paper..."
