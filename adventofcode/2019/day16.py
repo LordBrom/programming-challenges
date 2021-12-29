@@ -11,25 +11,24 @@ class FlawedFrequencyTransmission():
     def __str__(self) -> str:
         return str(self.step) + ": " + self.transmission
 
-    # @lru_cache(maxsize=None)
-    def takeSteps(self, steps=100, debug=0):
+    def takeSteps(self, steps=100):
         for s in range(steps):
-            if debug > 0:
-                print("Starting step", s)
-            if debug > 1:
-                print("With transmission", self.transmission)
-            newTransmission = ""
-            for i in range(1, len(self.transmission) + 1):
-                patternPointer = 1
-                stepSum = 0
-                for n in self.transmission:
-                    pos = math.floor((patternPointer %
-                                      (len(self.pattern * i))) / i)
-                    stepSum += int(n) * self.pattern[pos]
-                    patternPointer += 1
-                newTransmission += str(abs(stepSum) % 10)
-            self.step += 1
-            self.transmission = newTransmission
+            self.takeStep()
+
+    # @lru_cache(maxsize=None)
+    def takeStep(self):
+        newTransmission = ""
+        for i in range(1, len(self.transmission) + 1):
+            patternPointer = 1
+            stepSum = 0
+            for n in self.transmission:
+                pos = math.floor((patternPointer %
+                                  (len(self.pattern * i))) / i)
+                stepSum += int(n) * self.pattern[pos]
+                patternPointer += 1
+            newTransmission += str(abs(stepSum) % 10)
+        self.step += 1
+        self.transmission = newTransmission
 
 
 def part1(data):
