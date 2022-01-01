@@ -55,6 +55,4 @@ def part2(input):
                 bestRemoved = inputCheck
                 best = input[i]
 
-    print(best)
-
     return bestRemoved
