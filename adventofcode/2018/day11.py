@@ -1,25 +1,45 @@
+import math
 
 
-def checkPowerLevels(powerLevels):
+def checkPowerSquare(powerLevels, x, y, size):
+    powerSum = 0
+    lowerRange = -math.floor(size / 2)
+    upperRange = math.ceil(size / 2)
+    for difX in range(lowerRange, upperRange):
+        for difY in range(lowerRange, upperRange):
+            checkX = x + difX
+            checkY = y + difY
+            if checkX < 0 or checkX >= len(powerLevels):
+                return 0
+            if checkY < 0 or checkY >= len(powerLevels[x]):
+                return 0
+            powerSum += powerLevels[checkX][checkY]
+    return powerSum
+
+
+def checkPowerLevels(powerLevels, allSizes=False):
     best = 0
     bestPos = None
     bestSize = None
     for x in range(len(powerLevels)):
         for y in range(len(powerLevels[x])):
-            powerSum = 0
-            for difX in range(-1, 2):
-                for difY in range(-1, 2):
-                    checkX = x + difX
-                    checkY = y + difY
-                    if checkX < 0 or checkX >= len(powerLevels):
-                        continue
-                    if checkY < 0 or checkY >= len(powerLevels[x]):
-                        continue
-                    powerSum += powerLevels[checkX][checkY]
-            if best < powerSum:
-                best = powerSum
-                bestPos = [x, y]
-    return (bestPos, best, bestSize)
+            if not allSizes:
+                check = checkPowerSquare(powerLevels, x, y, 3)
+                if best < check:
+                    best = check
+                    bestPos = [x, y]
+                    bestSize = 3
+            else:
+                for r in range(1, 301):
+                    check = checkPowerSquare(powerLevels, x, y, r)
+                    if best < check:
+                        best = check
+                        bestPos = [x, y]
+                        bestSize = r
+
+    bestPos[0] -= math.floor(bestSize / 2) - 1
+    bestPos[1] -= math.floor(bestSize / 2) - 1
+    return (bestPos, bestSize, best)
 
 
 def calcPowerLevel(x, y, serial):
@@ -32,18 +52,23 @@ def calcPowerLevel(x, y, serial):
     return result - 5
 
 
-def part1(data):
+def parseInput(data):
     powerLevels = []
     for x in range(1, 301):
         rowLevels = []
         for y in range(1, 301):
             rowLevels.append(calcPowerLevel(x, y, int(data)))
         powerLevels.append(rowLevels)
+    return powerLevels
 
-    largestPos = checkPowerLevels(powerLevels)[0]
 
-    return str(largestPos[0]) + "," + str(largestPos[1])
+def part1(data):
+    powerLevels = parseInput(data)
+    largest = checkPowerLevels(powerLevels)
+    return "{},{}".format(largest[0][0], largest[0][1])
 
 
 def part2(data):
-    return "not implemented"
+    powerLevels = parseInput(data)
+    largest = checkPowerLevels(powerLevels, True)
+    return "{},{},{}".format(largest[0][0], largest[0][1], largest[2])
