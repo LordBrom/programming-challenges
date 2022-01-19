@@ -7,6 +7,7 @@ class HotChocolate():
         self.skill = skill
         self.elfOne = 0
         self.elfTwo = 1
+        self.skillPart2 = [int(x) for x in skill]
 
     def __str__(self) -> str:
         result = ""
@@ -19,49 +20,49 @@ class HotChocolate():
                 result += " {} ".format(self.recipe[i])
         return result
 
-    def learnRecipes(self, part2=False, debug=False):
-        while len(self.recipe) < int(self.skill) + 10:
-            self.doStep(debug)
-        return self.result(part2)
-
-    def doStep(self, debug=False):
+    def doRecpie(self, debug=False):
         if debug:
             print(self)
-        newRecpie = int(self.recipe[self.elfOne]) + \
-            int(self.recipe[self.elfTwo])
-        self.recipe += str(newRecpie)
-        self.elfOne += int(self.recipe[self.elfOne]) + 1
-        self.elfTwo += int(self.recipe[self.elfTwo]) + 1
+        newRecpie = self.recipe[self.elfOne] + self.recipe[self.elfTwo]
+        if newRecpie > 9:
+            self.recipe.append(math.floor(newRecpie / 10))
+            newRecpie %= 10
+        self.recipe.append(newRecpie)
+        self.elfOne += self.recipe[self.elfOne] + 1
+        self.elfTwo += self.recipe[self.elfTwo] + 1
         self.elfOne %= len(self.recipe)
         self.elfTwo %= len(self.recipe)
 
-    def result(self, part2=False):
+    def result(self):
         result = ""
         for i in range(10):
-            result += self.recipe[int(self.skill) + i]
-        if part2:
-            result = result[:5]
+            result += str(self.recipe[int(self.skill) + i])
         return result
 
     def checkSkill(self):
         if len(self.recipe) < len(self.skill):
             return False
 
-        if self.recipe[-len(self.skill):] == self.skill:
-            return True
+        if self.recipe[-len(self.skill):] == self.skillPart2:
+            return len(self.recipe) - len(self.skill)
+
+        if self.recipe[-2] == 1 and self.recipe[-(len(self.skill) + 1):-1] == self.skillPart2:
+            return (len(self.recipe) - len(self.skill)) - 1
+
+        return False
 
 
 def part1(data):
-    hotChocolate = HotChocolate("37", data)
-    return hotChocolate.learnRecipes()
+    hotChocolate = HotChocolate([3, 7], data)
+    while len(hotChocolate.recipe) < int(data) + 10:
+        hotChocolate.doRecpie()
+    return hotChocolate.result()
 
 
 def part2(data):
-    hotChocolate = HotChocolate("37", data)
-    while not hotChocolate.checkSkill():
-        hotChocolate.doStep()
-    return len(hotChocolate.recipe) - len(data)
-
-
-# 14131 - low
-# 41313 - low
+    hotChocolate = HotChocolate([3, 7], data)
+    result = False
+    while result == False:
+        hotChocolate.doRecpie()
+        result = hotChocolate.checkSkill()
+    return result
