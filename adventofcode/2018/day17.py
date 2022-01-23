@@ -45,22 +45,18 @@ class SandPit():
 
     def __str__(self) -> str:
         result = ""
-        outFile = open("outputs/day17.out", "w")
         for x in range(len(self.pit)):
             result += "\n"
-            rowOut = "\n"
             for y in range(len(self.pit[x])):
                 if x == 0 and y + self.pitOffsetY == 500:
                     result += "+"
-                    rowOut += "+"
                 else:
                     result += self.pit[x][y]
-                    rowOut += self.pit[x][y]
-            outFile.write(rowOut)
-        outFile.close()
         return result
 
     def spreadWater(self, x, y):
+        print(self)
+        input()
         if x + 1 >= len(self.pit):
             self.pit[x][y] = "|"
             return True
