@@ -38,10 +38,30 @@ class Cave():
         self.geologicIndex = None
         self.type = None
         self.distance = sys.maxsize
-        self.gear = None
         self.gearOptions = None
         self.cameFromCave = None
         self.isTarget = False
+        self.geoSet = False
+
+    def __eq__(self, __o: object) -> bool:
+        if __o == None or __o.x == None or __o.y == None:
+            return False
+        return __o.x == self.x and __o.y == self.y
+
+    def __lt__(self, __o: object) -> bool:
+        if __o == None or __o.distance == None:
+            return False
+        return self.distance < __o.distance
+
+    def __str__(self) -> str:
+        if self.x == 0 and self.y == 0:
+            return "{} M;T  ".format(TYPE_STR[self.type])
+        if self.isTarget:
+            return "{} DEST ".format(TYPE_STR[self.type])
+        if self.distance == sys.maxsize:
+            return "{}--    ".format(TYPE_STR[self.type])
+        else:
+            return "{}{:02d};{}/{}".format(TYPE_STR[self.type], self.distance, self.gearOptions[0].name[0] if self.gearOptions != None else "_", self.gearOptions[1].name[0] if self.gearOptions != None and len(self.gearOptions) == 2 else "_")
 
     def setGeoData(self):
         if [self.x, self.y] == self.target:
@@ -61,66 +81,77 @@ class Cave():
 
         self.erosionLevel = (self.geologicIndex + self.depth) % 20183
         self.type = CaveType(self.erosionLevel % 3)
+        self.geoSet = True
 
     def getErosionLevel(self):
-        if self.erosionLevel == None:
+        if not self.geoSet:
             self.setGeoData()
         return self.erosionLevel
-
-    def __eq__(self, __o: object) -> bool:
-        if __o == None or __o.x == None or __o.y == None:
-            return False
-        return __o.x == self.x and __o.y == self.y
-
-    def __lt__(self, __o: object) -> bool:
-        if __o == None or __o.distance == None:
-            return False
-        return self.distance < __o.distance
-
-    def __str__(self) -> str:
-        if self.x == 0 and self.y == 0:
-            return "{} MT    ".format(TYPE_STR[self.type])
-        if self.isTarget:
-            return "{}  T    ".format(TYPE_STR[self.type])
-        if self.distance == sys.maxsize:
-            return "{}--/    ".format(TYPE_STR[self.type])
-        else:
-            return "{}{:02d}{};{}/{}".format(TYPE_STR[self.type], self.distance, self.gear.name[0] if self.gear != None else "/", self.gearOptions[0].name[0] if self.gearOptions != None else "_", self.gearOptions[1].name[0] if self.gearOptions != None and len(self.gearOptions) == 2 else "_")
 
 
 class CaveSystem():
     def __init__(self, depth, target) -> None:
         self.target = target
         self.depth = depth
-
-        self.caves = []
-        for x in range(depth):
-            caveRow = []
-            for y in range(depth):
-                caveRow.append(
-                    Cave(x, y, depth, target, self.caves[x-1][y] if x > 0 else None, caveRow[-1] if y > 0 else None))
-            self.caves.append(caveRow)
-
         self.activeCave = None
+
+        self.caves = [[Cave(0, 0, depth, target, None, None)]]
+        for x in range(target[0]):
+            self.addCol()
+
+        for y in range(target[1]):
+            self.addRow()
 
     def __str__(self) -> str:
         result = ""
-        for x in range(self.target[0] + 6):
+        for x in range(min(len(self.caves), self.target[0] + 6)):
             rowStr = ""
-            for y in range(self.target[1] + 6):
-                rowStr += str(self.caves[y][x])
-                if [y, x] == self.activeCave:
+            for y in range(min(len(self.caves[x]), self.target[1] + 6)):
+                if not self.caves[x][y].geoSet:
+                    self.caves[x][y].setGeoData()
+                rowStr += str(self.caves[x][y])
+                if [x, y] == self.activeCave:
                     rowStr += "X "
                 else:
                     rowStr += "  "
             result += "\n" + rowStr
         return result
 
+    def addCol(self):
+        y = len(self.caves[0])
+        for x in range(len(self.caves)):
+
+            upCave = None
+            leftCave = None
+            if x > 0:
+                upCave = self.caves[x-1][y]
+            if y > 0:
+                leftCave = self.caves[x][y-1]
+
+            self.caves[x].append(
+                Cave(x, y, self.depth, self.target, upCave, leftCave))
+
+    def addRow(self):
+        x = len(self.caves)
+        newRow = []
+        for y in range(len(self.caves[0])):
+
+            upCave = None
+            leftCave = None
+            if x > 0:
+                upCave = self.caves[x-1][y]
+            if y > 0:
+                leftCave = newRow[-1]
+
+            newRow.append(
+                Cave(x, y, self.depth, self.target, upCave, leftCave))
+        self.caves.append(newRow)
+
     def determineDanger(self):
         result = 0
-        for x in range(self.target[0] + 1):
-            for y in range(self.target[1] + 1):
-                if self.caves[x][y].type == None:
+        for x in range(self.target[1] + 1):
+            for y in range(self.target[0] + 1):
+                if not self.caves[x][y].geoSet:
                     self.caves[x][y].setGeoData()
                 result += self.caves[x][y].type.value
 
@@ -133,13 +164,13 @@ class CaveSystem():
         caveQueue = []
         currentCave = self.caves[0][0]
         currentCave.distance = 0
-        currentCave.gear = Gear.TORCH
         currentCave.gearOptions = [Gear.TORCH]
-        caveQueue = [currentCave]
-        # caveQueue.append(self.caves[0][0])
-        self.activeCave = [currentCave.x, currentCave.y]
+        caveQueue = []
 
-        while currentCave != self.caves[self.target[0]][self.target[1]]:
+        while currentCave != self.caves[self.target[1]][self.target[0]]:
+            #self.activeCave = [currentCave.x, currentCave.y]
+            # print(self)
+            # input()
             for diffX in range(-1, 2):
                 for diffY in range(-1, 2):
                     if diffX == 0 and diffY == 0 or diffX != 0 and diffY != 0:
@@ -149,6 +180,11 @@ class CaveSystem():
                     y = diffY + currentCave.y
                     if x < 0 or y < 0 or x >= self.depth or y >= self.depth:
                         continue
+
+                    if x >= len(self.caves):
+                        self.addRow()
+                    if y >= len(self.caves[0]):
+                        self.addCol()
 
                     newCave = self.caves[x][y]
 
@@ -165,17 +201,11 @@ class CaveSystem():
 
                     if not newCave in visited and not newCave in caveQueue:
                         heapq.heappush(caveQueue, newCave)
-                        caveQueue.append(newCave)
-            caveQueue.remove(currentCave)
+
             visited.append(currentCave)
-
             currentCave = heapq.heappop(caveQueue)
-            #currentCave = caveQueue[0]
-            # for cave in caveQueue:
-            #    if cave.distance < currentCave.distance:
-            #        currentCave = cave
-
             prevGearOptions = currentCave.cameFromCave.gearOptions
+
             # 0 match
             if not ALLOWED_GEAR[currentCave.type][0] in prevGearOptions and not ALLOWED_GEAR[currentCave.type][1] in prevGearOptions:
                 currentCave.gearOptions = ALLOWED_GEAR[currentCave.type]
@@ -185,18 +215,12 @@ class CaveSystem():
                 currentCave.gearOptions = prevGearOptions
 
             # 1 match
-            elif not ALLOWED_GEAR[currentCave.type][0] in prevGearOptions or not ALLOWED_GEAR[currentCave.type][1] in prevGearOptions:
+            else:
                 if prevGearOptions[0] in ALLOWED_GEAR[currentCave.type]:
                     nextGear = prevGearOptions[0]
                 elif prevGearOptions[1] in ALLOWED_GEAR[currentCave.type]:
                     nextGear = prevGearOptions[1]
-                currentCave.gear = nextGear
                 currentCave.gearOptions = [nextGear]
-
-            # else?
-            else:
-                currentCave.gearOptions = prevGearOptions
-            self.activeCave = [currentCave.x, currentCave.y]
 
         if not Gear.TORCH in currentCave.gearOptions:
             currentCave.distance += 7
@@ -212,15 +236,11 @@ def parseInput(data):
 
 def part1(data):
     depth, target = parseInput(data)
-    caveSystem = CaveSystem(depth, target)
-    return caveSystem.determineDanger()
+    return CaveSystem(depth, target).determineDanger()
 
 
 def part2(data):
     depth, target = parseInput(data)
     caveSystem = CaveSystem(depth, target)
-    print('done1')
-    # caveSystem.caves[target[0]][target[1]].setGeoData()
-    # print('done2')
     caveSystem.followPath()
     return caveSystem.caves[target[0]][target[1]].distance
