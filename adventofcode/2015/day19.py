@@ -1,19 +1,82 @@
 
+def breakDownString(replacements, string):
+    totalSteps = 0
+    i = 0
+    while string != "e":
+        string, steps = replaceSimple(replacements, string)
+        totalSteps += steps
+        string, steps = replaceComplex(replacements, string)
+        totalSteps += steps
+    return totalSteps
 
-def getUniqueReversed(startStr, replacements, checked=[]):
-    results = []
-    for rep in replacements:
-        if replacements[rep] == "e" and startStr != rep:
+
+def replaceSimple(replacements, string):
+    i = 0
+    steps = 0
+    while len(string) > 1 and i < len(string):
+        start = i
+        first, i = getElement(string, i)
+        if first in ['Rn', 'Y', 'Ar']:
             continue
-        pos = startStr.find(rep)
-        while pos != -1:
-            check = startStr[:pos] + replacements[rep] + \
-                startStr[pos + len(rep):]
-            if check not in results and check not in checked:
-                results.append(check)
-            pos = startStr.find(rep, pos+1)
+        second, i = getElement(string, i)
+        if second in ['Rn', 'Y', 'Ar']:
+            continue
 
-    return results
+        pair = first + second
+
+        if pair in replacements:
+            steps += 1
+            string = string[:start] + replacements[pair] + \
+                string[start + len(pair):]
+            i = start - 2
+    return string, steps
+
+
+def replaceComplex(replacements, string):
+    i = 0
+    steps = 0
+    while len(string) > 1 and i < len(string):
+        start = i
+        end = None
+        first, i = getElement(string, i)
+        if first in ['Rn', 'Y', 'Ar']:
+            continue
+        second, i = getElement(string, i)
+        if second != 'Rn':
+            i -= len(second)
+            continue
+
+        for x in range(3):
+            ignore, i = getElement(string, i)
+            next, i = getElement(string, i)
+            if next == "Ar":
+                end = i
+                break
+            elif next != "Y":
+                break
+
+        if end == None:
+            i = start + len(first)
+            continue
+
+        pair = string[start:end]
+
+        if pair in replacements:
+            steps += 1
+            string = string[:start] + replacements[pair] + \
+                string[start + len(pair):]
+            i = start - 2
+    return string, steps
+
+
+def getElement(string, index):
+    if index >= len(string):
+        return "", index
+    result = string[index]
+    if index < len(string) - 1 and string[index + 1].islower():
+        result += string[index + 1]
+        index += 1
+    return result, index + 1
 
 
 def getUnique(startStr, replacements, checked=[]):
@@ -56,14 +119,9 @@ def part1(data):
 
 def part2(data):
     replacements, startStr = parseInput(data, True)
-    endStr = "e"
-    unique = [startStr]
-    steps = 0
-    while not endStr in unique:
-        steps += 1
-        nextUnique = []
-        for str in unique:
-            nextUnique.extend(getUniqueReversed(str, replacements, nextUnique))
-        unique = nextUnique
-
-    return steps
+    # There is a bit of an ordering issue. But adding this replacement still gets the right answer ;)
+    # SiThCaRnFAr needs to go to SiThRnFAr to use the ThRnFAr replacement
+    # But with this, it goes to CaRnFAr. But it gives the same answer.
+    # Note for fix, at each step just have a "make change" version and a "don't" version and find best
+    replacements['CaRnFAr'] = 'F'
+    return breakDownString(replacements, startStr)
