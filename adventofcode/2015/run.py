@@ -1,10 +1,10 @@
 import sys
 import time
-import day18 as Day
+import day19 as Day
 
 
 def main(args=None):
-    day = "18"
+    day = "19"
 
     runTest = input("(1) Run test; (2/else) Run actual: ")
     runPart1 = input("Run part 1 (y)/else: ")
@@ -45,11 +45,18 @@ def main(args=None):
 
     if runPart1 == "":
         startTime = timeMs()
-        outputAnswer("1", str(Day.part1(inPart1)), timeMs() - startTime)
+        try:
+            outputAnswer("1", str(Day.part1(inPart1)), timeMs() - startTime)
+        except KeyboardInterrupt:
+            outputAnswer("1", "Interrupted", timeMs() - startTime)
+
         printLine()
 
     startTime = timeMs()
-    outputAnswer("2", str(Day.part2(inPart2)), timeMs() - startTime)
+    try:
+        outputAnswer("2", str(Day.part2(inPart2)), timeMs() - startTime)
+    except KeyboardInterrupt:
+        outputAnswer("2", "Interrupted", timeMs() - startTime)
     printLine()
 
 
