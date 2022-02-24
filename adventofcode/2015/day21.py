@@ -1,5 +1,3 @@
-import numpy as np
-
 
 class Equipment():
     def __init__(self, cost, damage, armor, name) -> None:
