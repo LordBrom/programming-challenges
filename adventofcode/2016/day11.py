@@ -3,8 +3,9 @@ import re
 
 
 class ChipType():
-    def __init__(self, name) -> None:
+    def __init__(self, name, letter) -> None:
         self.name = name
+        self.letter = letter
         self.chipFloor = None
         self.genFloor = None
 
@@ -12,10 +13,10 @@ class ChipType():
         return isinstance(__o, ChipType) and self.name == __o.name
 
     def getChipShortName(self):
-        return self.name[0].upper() + "M"
+        return self.letter + "M"
 
     def getGenShortName(self):
-        return self.name[0].upper() + "G"
+        return self.letter + "G"
 
     def isCharged(self):
         return self.chipFloor == self.genFloor
@@ -28,11 +29,14 @@ class Building():
         self.floors = 4
         self.floorObjects = []
         self.chipTypes = {}
+        letterIndex = 0
         for f in range(4):
             reResult = re.findall(reStr, floorData[f])
             for res in reResult:
                 if not res[0] in self.chipTypes:
-                    self.chipTypes[res[0]] = ChipType(res[0])
+                    self.chipTypes[res[0]] = ChipType(
+                        res[0], chr(letterIndex + 97).upper())
+                    letterIndex += 1
 
                 if res[1][0] == "m":
                     self.chipTypes[res[0]].chipFloor = f
