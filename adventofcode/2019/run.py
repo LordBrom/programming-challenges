@@ -1,15 +1,15 @@
 import time
-import day19 as Day
+import day18 as Day
 
-day = "19"
+day = "18"
 
 runTest = input("(1) Run test; (2/else) Run actual: ")
 runPart1 = input("Run part 1 (y)/else: ")
 
 if runTest == "1":
-    inFile = open("testInputs/day" + day + ".in", "r").read().split("\n")
-else:
     inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
+else:
+    inFile = open("testInputs/day" + day + ".in", "r").read().split("\n")
 inFile.pop()
 
 if len(inFile) == 1:

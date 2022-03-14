@@ -1,6 +1,22 @@
 import sys
 
 
+class Key():
+    def __init__(self, name, x, y) -> None:
+        self.name = name
+        self.x = x
+        self.y = y
+        self.distToKeys = {}
+
+    def __eq__(self, __o: object) -> bool:
+        if not isinstance(__o, Key):
+            return False
+        return self.name == __o.name
+
+    def getPosition(self):
+        return [self.x, self.y]
+
+
 class PassageMap():
     def __init__(self, data) -> None:
         self.map = []
@@ -12,7 +28,8 @@ class PassageMap():
             for y in range(len(data[x])):
                 letter = data[x][y]
                 if letter.isalpha() and letter.lower() == letter:
-                    self.keys[letter] = [x, y]
+                    #self.keys[letter] = [x, y]
+                    self.keys[letter] = Key(letter, x, y)
                 elif letter.isalpha() and letter.upper() == letter:
                     self.doors[letter] = [x, y]
 
@@ -20,6 +37,17 @@ class PassageMap():
                     self.start = [x, y]
                 row.append(letter)
             self.map.append(row)
+
+        for key in self.keys:
+            for other in self.keys:
+                if key == other:
+                    continue
+                test = self.findChar(
+                    other, self.keys[key].getPosition(), list(self.keys.keys()), [])
+                #print("here", test)
+                if test[0] != None:
+                    self.keys[key].distToKeys[other] = test[0]
+            print(key, self.keys[key].distToKeys)
 
     def __str__(self) -> str:
         return self.printMap()
@@ -67,24 +95,24 @@ class PassageMap():
         if sortTowards:
             #print(pos, sortTowards, result)
             sortedResult = []
-            if pos[0] < sortTowards[0]:
+            if pos[0] < sortTowards.x:
                 # x above
-                if pos[1] < sortTowards[1]:
+                if pos[1] < sortTowards.y:
                     # y above
                     sortedResult = [result[2], result[3], result[1], result[0]]
-                elif pos[1] > sortTowards[1]:
+                elif pos[1] > sortTowards.y:
                     # y below
                     sortedResult = [result[1], result[3], result[2], result[0]]
                 else:
                     # y same
                     sortedResult = [result[3], result[2], result[1], result[0]]
                 pass
-            elif pos[0] > sortTowards[0]:
+            elif pos[0] > sortTowards.x:
                 # below
-                if pos[1] < sortTowards[1]:
+                if pos[1] < sortTowards.y:
                     # y above
                     sortedResult = [result[2], result[0], result[1], result[3]]
-                elif pos[1] > sortTowards[1]:
+                elif pos[1] > sortTowards.y:
                     # y below
                     sortedResult = [result[1], result[0], result[2], result[3]]
                 else:
@@ -93,10 +121,10 @@ class PassageMap():
                 pass
             else:
                 # same
-                if pos[1] < sortTowards[1]:
+                if pos[1] < sortTowards.y:
                     # y above
                     sortedResult = [result[2], result[0], result[3], result[1]]
-                elif pos[1] > sortTowards[1]:
+                elif pos[1] > sortTowards.y:
                     # y below
                     sortedResult = [result[1], result[0], result[3], result[2]]
                 else:
@@ -143,13 +171,19 @@ class PassageMap():
 
     def findPath(self, position, path, keysFound, best=None):
         keyOptions = self.availableKeys(position, keysFound)
+        bestRoute = None
+        bestPath = None
+
         if len(keysFound) == len(self.keys):
             return len(path), keysFound, path
         if best != None and best <= len(path):
             return None, None, None
-        bestRoute = None
-        bestPath = None
+
+        print(keyOptions)
+
         keyOptions.sort(key=lambda x: len(x[1][0]))
+        print(keyOptions)
+
         for option in keyOptions:
             tempPos = option[1][1]
             tempPath = path.copy()
@@ -167,8 +201,10 @@ class PassageMap():
 
 def part1(data):
     passageMap = PassageMap(data)
-    result = passageMap.findPath(passageMap.start, [], [])
-    return result[0]
+    print(passageMap)
+    return
+    #result = passageMap.findPath(passageMap.start, [], [])
+    # return result[0]
 
 
 def part2(data):

@@ -62,3 +62,5 @@ def part2(data):
     y1 = math.ceil(y1)
 
     return (x2 * 10000) + y1
+
+# not 8651326 :/
