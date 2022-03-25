@@ -5,11 +5,11 @@ def main(args=None):
     day = input("Day: ")
 
     default = ' \n\
-def part1(data): \n\
+def part1(data, test=False): \n\
     return "not implemented" \n\
 \n\
 \n\
-def part2(data): \n\
+def part2(data, test=False): \n\
     return "not implemented" \n\
 '
     mainPath = "day" + day + ".py"

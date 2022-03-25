@@ -1,15 +1,15 @@
 import sys
 import time
-import day10 as Day
+import day13 as Day
 
 
 def main(args=None):
-    day = "10"
+    day = "13"
 
-    runTest = input("(1) Run test; (2/else) Run actual: ")
+    runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
     runPart1 = input("Run part 1 (y)/else: ")
 
-    if runTest == "1":
+    if runTest:
         inFile = open("inputs/day" + day + ".in", "r").read().split("\n")
     else:
         inFile = open("testInputs/day" + day + ".in", "r").read().split("\n")
@@ -46,7 +46,8 @@ def main(args=None):
     if runPart1 == "":
         startTime = timeMs()
         try:
-            outputAnswer("1", str(Day.part1(inPart1)), timeMs() - startTime)
+            outputAnswer("1", str(Day.part1(inPart1, not runTest)),
+                         timeMs() - startTime)
         except KeyboardInterrupt:
             outputAnswer("1", "Interrupted", timeMs() - startTime)
 
@@ -54,7 +55,8 @@ def main(args=None):
 
     startTime = timeMs()
     try:
-        outputAnswer("2", str(Day.part2(inPart2)), timeMs() - startTime)
+        outputAnswer("2", str(Day.part2(inPart2, not runTest)),
+                     timeMs() - startTime)
     except KeyboardInterrupt:
         outputAnswer("2", "Interrupted", timeMs() - startTime)
     printLine()
