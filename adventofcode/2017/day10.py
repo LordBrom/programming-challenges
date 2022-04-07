@@ -16,46 +16,49 @@ class HashString():
                 result += " {} ".format(self.nums[i])
         return result
 
-    def doTwists(self):
-        print(self)
-        print()
-        for length in self.lengths:
-            start = self.position
-            end = (start + length) % len(self.nums)
+    def doTwists(self, count=1):
+        for i in range(count):
+            for length in self.lengths:
 
-            self.reverse_portion(start, end)
+                self.shift(self.position)
+                self.reverse_portion(length)
+                self.shift(self.position, False)
 
-            self.position += length + self.skipSize
-            self.position %= len(self.nums)
-            self.skipSize += 1
-            print(self)
-            input()
+                self.position += length + self.skipSize
+                self.position %= len(self.nums)
+                self.skipSize += 1
 
-    def reverse_portion(self, start, end):
-        if start < end:
-            print(self.nums[:start],
-                  "(", self.nums[start:end], ")", self.nums[end:])
-            self.nums = self.nums[:start] + \
-                self.nums[start:end][::-1] + self.nums[end:]
-            return
-        print(self.nums[:end], ")",
-              self.nums[end:start], "(",  self.nums[start:])
-
-        startPart = self.nums[start:]
-        endPart = self.nums[:end][::-1]
-        rest = self.nums[end:start]
-
-        if len(endPart) < len(startPart):
-            self.nums = startPart[:len(endPart)][::-1] + \
-                rest + endPart + startPart[len(endPart):][::-1]
-        # elif len(endPart) > len(startPart):
-        #    self.nums = startPart[:len(endPart)][::-1] + \
-        #        rest + endPart + startPart[len(endPart):][::-1]
+    def shift(self, amount, forwards=True):
+        if forwards:
+            self.nums = self.nums[amount:] + self.nums[:amount]
         else:
-            self.nums = startPart[::-1] + rest + endPart
+            self.nums = self.nums[-amount:] + self.nums[:-amount]
+
+    def reverse_portion(self, length):
+        self.nums = self.nums[:length][::-1] + self.nums[length:]
 
     def checkSum(self):
         return self.nums[0] * self.nums[1]
+
+    def dense_hash(self):
+        result = []
+        for i in range(16):
+            s = i*16
+            step = 0
+            for j in range(s, s+16):
+                step ^= self.nums[j]
+            result.append(step)
+        return result
+
+    def final_hash(self):
+        denseHash = self.dense_hash()
+
+        result = ""
+        for l in denseHash:
+            if len(str(hex(l))[2:]) == 1:
+                result += "0"
+            result += str(hex(l))[2:]
+        return result
 
 
 def part1(data, test=False):
@@ -68,4 +71,15 @@ def part1(data, test=False):
 
 
 def part2(data, test=False):
-    return "not implemented"
+    extraLengths = "17,31,73,47,23"
+    lengths = ""
+    if data == []:
+        data = ""
+
+    for char in data:
+        lengths += str(ord(char)) + ","
+    lengths += extraLengths
+
+    hashString = HashString(lengths)
+    hashString.doTwists(64)
+    return hashString.final_hash()
