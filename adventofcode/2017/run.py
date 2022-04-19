@@ -1,10 +1,10 @@
 import sys
 import time
-import day10 as Day
+import day13 as Day
 
 
 def main(args=None):
-    day = "10"
+    day = "13"
 
     runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
     runPart1 = input("Run part 1 (y)/else: ")
