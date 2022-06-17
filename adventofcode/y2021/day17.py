@@ -45,7 +45,7 @@ def part1(data, test=False) -> str:
             success, maxY = trackProbe([x, y], [xRange, yRange])
             if success:
                 result = max(result, maxY)
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -59,4 +59,4 @@ def part2(data, test=False) -> str:
         for y in range(yRange[0], -yRange[0]):
             if trackProbe([x, y], [xRange, yRange])[0]:
                 results += 1
-    return results
+    return str(results)

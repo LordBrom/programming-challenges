@@ -1,5 +1,5 @@
 import itertools
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 
 
 def part1(data, test=False) -> str:
@@ -14,7 +14,7 @@ def part1(data, test=False) -> str:
             lastOutput = comp.run(lastOutput)
         maxOutput = max(maxOutput, lastOutput)
 
-    return maxOutput
+    return str(maxOutput)
 
 
 def part2(data, test=False) -> str:
@@ -35,4 +35,4 @@ def part2(data, test=False) -> str:
             if amps[i].get_op_code() == "99":
                 run = False
         maxOutput = max(maxOutput, lastOutput)
-    return maxOutput
+    return str(maxOutput)

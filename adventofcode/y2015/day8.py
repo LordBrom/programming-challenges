@@ -38,7 +38,7 @@ def part1(data, test=False) -> str:
         literal, memory = countCharacters(d)
         literalValue += literal
         memoryValue += memory
-    return literalValue - memoryValue
+    return str(literalValue - memoryValue)
 
 
 def part2(data, test=False) -> str:
@@ -48,4 +48,4 @@ def part2(data, test=False) -> str:
         literal, memory = countCharacters(encode(d))
         literalValue += literal
         memoryValue += memory
-    return literalValue - memoryValue
+    return str(literalValue - memoryValue)

@@ -198,7 +198,7 @@ def part1(data, test=False) -> str:
         if noneFound:
             print("none found")
 
-    return len(scanners[0].beacons)
+    return str(len(scanners[0].beacons))
 
 
 def part2(data, test=False) -> str:
@@ -224,4 +224,4 @@ def part2(data, test=False) -> str:
                 result, manhattanDistance(scanners[i].offset, scanners[j].offset)
             )
 
-    return result
+    return str(result)

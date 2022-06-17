@@ -103,7 +103,7 @@ def part1(data, test=False) -> str:
     securityLayers = SecurityLayers(data)
     for i in range(securityLayers.max + 1):
         securityLayers.tick_time()
-    return securityLayers.result
+    return str(securityLayers.result)
 
 
 def part2(data, test=False) -> str:
@@ -121,4 +121,4 @@ def part2(data, test=False) -> str:
         if not securityCopy.caught:
             break
 
-    return securityLayers.time
+    return str(securityLayers.time)

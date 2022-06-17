@@ -1,4 +1,4 @@
-from TimeDevice import TimeDevice
+from y2018.TimeDevice import TimeDevice
 
 
 def part1(data, test=False) -> str:

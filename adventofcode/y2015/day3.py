@@ -15,7 +15,7 @@ def part1(data, test=False) -> str:
 
         visited.add("{}_{}".format(santa[0], santa[1]))
 
-    return len(visited)
+    return str(len(visited))
 
 
 def part2(data, test=False) -> str:
@@ -54,4 +54,4 @@ def part2(data, test=False) -> str:
 
         moveSanta = not moveSanta
 
-    return len(visited)
+    return str(len(visited))

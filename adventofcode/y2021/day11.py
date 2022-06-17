@@ -41,7 +41,7 @@ def part1(data, test=False) -> str:
         for r in flashingOctopi:
             octopi[r[0]][r[1]] = 0
 
-    return flashes
+    return str(flashes)
 
 
 def part2(data, test=False) -> str:
@@ -89,4 +89,4 @@ def part2(data, test=False) -> str:
         for r in flashingOctopi:
             octopi[r[0]][r[1]] = 0
 
-    return step
+    return str(step)

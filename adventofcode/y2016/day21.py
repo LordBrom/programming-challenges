@@ -88,10 +88,10 @@ class Password:
 def part1(data, test=False) -> str:
     password = Password("abcdefgh")
     password.scramble(data)
-    return password
+    return str(password)
 
 
 def part2(data, test=False) -> str:
     password = Password("fbgdceah", True)
     password.scramble(data[::-1])
-    return password
+    return str(password)

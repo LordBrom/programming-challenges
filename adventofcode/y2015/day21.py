@@ -109,7 +109,7 @@ def part1(data, test=False) -> str:
     playerFighter.equipItem(equipment["armor"][1])
 
     fightFighters(playerFighter, bossFighter)
-    return playerFighter.equipCost
+    return str(playerFighter.equipCost)
 
 
 def part2(data, test=False) -> str:
@@ -139,7 +139,7 @@ def part2(data, test=False) -> str:
 
     fightFighters(playerFighter, bossFighter)
 
-    return playerFighter.equipCost
+    return str(playerFighter.equipCost)
 
 
 # 186 - low

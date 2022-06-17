@@ -84,4 +84,4 @@ def part2(data, test=False) -> str:
         soundProgram0.run()
         soundProgram1.run()
 
-    return soundProgram1.valuesSent
+    return str(soundProgram1.valuesSent)

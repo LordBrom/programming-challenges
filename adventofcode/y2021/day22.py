@@ -98,7 +98,7 @@ def part1(data, test=False) -> str:
                         if posStr in reactor:
                             reactor.pop(posStr)
 
-    return len(reactor)
+    return str(len(reactor))
 
 
 def part2(data, test=False) -> str:
@@ -122,4 +122,4 @@ def part2(data, test=False) -> str:
     for cube in cubes:
         result += cube.cubeSize()
 
-    return result
+    return str(result)

@@ -58,4 +58,4 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
-    return len(followPath(data, shortest=False))
+    return str(len(followPath(data, shortest=False)))

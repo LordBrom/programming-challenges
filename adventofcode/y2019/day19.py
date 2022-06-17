@@ -46,7 +46,7 @@ def part1(data, test=False) -> str:
     for x in range(scan):
         for y in range(scan):
             result += getPoint(data, x, y)
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

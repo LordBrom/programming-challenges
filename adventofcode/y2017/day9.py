@@ -72,4 +72,4 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
-    return len(remove_escaped(count_groups(data)[1]))
+    return str(len(remove_escaped(count_groups(data)[1])))

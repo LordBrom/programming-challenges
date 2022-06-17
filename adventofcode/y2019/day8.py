@@ -20,7 +20,7 @@ def part1(data, test=False) -> str:
             min0 = len(find0)
             result = len(find1) * len(find2)
 
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

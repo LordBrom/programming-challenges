@@ -111,7 +111,7 @@ def parseInput(data, reverse=False):
 def part1(data, test=False) -> str:
     replacements, startStr = parseInput(data)
     unique = getUnique(startStr, replacements)
-    return len(unique)
+    return str(len(unique))
 
 
 def part2(data, test=False) -> str:

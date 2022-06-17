@@ -33,7 +33,7 @@ def part1(data, test=False) -> str:
     for box in boxes:
         result += box.getNeededPaper()
 
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -42,4 +42,4 @@ def part2(data, test=False) -> str:
     for box in boxes:
         result += box.getNeededRibbon()
 
-    return result
+    return str(result)

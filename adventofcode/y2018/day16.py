@@ -137,7 +137,7 @@ def part1(data, test=False) -> str:
         # print(s.instruction[0], s.possible)
         if len(s.possible) >= 3:
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -155,4 +155,4 @@ def part2(data, test=False) -> str:
     for d in final:
         inst = [int(x) for x in d.split(" ")]
         start = doOpcode(start, OPCODE_KEY[inst[0]], inst[1:])
-    return start[0]
+    return str(start[0])

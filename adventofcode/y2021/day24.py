@@ -97,7 +97,7 @@ def part1(data, test=False) -> str:
             continue
         checkVal = checkNum(data, str(num))
         if checkVal == 0:
-            return num
+            return str(num)
         num -= 1
     return None
 
@@ -111,6 +111,6 @@ def part2(data, test=False) -> str:
             continue
         checkVal = checkNum(data, str(num))
         if checkVal == 0:
-            return num
+            return str(num)
         num += 1
     return None

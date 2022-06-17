@@ -1,4 +1,4 @@
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 
 
 class AsciiView:

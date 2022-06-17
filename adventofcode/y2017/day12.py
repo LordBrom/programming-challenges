@@ -45,7 +45,7 @@ def parse_input(data):
 
 def part1(data, test=False) -> str:
     programs = parse_input(data)
-    return len(programs["0"].get_connected())
+    return str(len(programs["0"].get_connected()))
 
 
 def part2(data, test=False) -> str:
@@ -55,4 +55,4 @@ def part2(data, test=False) -> str:
         if programs[prog].groupNum == None:
             programs[prog].get_connected(groupNum=groupNum)
             groupNum += 1
-    return groupNum
+    return str(groupNum)

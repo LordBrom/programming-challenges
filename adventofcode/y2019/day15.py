@@ -1,4 +1,4 @@
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 import sys
 
 
@@ -187,7 +187,7 @@ def part1(data, test=False) -> str:
         droid.mapFloor(stepByStep)
         if displayMap.lower() == "y" or displayMap.lower() == "1":
             print(droid)
-    return len(droid.pathToO2) - 1
+    return str(len(droid.pathToO2) - 1)
 
 
 def part2(data, test=False) -> str:

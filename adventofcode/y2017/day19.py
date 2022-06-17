@@ -66,4 +66,4 @@ def part1(data, test=False) -> str:
 def part2(data, test=False) -> str:
     tubes = Tubes(data)
     tubes.follow()
-    return tubes.steps
+    return str(tubes.steps)

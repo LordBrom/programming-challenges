@@ -23,11 +23,11 @@ def part1(data, test=False) -> str:
     maze = TrampolineMaze(data)
     while not maze.take_step():
         pass
-    return maze.steps
+    return str(maze.steps)
 
 
 def part2(data, test=False) -> str:
     maze = TrampolineMaze(data, True)
     while not maze.take_step():
         pass
-    return maze.steps
+    return str(maze.steps)

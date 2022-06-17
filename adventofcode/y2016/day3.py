@@ -21,7 +21,7 @@ def part1(data, test=False) -> str:
     for d in data:
         if isValidTriangle(multiStrip(d).split(" ")):
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -37,4 +37,4 @@ def part2(data, test=False) -> str:
             result += 1
         if isValidTriangle([firstRow[2], secondRow[2], lastRow[2]]):
             result += 1
-    return result
+    return str(result)

@@ -34,7 +34,7 @@ def part1(data, test=False) -> str:
         if check_valid(str(i)):
             count += 1
 
-    return count
+    return str(count)
 
 
 def part2(data, test=False) -> str:
@@ -48,4 +48,4 @@ def part2(data, test=False) -> str:
         if check_valid(str(i), True):
             count += 1
 
-    return count
+    return str(count)

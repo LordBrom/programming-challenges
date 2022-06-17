@@ -62,10 +62,10 @@ class Judge:
 def part1(data, test=False) -> str:
     judge = Judge(data)
     judge.step(40000000)
-    return judge.result
+    return str(judge.result)
 
 
 def part2(data, test=False) -> str:
     judge = Judge(data, True)
     judge.step(5000000)
-    return judge.result
+    return str(judge.result)

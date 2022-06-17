@@ -89,4 +89,4 @@ def part2(data, test=False) -> str:
         system.takeStep()
         step += 1
 
-    return step
+    return str(step)

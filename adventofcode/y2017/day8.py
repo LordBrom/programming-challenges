@@ -58,7 +58,7 @@ def part1(data, test=False) -> str:
     result = 0
     for register in registers:
         result = max(result, registers[register])
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

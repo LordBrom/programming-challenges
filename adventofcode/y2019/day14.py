@@ -170,4 +170,4 @@ def part2(data, test=False) -> str:
         result = recipeDictionary.produceOutput(["FUEL", num])[0]["ORE"]
         if result < best:
             best = result
-    return num - 1
+    return str(num - 1)

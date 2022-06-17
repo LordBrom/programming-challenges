@@ -13,11 +13,11 @@ def part1(data, test=False) -> str:
     total = 0
     for num in data:
         total += calc_fuel(num)
-    return total
+    return str(total)
 
 
 def part2(data, test=False) -> str:
     total = 0
     for num in data:
         total += calc_fuel(num, True)
-    return total
+    return str(total)

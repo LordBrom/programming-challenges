@@ -76,7 +76,7 @@ def part1(data, test=False) -> str:
     count = 0
     for objectMass in GALAXY:
         count += GALAXY[objectMass].count_indirect_orbits()
-    return count
+    return str(count)
 
 
 def part2(data, test=False) -> str:

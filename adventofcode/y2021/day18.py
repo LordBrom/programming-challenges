@@ -215,4 +215,4 @@ def part2(data, test=False) -> str:
             swapCheck.reduce()
             result = max(result, swapCheck.getMagnitude())
 
-    return result
+    return str(result)

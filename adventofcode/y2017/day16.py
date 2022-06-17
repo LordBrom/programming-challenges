@@ -43,7 +43,7 @@ def part1(data, test=False) -> str:
 
     dance.do_dance(data)
 
-    return dance
+    return str(dance)
 
 
 def part2(data, test=False) -> str:
@@ -52,4 +52,4 @@ def part2(data, test=False) -> str:
     # doing the dance 42 times, brings you back to the original order
     for i in range(danceTimes % 42):
         dance.do_dance(data)
-    return dance
+    return str(dance)

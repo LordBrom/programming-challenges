@@ -1,4 +1,4 @@
-from monorailComputer import Computer
+from y2016.monorailComputer import Computer
 
 
 def part1(data, test=False) -> str:

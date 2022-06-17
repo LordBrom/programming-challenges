@@ -9,7 +9,7 @@ class Marble:
         self.left = None
         self.right = None
 
-    def __eq__(self, __o: "Marble") -> bool:
+    def __eq__(self, __o: object) -> bool:
         return self.value == __o.value
 
     def getClockWise(self, count):

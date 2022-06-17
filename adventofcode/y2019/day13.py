@@ -1,4 +1,4 @@
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 import numpy as np
 
 
@@ -98,7 +98,7 @@ def part1(data, test=False) -> str:
     for t in tiles:
         if t[2] == 2:
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

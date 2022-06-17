@@ -53,7 +53,7 @@ def part1(data, test=False) -> str:
     for asteroid in asteroids:
         result = max(result, len(count_visible(asteroids, asteroid)))
 
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -108,4 +108,4 @@ def part2(data, test=False) -> str:
             pointer = pointer % len(angles)
 
     if result:
-        return (result[1] * 100) + result[0]
+        return str((result[1] * 100) + result[0])

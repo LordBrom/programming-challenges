@@ -43,7 +43,7 @@ def part1(data, test=False) -> str:
     time = 0
     while True:
         if dropBall(discs, time):
-            return time
+            return str(time)
         time += 1
     return ""
 
@@ -54,6 +54,6 @@ def part2(data, test=False) -> str:
     time = 0
     while True:
         if dropBall(discs, time):
-            return time
+            return str(time)
         time += 1
     return ""

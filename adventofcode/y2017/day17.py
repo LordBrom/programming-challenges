@@ -49,4 +49,4 @@ def part2(data, test=False) -> str:
         index += 1
         position = newPosition
 
-    return oneNum
+    return str(oneNum)

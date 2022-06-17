@@ -32,7 +32,7 @@ def part1(data, test=False) -> str:
         if check >= int(data):
             break
         house += 1
-    return house
+    return str(house)
 
 
 def part2(data, test=False) -> str:
@@ -43,4 +43,4 @@ def part2(data, test=False) -> str:
         if check >= int(data):
             break
         house += 1
-    return house
+    return str(house)

@@ -41,4 +41,4 @@ def part1(data, test=False) -> str:
 def part2(data, test=False) -> str:
     containers = [int(x) for x in data]
     fillContainers(containers, True)
-    return COUNT
+    return str(COUNT)

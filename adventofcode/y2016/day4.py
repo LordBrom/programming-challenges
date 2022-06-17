@@ -26,7 +26,7 @@ def part1(data, test=False) -> str:
         isValid, sectorID, n = isValidRoom(d)
         if isValid:
             result += sectorID
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

@@ -68,4 +68,4 @@ def part2(data, test=False) -> str:
     while result == False:
         hotChocolate.doRecpie()
         result = hotChocolate.checkSkill()
-    return result
+    return str(result)

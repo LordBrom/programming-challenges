@@ -113,7 +113,7 @@ def parseInput(data):
 def part1(data, test=False) -> str:
     sandPit = SandPit(parseInput(data))
     sandPit.spreadWater(0, 500 - sandPit.pitOffsetY)
-    return len(sandPit.water)
+    return str(len(sandPit.water))
 
 
 def part2(data, test=False) -> str:
@@ -124,4 +124,4 @@ def part2(data, test=False) -> str:
         if sandPit.pit[w[0]][w[1]] == "~":
             result += 1
     str(sandPit)
-    return result
+    return str(result)

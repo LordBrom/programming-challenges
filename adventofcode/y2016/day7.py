@@ -66,7 +66,7 @@ def part1(data, test=False) -> str:
     for ip in data:
         if supportsTLS(ip):
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -74,4 +74,4 @@ def part2(data, test=False) -> str:
     for ip in data:
         if supportsSSL(ip):
             result += 1
-    return result
+    return str(result)

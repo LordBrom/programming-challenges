@@ -175,7 +175,7 @@ def part1(data, test=False) -> str:
     pathReStr = data[1:-1]
     constructionZone = ConstructionZone()
     constructionZone.followPath(pathReStr)
-    return len(constructionZone.followRoute()) - 1
+    return str(len(constructionZone.followRoute()) - 1)
 
 
 def part2(data, test=False) -> str:
@@ -187,4 +187,4 @@ def part2(data, test=False) -> str:
     for r in constructionZone.rooms:
         if constructionZone.rooms[r].distFromStart >= 1000:
             result += 1
-    return result
+    return str(result)

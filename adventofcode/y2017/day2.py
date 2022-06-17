@@ -12,7 +12,7 @@ def part1(data, test=False) -> str:
             maxNum = max(maxNum, int(val))
             minNum = min(minNum, int(val))
         result += maxNum - minNum
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -26,4 +26,4 @@ def part2(data, test=False) -> str:
                     continue
                 if int(val / val2) == val / val2:
                     result += int(val / val2)
-    return result
+    return str(result)

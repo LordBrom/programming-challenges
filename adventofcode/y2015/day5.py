@@ -57,7 +57,7 @@ def part1(data, test=False) -> str:
     for d in data:
         if isNiceString(d):
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -65,4 +65,4 @@ def part2(data, test=False) -> str:
     for d in data:
         if isNiceStringPart2(d):
             result += 1
-    return result
+    return str(result)

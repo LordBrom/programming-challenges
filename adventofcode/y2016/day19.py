@@ -53,7 +53,7 @@ def part1(data, test=False) -> str:
     large = "1" + ("0" * (len(binFormat) - 1))
     oneLarger = "1" + ("0" * (len(binFormat)))
     small = binFormat[1:]
-    return int(oneLarger, 2) - (((int(large, 2) - int(small, 2)) * 2) - 1)
+    return str(int(oneLarger, 2) - (((int(large, 2) - int(small, 2)) * 2) - 1))
 
 
 def part2(data, test=False) -> str:

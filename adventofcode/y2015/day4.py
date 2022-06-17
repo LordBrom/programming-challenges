@@ -14,11 +14,11 @@ def part1(data, test=False) -> str:
     result = 0
     while not checkHash(data + str(result)):
         result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
     result = 0
     while not checkHash(data + str(result), 6):
         result += 1
-    return result
+    return str(result)

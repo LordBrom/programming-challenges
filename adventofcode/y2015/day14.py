@@ -89,4 +89,4 @@ def part2(data, test=False) -> str:
             points[p] += 1
 
     points.sort()
-    return points[-1]
+    return str(points[-1])

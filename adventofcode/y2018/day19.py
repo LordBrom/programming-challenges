@@ -1,4 +1,4 @@
-from TimeDevice import TimeDevice
+from y2018.TimeDevice import TimeDevice
 
 
 def part1(data, test=False) -> str:
@@ -14,4 +14,4 @@ def part2(data, test=False) -> str:
     for i in range(1, num + 1):
         if num / i == int(num / i):
             result += i
-    return result
+    return str(result)

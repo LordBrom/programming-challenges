@@ -1,4 +1,4 @@
-from monorailComputer import Computer
+from y2016.monorailComputer import Computer
 
 
 def part1(data, test=False) -> str:
@@ -11,4 +11,4 @@ def part2(data, test=False) -> str:
     n = 12
     for i in range(1, 12):
         n *= i
-    return n + (84 * 89)
+    return str(n + (84 * 89))

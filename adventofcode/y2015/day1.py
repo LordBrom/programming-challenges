@@ -5,7 +5,7 @@ def part1(data, test=False) -> str:
             floor += 1
         elif d == ")":
             floor -= 1
-    return floor
+    return str(floor)
 
 
 def part2(data, test=False) -> str:
@@ -19,4 +19,4 @@ def part2(data, test=False) -> str:
         if floor == -1:
             result = i + 1
             break
-    return result
+    return str(result)

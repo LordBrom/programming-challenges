@@ -63,4 +63,4 @@ def part2(data, test=False) -> str:
     blockedCount = 0
     for ipRange in ipRanges:
         blockedCount += (ipRange.end - ipRange.start) + 1
-    return (maxIp + 1) - blockedCount
+    return str((maxIp + 1) - blockedCount)

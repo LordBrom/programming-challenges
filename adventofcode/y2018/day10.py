@@ -74,4 +74,4 @@ def part2(data, test=False) -> str:
         steps += 1
         for sp in starPoints:
             sp.moveTick()
-    return steps
+    return str(steps)

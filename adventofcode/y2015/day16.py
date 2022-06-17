@@ -69,7 +69,7 @@ def part1(data, test=False) -> str:
         if auntSue.checkPossessions(SUE_DATA):
             results.append(auntSue)
     if len(results) == 1:
-        return results[0].auntID
+        return str(results[0].auntID)
     else:
         return "didn't find just 1 aunt"
 
@@ -83,6 +83,6 @@ def part2(data, test=False) -> str:
         if auntSue.checkApproxPossessions(SUE_DATA):
             results.append(auntSue)
     if len(results) == 1:
-        return results[0].auntID
+        return str(results[0].auntID)
     else:
         return "didn't find just 1 aunt"

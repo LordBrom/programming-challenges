@@ -35,7 +35,7 @@ def part1(data, test=False) -> str:
     for d in data:
         if not has_duplicate_words(d):
             result += 1
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -46,4 +46,4 @@ def part2(data, test=False) -> str:
         if has_anagram_words(d):
             continue
         result += 1
-    return result
+    return str(result)

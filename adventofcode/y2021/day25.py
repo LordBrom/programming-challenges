@@ -73,7 +73,7 @@ def part1(data, test=False) -> str:
         found = trench.moveCucumbers()
         result += 1
 
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:

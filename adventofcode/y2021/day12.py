@@ -46,10 +46,11 @@ class CaveSystem:
 def part1(data, test=False) -> str:
     caveSystem = CaveSystem(data.copy())
     caveSystem.searchCaves()
-    return len(caveSystem.fullPaths)
-
+    return str(len(caveSystem.fullPaths)
+)
 
 def part2(data, test=False) -> str:
     caveSystem = CaveSystem(data.copy())
     caveSystem.searchCaves(True)
-    return len(caveSystem.fullPaths)
+    return str(len(caveSystem.fullPaths)
+)

@@ -1,4 +1,4 @@
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 
 
 def part1(data, test=False) -> str:
@@ -25,5 +25,5 @@ def part2(data, test=False) -> str:
             check = comp.get_intcode()[0]
 
             if check == 19690720:
-                return 100 * i + j
+                return str(100 * i + j)
     return "..."

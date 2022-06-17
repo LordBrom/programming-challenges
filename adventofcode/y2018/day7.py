@@ -84,7 +84,7 @@ def parsePointList(data):
     return pointList
 
 
-def part1(data, test=False) -> str:
+def part1(data, test=False):
     pointList = parsePointList(data)
 
     result = ""
@@ -139,4 +139,4 @@ def part2(data, test=False) -> str:
         # input()
         second += 1
 
-    return second - 1
+    return str(second - 1)

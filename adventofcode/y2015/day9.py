@@ -57,7 +57,7 @@ def part1(data, test=False) -> str:
         if check < best:
             best = check
 
-    return best
+    return str(best)
 
 
 def part2(data, test=False) -> str:
@@ -81,4 +81,4 @@ def part2(data, test=False) -> str:
         if check > best:
             best = check
 
-    return best
+    return str(best)

@@ -11,4 +11,4 @@ def part2(data, test=False) -> str:
     for i in range(len(data)):
         if data[i] == data[int(i + (len(data) / 2)) % len(data)]:
             result += int(data[i])
-    return result
+    return str(result)

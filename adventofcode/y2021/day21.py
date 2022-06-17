@@ -64,7 +64,7 @@ def part1(data, test=False) -> str:
         player += 1
         player = player % 2
 
-    return min(game.playerScore[0], game.playerScore[1]) * dieRolls
+    return str(min(game.playerScore[0], game.playerScore[1]) * dieRolls)
 
 
 @lru_cache(maxsize=None)

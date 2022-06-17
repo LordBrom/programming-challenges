@@ -1,4 +1,4 @@
-from monorailComputer import Computer
+from y2016.monorailComputer import Computer
 
 
 def part1(data, test=False) -> str:
@@ -8,7 +8,7 @@ def part1(data, test=False) -> str:
         if comp.runInstructions():
             break
         i += 1
-    return i
+    return str(i)
 
 
 def part2(data, test=False) -> str:

@@ -184,7 +184,7 @@ def part1(data, test=False) -> str:
     for unit in armies[1]:
         result += unit.unitCount
 
-    return result
+    return str(result)
 
 
 def part2(data, test=False) -> str:
@@ -201,4 +201,4 @@ def part2(data, test=False) -> str:
     for unit in armies[0]:
         result += unit.unitCount
 
-    return result  # Not sure why it is 24 off.... :/
+    return str(result)  # Not sure why it is 24 off.... :/

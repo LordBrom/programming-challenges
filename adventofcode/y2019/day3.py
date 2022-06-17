@@ -85,7 +85,7 @@ def part1(data, test=False) -> str:
             else:
                 minDist = min(calcDist, minDist)
 
-    return minDist
+    return str(minDist)
 
 
 def part2(data, test=False) -> str:

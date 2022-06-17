@@ -49,7 +49,7 @@ def part1(data, test=False) -> str:
     for n in range(64):
         i += 1
         hashString, i, lookUp = getNextHash(data, i, 1, lookUp)
-    return i
+    return str(i)
 
 
 def part2(data, test=False) -> str:
@@ -58,7 +58,7 @@ def part2(data, test=False) -> str:
     for n in range(64):
         i += 1
         hashString, i, lookUp = getNextHash(data, i, 2017, lookUp)
-    return i
+    return str(i)
 
 
 # 21074 - high
