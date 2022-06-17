@@ -207,7 +207,7 @@ class PassageMap:
 def part1(data, test=False) -> str:
     passageMap = PassageMap(data)
     print(passageMap)
-    return
+    return ""
     # result = passageMap.findPath(passageMap.start, [], [])
     # return result[0]
 

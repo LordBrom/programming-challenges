@@ -42,14 +42,10 @@ class Cave:
         self.geoSet = False
 
     def __eq__(self, __o: object) -> bool:
-        if __o == None or __o.x == None or __o.y == None:
-            return False
-        return __o.x == self.x and __o.y == self.y
+        return isinstance(__o, Cave) and self.x == __o.x and self.y == __o.y
 
     def __lt__(self, __o: object) -> bool:
-        if __o == None or __o.distance == None:
-            return False
-        return self.distance < __o.distance
+        return isinstance(__o, Cave) and self.distance < __o.distance
 
     def __str__(self) -> str:
         if self.x == 0 and self.y == 0:

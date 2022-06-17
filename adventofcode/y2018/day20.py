@@ -20,10 +20,7 @@ class Room:
         )
 
     def __eq__(self, __o: object) -> bool:
-        if __o != None and __o.x != None and __o.y != None:
-            return self.x == __o.x and self.y == __o.y
-        else:
-            return False
+        return isinstance(__o, Room) and self.x == __o.x and self.y == __o.y
 
     def xy(self, asStr=False):
         if asStr:

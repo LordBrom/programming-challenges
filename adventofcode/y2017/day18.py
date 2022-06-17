@@ -1,3 +1,4 @@
+import typing
 from cmath import isnan
 
 
@@ -10,8 +11,8 @@ class SoundProgram:
         self.sound = None
         self.valuesSent = 0
 
-        self.inQueue = []
-        self.outQueue = None
+        self.inQueue: typing.List[int] = []
+        self.outQueue: typing.Optional[typing.List[int]] = None
 
     def __str__(self) -> str:
         return str(self.pVal) + ": " + str(self.registers)

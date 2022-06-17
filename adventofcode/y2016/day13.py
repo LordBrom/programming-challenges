@@ -13,7 +13,7 @@ class Tile:
         return isinstance(__o, Tile) and self.x == __o.x and self.y == __o.y
 
     def __lt__(self, __o: object) -> bool:
-        return self.distFromStart < __o.distFromStart
+        return isinstance(__o, Tile) and self.distFromStart < __o.distFromStart
 
     def __str__(self) -> str:
         if self.isWall:

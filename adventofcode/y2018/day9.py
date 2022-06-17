@@ -1,3 +1,4 @@
+import typing
 import re
 
 RE_STR = "([0-9]+) players; last marble is worth ([0-9]+) points"
@@ -6,11 +7,11 @@ RE_STR = "([0-9]+) players; last marble is worth ([0-9]+) points"
 class Marble:
     def __init__(self, value) -> None:
         self.value = value
-        self.left = None
-        self.right = None
+        self.left: typing.Optional[Marble] = None
+        self.right: typing.Optional[Marble] = None
 
     def __eq__(self, __o: object) -> bool:
-        return self.value == __o.value
+        return isinstance(__o, Marble) and self.value == __o.value
 
     def getClockWise(self, count):
         if count == 0:

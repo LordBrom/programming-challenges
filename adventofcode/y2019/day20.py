@@ -22,7 +22,7 @@ class MazeTile:
             return self.floorType + " "
 
     def __lt__(self, __o: object) -> bool:
-        return self.distance < __o.distance
+        return isinstance(__o, MazeTile) and self.distance < __o.distance
 
     def __eq__(self, __o: object) -> bool:
         if not isinstance(__o, MazeTile):

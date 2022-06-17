@@ -1,12 +1,13 @@
 import re
+import typing
 
 
 class ChipType:
     def __init__(self, name, letter) -> None:
         self.name = name
         self.letter = letter
-        self.chipFloor = None
-        self.genFloor = None
+        self.chipFloor: typing.Optional[int] = None
+        self.genFloor: typing.Optional[int] = None
 
     def __eq__(self, __o: object) -> bool:
         return isinstance(__o, ChipType) and self.name == __o.name
@@ -26,8 +27,8 @@ class Building:
         reStr = "a ([a-z]+)(?:-compatible|) (microchip|generator)"
         self.elevator = 0
         self.floors = 4
-        self.floorObjects = []
-        self.chipTypes = {}
+        # self.floorObjects = []
+        self.chipTypes: typing.Dict[str, ChipType] = {}
         letterIndex = 0
         for f in range(4):
             reResult = re.findall(reStr, floorData[f])

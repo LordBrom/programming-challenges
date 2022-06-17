@@ -19,7 +19,7 @@ class Reindeer:
         )
 
     def __lt__(self, __o: object) -> bool:
-        return self.raceDist < __o.raceDist
+        return isinstance(__o, Reindeer) and self.raceDist < __o.raceDist
 
     def race(self, time=2503):
         raceTime = time

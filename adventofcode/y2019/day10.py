@@ -109,3 +109,4 @@ def part2(data, test=False) -> str:
 
     if result:
         return str((result[1] * 100) + result[0])
+    return ""

@@ -18,7 +18,7 @@ class HexGrid:
     def __init__(self) -> None:
         self.tiles = {}
         centerTile = HexTile(0, 0, 0)
-        centerTile.dist = 0
+        # centerTile.dist = 0
         self.tiles["0_0_0"] = centerTile
 
     def follow_path(self, path):
