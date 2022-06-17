@@ -1,12 +1,11 @@
 import re
 
 
-class LightGrid():
+class LightGrid:
     def __init__(self, part1=True, gridSize=1000) -> None:
         self.part1 = part1
         if self.part1:
-            self.grid = [[False for x in range(gridSize)]
-                         for y in range(gridSize)]
+            self.grid = [[False for x in range(gridSize)] for y in range(gridSize)]
         else:
             self.grid = [[0 for x in range(gridSize)] for y in range(gridSize)]
 
@@ -55,14 +54,14 @@ class LightGrid():
         return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     lightGrid = LightGrid()
     for d in data:
         lightGrid.doInstruction(d)
     return lightGrid.countOn()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     lightGrid = LightGrid(False)
     for d in data:
         lightGrid.doInstruction(d)

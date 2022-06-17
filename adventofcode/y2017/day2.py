@@ -1,7 +1,7 @@
 import sys
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for row in data:
         row = row.replace("\t", " ")
@@ -15,7 +15,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for row in data:
         row = row.replace("\t", " ")

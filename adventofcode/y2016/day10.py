@@ -1,7 +1,7 @@
 import re
 
 
-class Bot():
+class Bot:
     def __init__(self, name, num) -> None:
         self.name = name
         self.num = num
@@ -80,7 +80,7 @@ def inputToBots(data):
     return bots
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     findLow = 17
     findHigh = 61
     bots = inputToBots(data)
@@ -102,7 +102,7 @@ def part1(data):
     return bots[result].num
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     bots = inputToBots(data)
     i = 0
     botNames = list(bots.keys())

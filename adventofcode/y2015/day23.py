@@ -1,4 +1,4 @@
-class Computer():
+class Computer:
     def __init__(self, instructions, aVal=0) -> None:
         self.registers = {"a": aVal, "b": 0}
         self.pointer = 0
@@ -47,13 +47,13 @@ class Computer():
             self.pointer -= int(amount[1:])
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     comp = Computer(data)
     comp.run()
     return comp.registers["b"]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     comp = Computer(data, 1)
     comp.run()
     return comp.registers["b"]

@@ -1,5 +1,4 @@
-
-def part1(data):
+def part1(data, test=False) -> str:
     santa = [0, 0]
     visited = set()
     visited.add("{}_{}".format(santa[0], santa[1]))
@@ -19,7 +18,7 @@ def part1(data):
     return len(visited)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     santa = [0, 0]
     roboSanta = [0, 0]
     visited = set()

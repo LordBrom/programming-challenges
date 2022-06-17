@@ -7,21 +7,21 @@ import numpy as np
 
 
 def dirHelp(inChar, ret=0):
-    if inChar == '^' or inChar == 0:
+    if inChar == "^" or inChar == 0:
         if ret == 0:
             return 0
         elif ret == 1:
             return "up"
         else:
             return "^"
-    elif inChar == '>' or inChar == 1:
+    elif inChar == ">" or inChar == 1:
         if ret == 0:
             return 1
         elif ret == 1:
             return "right"
         else:
             return ">"
-    elif inChar == 'v' or inChar == 2:
+    elif inChar == "v" or inChar == 2:
         if ret == 0:
             return 2
         elif ret == 1:
@@ -37,7 +37,7 @@ def dirHelp(inChar, ret=0):
             return "<"
 
 
-class Track():
+class Track:
     def __init__(self, paths, carts) -> None:
         self.paths = paths
         self.carts = carts
@@ -90,15 +90,14 @@ class Track():
                         cartPos[curCartPos].x = nextX
                         cartPos[curCartPos].y = nextY
 
-                    cartPos[curCartPos].setNewDirection(
-                        self.paths[nextX][nextY])
+                    cartPos[curCartPos].setNewDirection(self.paths[nextX][nextY])
 
                     cartPos[curCartNextPos] = cartPos[curCartPos]
                     del cartPos[curCartPos]
         return None
 
 
-class Cart():
+class Cart:
     def __init__(self, x, y, dirChar) -> None:
         self.x = x
         self.y = y
@@ -146,10 +145,10 @@ def parseInput(data):
     for x in range(len(data)):
         trackRow = []
         for y in range(maxLen):
-            if (y < len(data[x])):
-                if data[x][y] in ['^', '>', 'v', '<']:
+            if y < len(data[x]):
+                if data[x][y] in ["^", ">", "v", "<"]:
                     carts.append(Cart(x, y, data[x][y]))
-                    if data[x][y] in ['>', '<']:
+                    if data[x][y] in [">", "<"]:
                         trackRow.append("-")
                     else:
                         trackRow.append("|")
@@ -162,7 +161,7 @@ def parseInput(data):
     return Track(track, carts)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     track = parseInput(data)
     firstCrash = None
     while firstCrash == None:
@@ -170,7 +169,7 @@ def part1(data):
     return "{},{}".format(firstCrash[1], firstCrash[0])
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     track = parseInput(data)
     while len(track.carts) > 1:
         track.moveCarts(False)

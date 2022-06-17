@@ -1,9 +1,8 @@
-
 import sys
 import re
 
 
-class NanoBot():
+class NanoBot:
     def __init__(self, inData) -> None:
         reStr = "pos=<([-0-9]+),([-0-9]+),([-0-9]+)>, r=([-0-9]+)"
         reResult = re.search(reStr, inData)
@@ -40,7 +39,7 @@ def parseInput(data):
     return nanoBots, strongest
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     nanoBots, strongest = parseInput(data)
 
     result = 0
@@ -51,7 +50,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     nanoBots = parseInput(data)[0]
     best = 0
     bestPos = [0, 0, 0]

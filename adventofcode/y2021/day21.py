@@ -12,24 +12,30 @@ def nextDie100Value(dieValue):
     return next, dieValue
 
 
-class Game():
+class Game:
     def __init__(self, player1Pos, player2Pos, winningScore) -> None:
         self.playerPosition = [player1Pos - 1, player2Pos - 1]
         self.playerScore = [0, 0]
         self.winningScore = winningScore
 
     def __str__(self) -> str:
-        result = "Player 1 at " + \
-            str(self.playerPosition[0]) + \
-            " with score: " + str(self.playerScore[0])
-        result += "\nPlayer 2 at " + \
-            str(self.playerPosition[1]) + \
-            " with score: " + str(self.playerScore[1])
+        result = (
+            "Player 1 at "
+            + str(self.playerPosition[0])
+            + " with score: "
+            + str(self.playerScore[0])
+        )
+        result += (
+            "\nPlayer 2 at "
+            + str(self.playerPosition[1])
+            + " with score: "
+            + str(self.playerScore[1])
+        )
         return result
 
     def movePiece(self, player, spaces):
         self.playerPosition[player] += spaces
-        self.playerPosition[player] = (self.playerPosition[player] % 10)
+        self.playerPosition[player] = self.playerPosition[player] % 10
         self.playerScore[player] += self.playerPosition[player] + 1
 
         if self.playerScore[player] >= self.winningScore:
@@ -38,7 +44,7 @@ class Game():
         return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     p1Result = re.search(RE_STR, data[0])
     p2Result = re.search(RE_STR, data[1])
     game = Game(int(p1Result.group(2)), int(p2Result.group(2)), 1000)
@@ -94,7 +100,7 @@ def runGame(p1, p2, s1=0, s2=0, player=0):
     return wins
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     p1Result = re.search(RE_STR, data[0])
     p2Result = re.search(RE_STR, data[1])
     result = runGame(int(p1Result.group(2)), int(p2Result.group(2)))

@@ -3,7 +3,7 @@ import heapq
 import numpy as np
 
 
-class MazeTile():
+class MazeTile:
     def __init__(self, x, y, floorType) -> None:
         self.x = x
         self.y = y
@@ -36,7 +36,7 @@ class MazeTile():
             self.neighbors.append(maze[x][y])
 
 
-class TorusMaze():
+class TorusMaze:
     def __init__(self, mapString) -> None:
         self.rawMap = [x for x in [y for y in mapString]]
         self.maxWidth = 0
@@ -60,12 +60,10 @@ class TorusMaze():
                     if len(neighbors) == 2:
                         if self.rawMap[neighbors[0][0]][neighbors[0][1]] == ".":
                             warpCoords = neighbors[0]
-                            warpID = self.getWarpID(
-                                [x, y], neighbors[1])
+                            warpID = self.getWarpID([x, y], neighbors[1])
                         else:
                             warpCoords = neighbors[1]
-                            warpID = self.getWarpID(
-                                [x, y], neighbors[0])
+                            warpID = self.getWarpID([x, y], neighbors[0])
 
                         if warpID == "AA":
                             self.start = warpCoords
@@ -74,8 +72,9 @@ class TorusMaze():
                         else:
                             if not warpID in warpIDKey:
                                 warpIDKey[warpID] = []
-                            warpTiles.append("{}_{}".format(
-                                warpCoords[0], warpCoords[1]))
+                            warpTiles.append(
+                                "{}_{}".format(warpCoords[0], warpCoords[1])
+                            )
                             warpIDKey[warpID].append(warpCoords)
                     mapRow.append(MazeTile(x, y, " "))
             self.map.append(mapRow)
@@ -85,10 +84,11 @@ class TorusMaze():
                 if self.map[x][y].walkable:
                     neighbors = self.getNeighbors(x, y, False)
                     self.map[x][y].addNeighbors(
-                        self.getNeighbors(x, y, False), self.map)
+                        self.getNeighbors(x, y, False), self.map
+                    )
 
         for warpID in warpIDKey:
-            if (len(warpIDKey[warpID]) == 2):
+            if len(warpIDKey[warpID]) == 2:
                 warp1 = warpIDKey[warpID][0]
                 warp2 = warpIDKey[warpID][1]
                 self.map[warp1[0]][warp1[1]].addNeighbors([warp2], self.map)
@@ -134,14 +134,26 @@ class TorusMaze():
     def getWarpID(self, point1, point2):
         if point1[0] == point2[0]:
             if point1[1] < point2[1]:
-                return self.rawMap[point1[0]][point1[1]] + self.rawMap[point2[0]][point2[1]]
+                return (
+                    self.rawMap[point1[0]][point1[1]]
+                    + self.rawMap[point2[0]][point2[1]]
+                )
             else:
-                return self.rawMap[point2[0]][point2[1]] + self.rawMap[point1[0]][point1[1]]
+                return (
+                    self.rawMap[point2[0]][point2[1]]
+                    + self.rawMap[point1[0]][point1[1]]
+                )
         else:
             if point1[0] < point2[0]:
-                return self.rawMap[point1[0]][point1[1]] + self.rawMap[point2[0]][point2[1]]
+                return (
+                    self.rawMap[point1[0]][point1[1]]
+                    + self.rawMap[point2[0]][point2[1]]
+                )
             else:
-                return self.rawMap[point2[0]][point2[1]] + self.rawMap[point1[0]][point1[1]]
+                return (
+                    self.rawMap[point2[0]][point2[1]]
+                    + self.rawMap[point1[0]][point1[1]]
+                )
 
     def findPath(self):
         self.map[self.start[0]][self.start[1]].distance = 0
@@ -152,8 +164,7 @@ class TorusMaze():
             currentTile = heapq.heappop(tileQueue)
 
             for neighbor in currentTile.neighbors:
-                neighbor.distance = min(
-                    neighbor.distance, currentTile.distance + 1)
+                neighbor.distance = min(neighbor.distance, currentTile.distance + 1)
                 if not neighbor in visited and not neighbor in tileQueue:
                     heapq.heappush(tileQueue, neighbor)
             visited.append(currentTile)
@@ -161,10 +172,10 @@ class TorusMaze():
         return self.map[self.end[0]][self.end[1]].distance
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     torusMaze = TorusMaze(data)
     return torusMaze.findPath()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "Wut?"

@@ -1,12 +1,9 @@
-
 from cmath import isnan
 
 
-class SoundProgram():
+class SoundProgram:
     def __init__(self, instructions, pVal=0) -> None:
-        self.registers = {
-            'p': pVal
-        }
+        self.registers = {"p": pVal}
         self.pVal = pVal
         self.instructions = instructions
         self.index = 0
@@ -31,7 +28,7 @@ class SoundProgram():
         inst = self.instructions[self.index].split(" ")
         action = inst[0]
 
-        if not inst[1].lstrip('-').isnumeric() and not inst[1] in self.registers:
+        if not inst[1].lstrip("-").isnumeric() and not inst[1] in self.registers:
             self.registers[inst[1]] = 0
 
         if action == "snd":
@@ -63,7 +60,7 @@ class SoundProgram():
         return False
 
     def get_value(self, value):
-        if value.lstrip('-').isnumeric():
+        if value.lstrip("-").isnumeric():
             return int(value)
         else:
             return self.registers[value]
@@ -72,12 +69,12 @@ class SoundProgram():
         return len(self.inQueue) == 0 and self.instructions[self.index][:3] == "rcv"
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     soundProgram = SoundProgram(data)
     return soundProgram.run()
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     soundProgram0 = SoundProgram(data, 0)
     soundProgram1 = SoundProgram(data, 1)
     soundProgram0.outQueue = soundProgram1.inQueue

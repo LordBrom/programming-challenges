@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Unit():
+class Unit:
     def __init__(self, team) -> None:
         self.team = team
         self.health = 200
@@ -14,7 +14,7 @@ class Unit():
         pass
 
 
-class Combat():
+class Combat:
     def __init__(self, data) -> None:
         self.board = []
         self.team1 = []
@@ -51,11 +51,11 @@ class Combat():
         pass
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     combat = Combat(data)
     print(combat)
     return "not implemented"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "not implemented"

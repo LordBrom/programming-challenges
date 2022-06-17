@@ -20,7 +20,7 @@ def isValidRoom(roomCode):
     return check == checksum, sectorID, roomName
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for d in data:
         isValid, sectorID, n = isValidRoom(d)
@@ -29,7 +29,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     a_offset = 97
     for d in data:
         isValid, sectorID, encryptedName = isValidRoom(d)

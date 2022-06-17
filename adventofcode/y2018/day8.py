@@ -1,4 +1,3 @@
-
 def parseNavigationNodes(inData, part2=False, depth=1):
     childCount = int(inData.pop(0))
     metaDataCount = int(inData.pop(0))
@@ -6,8 +5,7 @@ def parseNavigationNodes(inData, part2=False, depth=1):
 
     childMetaData = []
     for i in range(childCount):
-        newMetaData, inData = parseNavigationNodes(
-            inData.copy(), part2, depth + 1)
+        newMetaData, inData = parseNavigationNodes(inData.copy(), part2, depth + 1)
         childMetaData.append(newMetaData)
         if not part2:
             metaDataSum += newMetaData
@@ -24,11 +22,11 @@ def parseNavigationNodes(inData, part2=False, depth=1):
     return metaDataSum, inData
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = parseNavigationNodes(data.split(" "))
     return result[0]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = parseNavigationNodes(data.split(" "), True)
     return result[0]

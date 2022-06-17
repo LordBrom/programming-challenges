@@ -1,6 +1,4 @@
-
-
-class Constellation():
+class Constellation:
     def __init__(self, id, startStar, distance=3) -> None:
         self.id = id
         self.stars = [startStar]
@@ -23,7 +21,7 @@ class Constellation():
                 return True
         return False
 
-    def checkConstellation(self, other: 'Constellation'):
+    def checkConstellation(self, other: "Constellation"):
         for otherStar in other.stars:
             if self.checkStar(otherStar):
                 return True
@@ -32,14 +30,14 @@ class Constellation():
     def addStar(self, newStar):
         self.stars.append(newStar)
 
-    def mergeConstellations(self, other: 'Constellation'):
+    def mergeConstellations(self, other: "Constellation"):
         for otherStar in other.stars:
             self.addStar(otherStar)
 
 
 def manhattanDistance(point1, point2):
     if len(point1) != len(point2):
-        raise Exception('The 2 points require the same number of coords')
+        raise Exception("The 2 points require the same number of coords")
     result = 0
     for i in range(len(point1)):
         result += abs(point1[i] - point2[i])
@@ -55,7 +53,7 @@ def parseInput(data):
     return stars
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     stars = parseInput(data)
     count = 0
     constellations = []
@@ -81,10 +79,13 @@ def part1(data):
                     continue
                 if outerCheck == innerCheck:
                     continue
-                if constellations[outerCheck].checkConstellation(constellations[innerCheck]):
+                if constellations[outerCheck].checkConstellation(
+                    constellations[innerCheck]
+                ):
                     foundOne = True
                     constellations[outerCheck].mergeConstellations(
-                        constellations[innerCheck])
+                        constellations[innerCheck]
+                    )
                     constellations[innerCheck] = None
 
     result = 0
@@ -95,5 +96,5 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "Merry Christmas!"

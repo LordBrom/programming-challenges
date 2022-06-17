@@ -5,22 +5,26 @@ def getAbaStrings(string: str) -> list:
     result = []
 
     for i in range(len(string) - 2):
-        if string[i] == string[i + 2] and string[i] != string[i+1]:
-            result.append(string[i+1] + string[i] + string[i+1])
+        if string[i] == string[i + 2] and string[i] != string[i + 1]:
+            result.append(string[i + 1] + string[i] + string[i + 1])
 
     return result
 
 
 def hasBabString(string: str, babStrings: list) -> bool:
     for i in range(len(string) - 2):
-        if string[i:i+3] in babStrings:
+        if string[i : i + 3] in babStrings:
             return True
     return False
 
 
 def hasAbbaString(string: str) -> bool:
     for i in range(len(string) - 3):
-        if string[i] == string[i+3] and string[i+1] == string[i+2] and string[i] != string[i+2]:
+        if (
+            string[i] == string[i + 3]
+            and string[i + 1] == string[i + 2]
+            and string[i] != string[i + 2]
+        ):
             return True
     return False
 
@@ -57,7 +61,7 @@ def supportsSSL(ipString: str) -> bool:
     return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for ip in data:
         if supportsTLS(ip):
@@ -65,7 +69,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for ip in data:
         if supportsSSL(ip):

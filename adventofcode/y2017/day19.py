@@ -1,11 +1,10 @@
-
 UP = 0
 RIGHT = 1
 DOWN = 2
 LEFT = 3
 
 
-class Tubes():
+class Tubes:
     def __init__(self, data) -> None:
         rowLen = 0
         for row in data:
@@ -33,7 +32,7 @@ class Tubes():
                 break
             self.steps += 1
 
-            if not current in ['|', '-', '+']:
+            if not current in ["|", "-", "+"]:
                 result += current
             elif current == "+":
                 if self.dir in [UP, DOWN]:
@@ -59,12 +58,12 @@ class Tubes():
         return result
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     tubes = Tubes(data)
     return tubes.follow()
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     tubes = Tubes(data)
     tubes.follow()
     return tubes.steps

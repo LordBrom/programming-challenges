@@ -1,7 +1,7 @@
 import re
 
 
-class Wire():
+class Wire:
     def __init__(self, wireName, value=None) -> None:
         self.name = wireName
         self.value = value
@@ -17,7 +17,7 @@ class Wire():
             if self.action == "SET":
                 self.value = self.wire1.getValue()
             elif self.action == "NOT":
-                self.value = ~ self.wire1.getValue()
+                self.value = ~self.wire1.getValue()
             elif self.action == "AND":
                 self.value = self.wire1.getValue() & self.wire2.getValue()
             elif self.action == "OR":
@@ -29,7 +29,7 @@ class Wire():
         return self.value
 
 
-class CircuitBoard():
+class CircuitBoard:
     def __init__(self) -> None:
         self.wires = {}
 
@@ -63,7 +63,7 @@ class CircuitBoard():
 
     def addWire(self, wireName):
         if wireName.isnumeric():
-            return Wire('input', int(wireName))
+            return Wire("input", int(wireName))
         else:
             if not wireName in self.wires:
                 self.wires[wireName] = Wire(wireName)
@@ -75,14 +75,14 @@ class CircuitBoard():
         return None
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     circuitBoard = CircuitBoard()
     for d in data:
         circuitBoard.inputCommand(d)
     return circuitBoard.getWire()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     newBValue = part1(data.copy())
     circuitBoard = CircuitBoard()
     for d in data:

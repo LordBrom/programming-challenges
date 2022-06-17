@@ -1,7 +1,7 @@
 import math
 
 
-class HotChocolate():
+class HotChocolate:
     def __init__(self, start, skill) -> None:
         self.recipe = start
         self.skill = skill
@@ -43,23 +43,26 @@ class HotChocolate():
         if len(self.recipe) < len(self.skill):
             return False
 
-        if self.recipe[-len(self.skill):] == self.skillPart2:
+        if self.recipe[-len(self.skill) :] == self.skillPart2:
             return len(self.recipe) - len(self.skill)
 
-        if self.recipe[-2] == 1 and self.recipe[-(len(self.skill) + 1):-1] == self.skillPart2:
+        if (
+            self.recipe[-2] == 1
+            and self.recipe[-(len(self.skill) + 1) : -1] == self.skillPart2
+        ):
             return (len(self.recipe) - len(self.skill)) - 1
 
         return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     hotChocolate = HotChocolate([3, 7], data)
     while len(hotChocolate.recipe) < int(data) + 10:
         hotChocolate.doRecpie()
     return hotChocolate.result()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     hotChocolate = HotChocolate([3, 7], data)
     result = False
     while result == False:

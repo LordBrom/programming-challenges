@@ -1,11 +1,26 @@
-
-OPCODES = ["addr", "addi", "mulr", "muli", "banr", "bani", "borr",
-           "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr"]
+OPCODES = [
+    "addr",
+    "addi",
+    "mulr",
+    "muli",
+    "banr",
+    "bani",
+    "borr",
+    "bori",
+    "setr",
+    "seti",
+    "gtir",
+    "gtri",
+    "gtrr",
+    "eqir",
+    "eqri",
+    "eqrr",
+]
 
 OPCODE_KEY = {}
 
 
-class OpcodeSample():
+class OpcodeSample:
     def __init__(self, before, instruction, after) -> None:
         self.before = [int(x) for x in before.split(", ")]
         self.after = [int(x) for x in after.split(", ")]
@@ -26,8 +41,7 @@ class OpcodeSample():
             result.append(OPCODE_KEY[self.instruction[0]])
         else:
             for opcode in opcodes:
-                check = doOpcode(self.before.copy(), opcode,
-                                 self.instruction[1:])
+                check = doOpcode(self.before.copy(), opcode, self.instruction[1:])
                 if check == self.after:
                     result.append(opcode)
         return result
@@ -103,8 +117,9 @@ def parseInput(data):
         if data[0] == "":
             break
         if firstPart:
-            samples.append(OpcodeSample(
-                data.pop(0)[9:-1], data.pop(0), data.pop(0)[9:-1]))
+            samples.append(
+                OpcodeSample(data.pop(0)[9:-1], data.pop(0), data.pop(0)[9:-1])
+            )
             if len(data) == 0:
                 break
             data.pop(0)
@@ -115,17 +130,17 @@ def parseInput(data):
     return samples, data
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     samples = parseInput(data)[0]
     result = 0
     for s in samples:
-        #print(s.instruction[0], s.possible)
+        # print(s.instruction[0], s.possible)
         if len(s.possible) >= 3:
             result += 1
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     samples, final = parseInput(data)
     neededOpcodes = OPCODES.copy()
     while len(neededOpcodes) > 0:

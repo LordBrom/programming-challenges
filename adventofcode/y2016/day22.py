@@ -1,7 +1,7 @@
 import re
 
 
-class Node():
+class Node:
     def __init__(self, x, y, size, used) -> None:
         self.x = x
         self.y = y
@@ -22,8 +22,11 @@ class Node():
         return result
 
     def getInfo(self):
-        return "/dev/grid/node-x{:02d}-y{:02d}  {:02d}T  {:02d}T  {:02d}T  {:02d}%".format(
-            self.x, self.y, self.size, self.used, self.avail(), self.usedPercent())
+        return (
+            "/dev/grid/node-x{:02d}-y{:02d}  {:02d}T  {:02d}T  {:02d}T  {:02d}%".format(
+                self.x, self.y, self.size, self.used, self.avail(), self.usedPercent()
+            )
+        )
 
     def avail(self):
         return self.size - self.used
@@ -31,7 +34,7 @@ class Node():
     def usedPercent(self):
         return int((self.used / self.size) * 100)
 
-    def isViablePair(self, nodeB: 'Node', adjacent=False):
+    def isViablePair(self, nodeB: "Node", adjacent=False):
         if self.used == 0:
             return False
 
@@ -92,12 +95,13 @@ def printNodes(nodes):
             if x != 0:
                 rowStr += " - "
             rowStr += "{:03d}/{:03d}:{:03d}".format(
-                nodes[x][y].used, nodes[x][y].size, nodes[x][y].avail())
+                nodes[x][y].used, nodes[x][y].size, nodes[x][y].avail()
+            )
             splitRow += "   |          "
         print(rowStr)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
 
     nodes = []
     reStr = "/dev/grid/node-x([0-9]+)-y([0-9]+)[ ]+([0-9]+)T[ ]+([0-9]+)T[ ]+([0-9]+)T[ ]+([0-9]+)%"
@@ -106,8 +110,14 @@ def part1(data):
         reResult = re.search(reStr, d)
         if reResult == None:
             continue
-        nodes.append(Node(int(reResult.group(1)), int(reResult.group(2)), int(
-            reResult.group(3)), int(reResult.group(4))))
+        nodes.append(
+            Node(
+                int(reResult.group(1)),
+                int(reResult.group(2)),
+                int(reResult.group(3)),
+                int(reResult.group(4)),
+            )
+        )
 
     result = 0
     for nodeA in nodes:
@@ -120,7 +130,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     nodes = setupNodes(data)
     printNodes(nodes)
     return "not implemented"

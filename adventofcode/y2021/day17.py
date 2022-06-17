@@ -33,7 +33,7 @@ def trackProbe(velocity, target):
             return (False, maxY)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     reResult = re.search(RE_STR, data[0])
     xRange = (int(reResult.group(1)), int(reResult.group(2)))
     yRange = (int(reResult.group(3)), int(reResult.group(4)))
@@ -48,7 +48,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     reResult = re.search(RE_STR, data[0])
     xRange = (int(reResult.group(1)), int(reResult.group(2)))
     yRange = (int(reResult.group(3)), int(reResult.group(4)))

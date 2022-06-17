@@ -1,4 +1,3 @@
-
 def countCharacters(string):
     string = string[1:-1]
     literal = 2
@@ -10,7 +9,7 @@ def countCharacters(string):
             literal += 1
             memory += 1
         else:
-            if string[i + 1] in ["\\", "\""]:
+            if string[i + 1] in ["\\", '"']:
                 literal += 2
                 memory += 1
                 i += 1
@@ -26,13 +25,13 @@ def countCharacters(string):
 def encode(string):
     result = ""
     for s in string:
-        if s in ["\\", "\""]:
+        if s in ["\\", '"']:
             result += "\\"
         result += s
-    return "\"" + result + "\""
+    return '"' + result + '"'
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     literalValue = 0
     memoryValue = 0
     for d in data:
@@ -42,7 +41,7 @@ def part1(data):
     return literalValue - memoryValue
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     literalValue = 0
     memoryValue = 0
     for d in data:

@@ -6,7 +6,7 @@ def findAsteroids(data):
 
     for row in enumerate(data):
         for col in enumerate(row[1]):
-            if data[row[0]][col[0]] == '#':
+            if data[row[0]][col[0]] == "#":
                 result.append([row[0], col[0]])
 
     return result
@@ -22,7 +22,7 @@ def calc_angle(p1, p2):
     if angle >= 0:
         return angle
     else:
-        return (2 + angle)
+        return 2 + angle
 
 
 def count_visible(asteroids, current):
@@ -40,12 +40,12 @@ def calc_dist(p1, p2):
     deltaX = p1[0] - p2[0]
     deltaY = p1[1] - p2[1]
 
-    dist = math.sqrt((deltaX)**2 + (deltaY)**2)
+    dist = math.sqrt((deltaX) ** 2 + (deltaY) ** 2)
 
     return dist
 
 
-def part1(data):
+def part1(data, test=False) -> str:
 
     asteroids = findAsteroids(data)
 
@@ -56,7 +56,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
 
     asteroids = findAsteroids(data)
 
@@ -78,8 +78,7 @@ def part2(data):
         if not angle in angles:
             angles.append(angle)
             asteroidAngles[angle] = []
-        asteroidAngles[angle].append(
-            [asteroid, calc_dist(bestAsteroid, asteroid)])
+        asteroidAngles[angle].append([asteroid, calc_dist(bestAsteroid, asteroid)])
 
     angles.sort()
     for asteroidAngle in asteroidAngles:
@@ -95,8 +94,8 @@ def part2(data):
         count += 1
         curAngle = angles[pointer]
         asteroid = asteroidAngles[curAngle].pop(0)
-        #print("The", count, "asteroid to be vaporized is at", asteroid[0], "at angle", curAngle, "and distance", asteroid[1])
-        #print("The", count, "asteroid to be vaporized is at", asteroid[0])
+        # print("The", count, "asteroid to be vaporized is at", asteroid[0], "at angle", curAngle, "and distance", asteroid[1])
+        # print("The", count, "asteroid to be vaporized is at", asteroid[0])
         if count == findCount:
             result = asteroid[0]
         if len(asteroidAngles[curAngle]) == 0:

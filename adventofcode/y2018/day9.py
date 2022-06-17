@@ -3,13 +3,13 @@ import re
 RE_STR = "([0-9]+) players; last marble is worth ([0-9]+) points"
 
 
-class Marble():
+class Marble:
     def __init__(self, value) -> None:
         self.value = value
         self.left = None
         self.right = None
 
-    def __eq__(self, __o: 'Marble') -> bool:
+    def __eq__(self, __o: "Marble") -> bool:
         return self.value == __o.value
 
     def getClockWise(self, count):
@@ -28,7 +28,7 @@ class Marble():
         return self.getClockWise(1)
 
 
-class MarbleGame():
+class MarbleGame:
     def __init__(self, players, marbles) -> None:
         self.players = players
         self.marbles = marbles
@@ -103,13 +103,13 @@ def parseInput(data):
     return (int(reResult.group(1)), int(reResult.group(2)))
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     playerCount, marbleCount = parseInput(data)
     marbleGame = MarbleGame(playerCount, marbleCount)
     return marbleGame.runGame()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     playerCount, marbleCount = parseInput(data)
     marbleGame = MarbleGame(playerCount, marbleCount * 100)
     return marbleGame.runGame()

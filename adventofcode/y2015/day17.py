@@ -23,20 +23,22 @@ def fillContainers(containers, setGlobal=False, eggnog=150, index=0, used=[], st
 
     usedCopy = used.copy()
     usedCopy.append(index)
-    result += fillContainers(containers, setGlobal, eggnog, index + 1,
-                             usedCopy, stored + containers[index])
-    result += fillContainers(containers, setGlobal, eggnog,
-                             index + 1, used.copy(), stored)
+    result += fillContainers(
+        containers, setGlobal, eggnog, index + 1, usedCopy, stored + containers[index]
+    )
+    result += fillContainers(
+        containers, setGlobal, eggnog, index + 1, used.copy(), stored
+    )
 
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     containers = [int(x) for x in data]
     return fillContainers(containers)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     containers = [int(x) for x in data]
     fillContainers(containers, True)
     return COUNT

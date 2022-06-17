@@ -17,7 +17,9 @@ class CaveSystem:
             self.connections[cave1].append(cave2)
             self.connections[cave2].append(cave1)
 
-    def searchCaves(self, extraSmallSearch=False, cave="start", path=[], usedExtraSearch=False):
+    def searchCaves(
+        self, extraSmallSearch=False, cave="start", path=[], usedExtraSearch=False
+    ):
         if cave == "start":
             path = []
         path.append(cave)
@@ -33,21 +35,21 @@ class CaveSystem:
                 if (not extraSmallSearch) or usedExtraSearch == True:
                     continue
                 elif extraSmallSearch and not usedExtraSearch:
-                    self.searchCaves(extraSmallSearch,
-                                     connection, path.copy(), True)
+                    self.searchCaves(extraSmallSearch, connection, path.copy(), True)
                     continue
-            self.searchCaves(extraSmallSearch, connection,
-                             path.copy(), not not usedExtraSearch)
+            self.searchCaves(
+                extraSmallSearch, connection, path.copy(), not not usedExtraSearch
+            )
         return
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     caveSystem = CaveSystem(data.copy())
     caveSystem.searchCaves()
     return len(caveSystem.fullPaths)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     caveSystem = CaveSystem(data.copy())
     caveSystem.searchCaves(True)
     return len(caveSystem.fullPaths)

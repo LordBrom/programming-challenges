@@ -1,7 +1,7 @@
 import re
 
 
-class SolarSystem():
+class SolarSystem:
     def __init__(self, startPositions):
         self.planets = []
         for position in startPositions:
@@ -39,12 +39,15 @@ class SolarSystem():
         return planetPositions
 
 
-class Planet():
+class Planet:
     def __init__(self, dataStr):
-        reStr = '<x=([-0-9]+), y=([-0-9]+), z=([-0-9]+)>'
+        reStr = "<x=([-0-9]+), y=([-0-9]+), z=([-0-9]+)>"
         reResult = re.search(reStr, dataStr)
-        self.position = [int(reResult.group(1)), int(
-            reResult.group(2)), int(reResult.group(3))]
+        self.position = [
+            int(reResult.group(1)),
+            int(reResult.group(2)),
+            int(reResult.group(3)),
+        ]
         self.velocity = [0, 0, 0]
 
     def updateVelocity(self, gravity):
@@ -64,7 +67,7 @@ class Planet():
         return abs(self.velocity[0]) + abs(self.velocity[1]) + abs(self.velocity[2])
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     system = SolarSystem(data)
 
     for step in range(1000):
@@ -73,7 +76,7 @@ def part1(data):
     return system.getSystemEnergy()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     system = SolarSystem(data)
 
     positions = []

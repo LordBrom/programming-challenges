@@ -2,7 +2,7 @@ import itertools
 from intcode import IntcodeComputer
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     data = data[0].split(",")
     lastOutput = 0
     maxOutput = 0
@@ -17,7 +17,7 @@ def part1(data):
     return maxOutput
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     data = data[0].split(",")
     lastOutput = 0
     maxOutput = 0
@@ -32,7 +32,7 @@ def part2(data):
         while run:
             for i in range(patLen):
                 lastOutput = amps[i].run(lastOutput)
-            if amps[i].get_op_code() == '99':
+            if amps[i].get_op_code() == "99":
                 run = False
         maxOutput = max(maxOutput, lastOutput)
     return maxOutput

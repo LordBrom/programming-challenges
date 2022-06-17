@@ -1,8 +1,7 @@
-
 import re
 
 
-class ChipType():
+class ChipType:
     def __init__(self, name, letter) -> None:
         self.name = name
         self.letter = letter
@@ -22,7 +21,7 @@ class ChipType():
         return self.chipFloor == self.genFloor
 
 
-class Building():
+class Building:
     def __init__(self, floorData) -> None:
         reStr = "a ([a-z]+)(?:-compatible|) (microchip|generator)"
         self.elevator = 0
@@ -35,7 +34,8 @@ class Building():
             for res in reResult:
                 if not res[0] in self.chipTypes:
                     self.chipTypes[res[0]] = ChipType(
-                        res[0], chr(letterIndex + 97).upper())
+                        res[0], chr(letterIndex + 97).upper()
+                    )
                     letterIndex += 1
 
                 if res[1][0] == "m":
@@ -77,12 +77,12 @@ class Building():
         #    return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     building = Building(data)
     print(building)
 
     return "not implemented"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "not implemented"

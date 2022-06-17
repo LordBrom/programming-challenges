@@ -6,7 +6,7 @@ IMAGE_HEIGHT = 6
 LAYER_SIZE = IMAGE_WIDTH * IMAGE_HEIGHT
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     reFind = re.findall(".{" + str(LAYER_SIZE) + "}", data[0])
     min0 = -1
     result = 0
@@ -23,16 +23,16 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     reFind = re.findall(".{" + str(LAYER_SIZE) + "}", data[0])
 
-    result = ''
+    result = ""
 
     for i in range(LAYER_SIZE):
         pixelFound = False
         for j in range(len(reFind)):
-            if reFind[j][i] != '2':
-                if reFind[j][i] == '0':
+            if reFind[j][i] != "2":
+                if reFind[j][i] == "0":
                     result += " "
                 else:
                     result += "1"

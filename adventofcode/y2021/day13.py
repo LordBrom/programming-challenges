@@ -1,4 +1,3 @@
-
 def parseInput(data):
     points = []
     folds = []
@@ -23,17 +22,15 @@ def makeFold(paper, fold):
             if fold[0] == "x" and y > ((len(paper[x]) - 1) / 2):
                 break
             if fold[0] == "x":
-                paper[x][y] = paper[x][y] or paper[x][(
-                    int(fold[1]) - y) + int(fold[1])]
+                paper[x][y] = paper[x][y] or paper[x][(int(fold[1]) - y) + int(fold[1])]
             else:
-                paper[x][y] = paper[x][y] or paper[(
-                    int(fold[1]) - x) + int(fold[1])][y]
+                paper[x][y] = paper[x][y] or paper[(int(fold[1]) - x) + int(fold[1])][y]
 
     if fold[0] == "y":
-        del paper[int(fold[1]):]
+        del paper[int(fold[1]) :]
     else:
         for x in range(len(paper)):
-            del paper[x][int(fold[1]):]
+            del paper[x][int(fold[1]) :]
 
     return paper
 
@@ -58,7 +55,7 @@ def printPaper(paper):
         print(rowStr)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     paper = []
     paperSize = 1500
     for x in range(paperSize):
@@ -74,7 +71,7 @@ def part1(data):
     return countMarks(paper)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     paper = []
     paperSize = 1500
     for x in range(paperSize):

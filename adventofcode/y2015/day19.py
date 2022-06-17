@@ -1,4 +1,3 @@
-
 def breakDownString(replacements, string):
     totalSteps = 0
     i = 0
@@ -16,18 +15,17 @@ def replaceSimple(replacements, string):
     while len(string) > 1 and i < len(string):
         start = i
         first, i = getElement(string, i)
-        if first in ['Rn', 'Y', 'Ar']:
+        if first in ["Rn", "Y", "Ar"]:
             continue
         second, i = getElement(string, i)
-        if second in ['Rn', 'Y', 'Ar']:
+        if second in ["Rn", "Y", "Ar"]:
             continue
 
         pair = first + second
 
         if pair in replacements:
             steps += 1
-            string = string[:start] + replacements[pair] + \
-                string[start + len(pair):]
+            string = string[:start] + replacements[pair] + string[start + len(pair) :]
             i = start - 2
     return string, steps
 
@@ -39,10 +37,10 @@ def replaceComplex(replacements, string):
         start = i
         end = None
         first, i = getElement(string, i)
-        if first in ['Rn', 'Y', 'Ar']:
+        if first in ["Rn", "Y", "Ar"]:
             continue
         second, i = getElement(string, i)
-        if second != 'Rn':
+        if second != "Rn":
             i -= len(second)
             continue
 
@@ -63,8 +61,7 @@ def replaceComplex(replacements, string):
 
         if pair in replacements:
             steps += 1
-            string = string[:start] + replacements[pair] + \
-                string[start + len(pair):]
+            string = string[:start] + replacements[pair] + string[start + len(pair) :]
             i = start - 2
     return string, steps
 
@@ -83,12 +80,12 @@ def getUnique(startStr, replacements, checked=[]):
     results = []
     for i in range(len(startStr)):
         letter = startStr[i]
-        if i < len(startStr) - 1 and startStr[i+1].islower():
-            letter += startStr[i+1]
+        if i < len(startStr) - 1 and startStr[i + 1].islower():
+            letter += startStr[i + 1]
         if not letter in replacements:
             continue
         for rep in replacements[letter]:
-            check = startStr[:i] + rep + startStr[i+len(letter):]
+            check = startStr[:i] + rep + startStr[i + len(letter) :]
             if check not in results and check not in checked:
                 results.append(check)
         i += len(letter) - 1
@@ -111,17 +108,17 @@ def parseInput(data, reverse=False):
     return replacements, data.pop(0)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     replacements, startStr = parseInput(data)
     unique = getUnique(startStr, replacements)
     return len(unique)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     replacements, startStr = parseInput(data, True)
     # There is a bit of an ordering issue. But adding this replacement still gets the right answer ;)
     # SiThCaRnFAr needs to go to SiThRnFAr to use the ThRnFAr replacement
     # But with this, it goes to CaRnFAr. But it gives the same answer.
     # Note for fix, at each step just have a "make change" version and a "don't" version and find best
-    replacements['CaRnFAr'] = 'F'
+    replacements["CaRnFAr"] = "F"
     return breakDownString(replacements, startStr)

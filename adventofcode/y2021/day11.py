@@ -1,6 +1,4 @@
-
-
-def part1(data):
+def part1(data, test=False) -> str:
     octopi = []
 
     for i in data:
@@ -18,9 +16,16 @@ def part1(data):
 
         octoIndex = 0
         while octoIndex < len(flashingOctopi):
-            for x in range(flashingOctopi[octoIndex][0] - 1, flashingOctopi[octoIndex][0] + 2):
-                for y in range(flashingOctopi[octoIndex][1] - 1, flashingOctopi[octoIndex][1] + 2):
-                    if x == flashingOctopi[octoIndex][0] and y == flashingOctopi[octoIndex][1]:
+            for x in range(
+                flashingOctopi[octoIndex][0] - 1, flashingOctopi[octoIndex][0] + 2
+            ):
+                for y in range(
+                    flashingOctopi[octoIndex][1] - 1, flashingOctopi[octoIndex][1] + 2
+                ):
+                    if (
+                        x == flashingOctopi[octoIndex][0]
+                        and y == flashingOctopi[octoIndex][1]
+                    ):
                         continue
                     if x < 0 or x >= len(octopi):
                         continue
@@ -39,7 +44,7 @@ def part1(data):
     return flashes
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     octopi = []
 
     for i in data:
@@ -58,9 +63,16 @@ def part2(data):
 
         octoIndex = 0
         while octoIndex < len(flashingOctopi):
-            for x in range(flashingOctopi[octoIndex][0] - 1, flashingOctopi[octoIndex][0] + 2):
-                for y in range(flashingOctopi[octoIndex][1] - 1, flashingOctopi[octoIndex][1] + 2):
-                    if x == flashingOctopi[octoIndex][0] and y == flashingOctopi[octoIndex][1]:
+            for x in range(
+                flashingOctopi[octoIndex][0] - 1, flashingOctopi[octoIndex][0] + 2
+            ):
+                for y in range(
+                    flashingOctopi[octoIndex][1] - 1, flashingOctopi[octoIndex][1] + 2
+                ):
+                    if (
+                        x == flashingOctopi[octoIndex][0]
+                        and y == flashingOctopi[octoIndex][1]
+                    ):
                         continue
                     if x < 0 or x >= len(octopi):
                         continue

@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 
-class SecurityLayer():
+class SecurityLayer:
     def __init__(self, depth, range) -> None:
         self.depth = depth
         self.range = range
@@ -35,7 +35,7 @@ class SecurityLayer():
         self.scanUp = False
 
 
-class SecurityLayers():
+class SecurityLayers:
     def __init__(self, data) -> None:
         self.layers = {}
         self.max = 0
@@ -47,8 +47,7 @@ class SecurityLayers():
 
         for d in data:
             dSplit = d.split(": ")
-            self.layers[int(dSplit[0])] = SecurityLayer(
-                int(dSplit[0]), int(dSplit[1]))
+            self.layers[int(dSplit[0])] = SecurityLayer(int(dSplit[0]), int(dSplit[1]))
             self.max = max(self.max, int(dSplit[0]))
 
     def __str__(self) -> str:
@@ -76,7 +75,11 @@ class SecurityLayers():
 
         caught = False
 
-        if self.position != None and self.position in self.layers and self.layers[self.position].scanning == 0:
+        if (
+            self.position != None
+            and self.position in self.layers
+            and self.layers[self.position].scanning == 0
+        ):
             self.result += self.layers[self.position].caught_severity()
             self.caught = True
             caught = True
@@ -96,14 +99,14 @@ class SecurityLayers():
             self.layers[i].reset()
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     securityLayers = SecurityLayers(data)
     for i in range(securityLayers.max + 1):
         securityLayers.tick_time()
     return securityLayers.result
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     securityLayers = SecurityLayers(data)
 
     while True:

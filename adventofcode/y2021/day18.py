@@ -2,7 +2,7 @@ import math
 import random
 
 
-class SnailNum():
+class SnailNum:
     def __init__(self, data, depth=0, parent=None):
         self.randID = random.randint(1, 10000)
         self.left = None
@@ -25,7 +25,7 @@ class SnailNum():
                 nextOpen = data.find("[", openPos)
                 nextClose = data.find("]", closePos)
             rightStart = data.find(",", nextClose)
-            self.left = SnailNum(data[0:nextClose + 1], depth + 1, self)
+            self.left = SnailNum(data[0 : nextClose + 1], depth + 1, self)
             self.leftIsNum = False
         else:
             self.left = int(data[0:rightStart])
@@ -41,17 +41,18 @@ class SnailNum():
                 closePos = nextClose + 1
                 nextOpen = data.find("[", openPos)
                 nextClose = data.find("]", closePos)
-            self.right = SnailNum(
-                data[rightStart + 1:nextClose + 1], depth + 1, self)
+            self.right = SnailNum(data[rightStart + 1 : nextClose + 1], depth + 1, self)
             self.rightIsNum = False
         else:
-            self.right = int(data[rightStart + 1:])
+            self.right = int(data[rightStart + 1 :])
             self.rightIsNum = True
 
         pass
 
     def addition(self, snailNum):
-        return SnailNum('[' + self.printNum(False) + ',' + snailNum.printNum(False) + ']')
+        return SnailNum(
+            "[" + self.printNum(False) + "," + snailNum.printNum(False) + "]"
+        )
 
     def addLeft(self, amount, sameSide=True, goingUp=False):
         if self.leftIsNum:
@@ -61,15 +62,14 @@ class SnailNum():
                 self.left.addLeft(amount, sameSide, goingUp)
             elif self.depth != 0 and sameSide:
                 newSameSide = (
-                    not self.parentSnailNum.leftIsNum) and self.parentSnailNum.left.randID == self.randID
+                    not self.parentSnailNum.leftIsNum
+                ) and self.parentSnailNum.left.randID == self.randID
 
-                self.parentSnailNum.addLeft(
-                    amount, newSameSide)
+                self.parentSnailNum.addLeft(amount, newSameSide)
             elif self.depth == 0 and sameSide:
                 pass
             else:
-                self.left.addRight(
-                    amount, True, True)
+                self.left.addRight(amount, True, True)
 
     def addRight(self, amount, sameSide=True, goingUp=False):
         if self.rightIsNum:
@@ -79,14 +79,13 @@ class SnailNum():
                 self.right.addRight(amount, sameSide, goingUp)
             elif self.depth != 0 and sameSide:
                 newSameSide = (
-                    not self.parentSnailNum.rightIsNum) and self.parentSnailNum.right.randID == self.randID
-                self.parentSnailNum.addRight(
-                    amount, newSameSide)
+                    not self.parentSnailNum.rightIsNum
+                ) and self.parentSnailNum.right.randID == self.randID
+                self.parentSnailNum.addRight(amount, newSameSide)
             elif self.depth == 0 and sameSide:
                 pass
             else:
-                self.right.addLeft(
-                    amount, True, True)
+                self.right.addLeft(amount, True, True)
 
     def reduce(self):
         step = 0
@@ -127,7 +126,12 @@ class SnailNum():
         if not didSplit and self.leftIsNum and self.left >= 10:
             self.leftIsNum = False
             self.left = SnailNum(
-                "[" + str(math.floor(self.left / 2)) + "," + str(math.ceil(self.left / 2)) + "]")
+                "["
+                + str(math.floor(self.left / 2))
+                + ","
+                + str(math.ceil(self.left / 2))
+                + "]"
+            )
             self.left.depth = self.depth + 1
             self.left.parentSnailNum = self
             didSplit = True
@@ -137,7 +141,12 @@ class SnailNum():
         if not didSplit and self.rightIsNum and self.right >= 10:
             self.rightIsNum = False
             self.right = SnailNum(
-                "[" + str(math.floor(self.right / 2)) + "," + str(math.ceil(self.right / 2)) + "]")
+                "["
+                + str(math.floor(self.right / 2))
+                + ","
+                + str(math.ceil(self.right / 2))
+                + "]"
+            )
             self.right.depth = self.depth + 1
             self.right.parentSnailNum = self
             didSplit = True
@@ -181,7 +190,7 @@ class SnailNum():
         return outStr
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = SnailNum(data[0])
 
     for i in range(1, len(data)):
@@ -192,7 +201,7 @@ def part1(data):
     return result.getMagnitude()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for x in range(len(data)):
         for y in range(len(data)):

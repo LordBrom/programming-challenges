@@ -1,4 +1,3 @@
-
 def getCode(keyPad, data, startPos=[1, 1]):
     position = startPos.copy()
     result = ""
@@ -31,15 +30,17 @@ def getCode(keyPad, data, startPos=[1, 1]):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     keyPad = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     return getCode(keyPad, data)
 
 
-def part2(data):
-    keyPad = [[0, 0, 1, 0, 0],
-              [0, 2, 3, 4, 0],
-              [5, 6, 7, 8, 9],
-              [0, 'A', 'B', 'C', 0],
-              [0, 0, 'D', 0, 0]]
+def part2(data, test=False) -> str:
+    keyPad = [
+        [0, 0, 1, 0, 0],
+        [0, 2, 3, 4, 0],
+        [5, 6, 7, 8, 9],
+        [0, "A", "B", "C", 0],
+        [0, 0, "D", 0, 0],
+    ]
     return getCode(keyPad, data, [3, 0])

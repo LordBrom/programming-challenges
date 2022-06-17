@@ -1,15 +1,14 @@
 from math import floor
 
 
-class Generator():
+class Generator:
     def __init__(self, start, factor, submitVal) -> None:
         self.product = start
         self.factor = factor
         self.submitVal = submitVal
 
     def __str__(self) -> str:
-        return str(self.product).rjust(
-            10)
+        return str(self.product).rjust(10)
 
     def produceValue(self, resProduct=2147483647, checkVal=False):
         self.product *= self.factor
@@ -21,7 +20,7 @@ class Generator():
             pass
 
 
-class Judge():
+class Judge:
     def __init__(self, data, useQueue=False, debug=False) -> None:
         aVal = data[0].split(" ")[-1]
         bVal = data[1].split(" ")[-1]
@@ -60,13 +59,13 @@ class Judge():
                 return
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     judge = Judge(data)
     judge.step(40000000)
     return judge.result
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     judge = Judge(data, True)
     judge.step(5000000)
     return judge.result

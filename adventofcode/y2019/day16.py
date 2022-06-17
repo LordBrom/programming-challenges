@@ -2,7 +2,7 @@ import math
 from functools import lru_cache
 
 
-class FlawedFrequencyTransmission():
+class FlawedFrequencyTransmission:
     def __init__(self, data, pattern) -> None:
         self.transmission = data
         self.pattern = pattern
@@ -22,8 +22,7 @@ class FlawedFrequencyTransmission():
             patternPointer = 1
             stepSum = 0
             for n in self.transmission:
-                pos = math.floor((patternPointer %
-                                  (len(self.pattern * i))) / i)
+                pos = math.floor((patternPointer % (len(self.pattern * i))) / i)
                 stepSum += int(n) * self.pattern[pos]
                 patternPointer += 1
             newTransmission += str(abs(stepSum) % 10)
@@ -31,17 +30,17 @@ class FlawedFrequencyTransmission():
         self.transmission = newTransmission
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     fft = FlawedFrequencyTransmission(data, [0, 1, 0, -1])
     fft.takeSteps()
     return fft.transmission[:8]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     realMessage = ""
     for i in range(10000):
         realMessage += data
     offset = int(data[:7])
     fft = FlawedFrequencyTransmission(realMessage, [0, 1, 0, -1])
     fft.takeSteps()
-    return fft.transmission[offset:offset + 8]
+    return fft.transmission[offset : offset + 8]

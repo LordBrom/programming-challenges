@@ -1,11 +1,11 @@
 import sys
 import re
 
-#default: 1000
+# default: 1000
 sys.setrecursionlimit(3000)
 
 
-class SandPit():
+class SandPit:
     def __init__(self, clayVeins) -> None:
         maxX = 0
         minX = sys.maxsize
@@ -29,16 +29,13 @@ class SandPit():
         self.pitOffsetX = minX - 1
         self.pitOffsetY = minY - 1
 
-        self.pit = [["." for y in range(pitSizeY)]
-                    for x in range(pitSizeX)]
+        self.pit = [["." for y in range(pitSizeY)] for x in range(pitSizeX)]
         for vein in clayVeins:
             for i in range(int(vein[3]), int(vein[4]) + 1):
                 if vein[0] == "y":
-                    self.pit[int(vein[1]) -
-                             self.pitOffsetX][i - self.pitOffsetY] = "#"
+                    self.pit[int(vein[1]) - self.pitOffsetX][i - self.pitOffsetY] = "#"
                 else:
-                    self.pit[i - self.pitOffsetX][int(vein[1]) -
-                                                  self.pitOffsetY] = "#"
+                    self.pit[i - self.pitOffsetX][int(vein[1]) - self.pitOffsetY] = "#"
 
         self.water = []
         self.debug = False
@@ -113,13 +110,13 @@ def parseInput(data):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     sandPit = SandPit(parseInput(data))
     sandPit.spreadWater(0, 500 - sandPit.pitOffsetY)
     return len(sandPit.water)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     sandPit = SandPit(parseInput(data))
     sandPit.spreadWater(0, 500 - sandPit.pitOffsetY)
     result = 0

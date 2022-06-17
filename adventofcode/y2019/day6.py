@@ -1,6 +1,6 @@
 import re
 
-GALAXY_CENTER = 'COM'
+GALAXY_CENTER = "COM"
 GALAXY = {}
 
 
@@ -41,12 +41,12 @@ class ObjectMass:
 
         best = 9999
         if not fromParent:
-            best = GALAXY[self.parentObject].find_destination(
-                destination, checked, 0)
+            best = GALAXY[self.parentObject].find_destination(destination, checked, 0)
 
         for objectMass in self.childObjects:
-            best = min(best, GALAXY[objectMass].find_destination(
-                destination, checked, 0, True))
+            best = min(
+                best, GALAXY[objectMass].find_destination(destination, checked, 0, True)
+            )
 
         if initial:
             return best
@@ -54,12 +54,12 @@ class ObjectMass:
             return 1 + best
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     global GALAXY
     GALAXY = {}
 
     for objectPair in data:
-        m = re.search('([0-9a-zA-Z]+).([0-9a-zA-Z]+)', objectPair)
+        m = re.search("([0-9a-zA-Z]+).([0-9a-zA-Z]+)", objectPair)
         parent = m.group(1)
         child = m.group(2)
 
@@ -79,12 +79,12 @@ def part1(data):
     return count
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     global GALAXY
     GALAXY = {}
 
     for objectPair in data:
-        m = re.search('([0-9a-zA-Z]+).([0-9a-zA-Z]+)', objectPair)
+        m = re.search("([0-9a-zA-Z]+).([0-9a-zA-Z]+)", objectPair)
         parent = m.group(1)
         child = m.group(2)
 
@@ -98,4 +98,4 @@ def part2(data):
         if not parent == GALAXY_CENTER:
             GALAXY[parent].add_child_object(child)
 
-    return GALAXY['YOU'].find_destination('SAN')
+    return GALAXY["YOU"].find_destination("SAN")

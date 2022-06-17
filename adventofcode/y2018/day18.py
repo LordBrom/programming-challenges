@@ -1,4 +1,4 @@
-class Acre():
+class Acre:
     def __init__(self, start) -> None:
         self.state = start
         self.nextState = None
@@ -11,7 +11,7 @@ class Acre():
         return self.state == __o
 
     def updateState(self):
-        if self.state == '.':
+        if self.state == ".":
             treeCount = 0
             for a in self.adjacent:
                 if a == "|":
@@ -19,9 +19,9 @@ class Acre():
                     if treeCount >= 3:
                         self.nextState = "|"
                         return
-                self.nextState = '.'
+                self.nextState = "."
 
-        elif self.state == '|':
+        elif self.state == "|":
             lumberyardCount = 0
             for a in self.adjacent:
                 if a == "#":
@@ -29,7 +29,7 @@ class Acre():
                     if lumberyardCount >= 3:
                         self.nextState = "#"
                         return
-            self.nextState = '|'
+            self.nextState = "|"
 
         else:  # '#'
             treeCount = 0
@@ -99,14 +99,14 @@ class LumberArea:
         lumberYards = 0
         for x in range(len(self.area)):
             for y in range(len(self.area[x])):
-                if self.area[x][y] == '|':
+                if self.area[x][y] == "|":
                     woodedAcres += 1
-                elif self.area[x][y] == '#':
+                elif self.area[x][y] == "#":
                     lumberYards += 1
         return woodedAcres * lumberYards
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     lumberArea = LumberArea(data)
     for t in range(10):
         lumberArea.minutePass()
@@ -114,7 +114,7 @@ def part1(data):
     return lumberArea.result()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     lumberArea = LumberArea(data)
     for t in range(1000000000):
         lumberArea.minutePass()

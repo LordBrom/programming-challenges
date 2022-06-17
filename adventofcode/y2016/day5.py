@@ -1,4 +1,3 @@
-
 from hashlib import md5
 
 
@@ -11,7 +10,7 @@ def getNextHash(data, index):
     return result, index
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = ""
     i = 0
 
@@ -22,13 +21,13 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = [None for x in range(8)]
     i = 0
 
     while None in result:
         hashCheck, i = getNextHash(data, i)
-        if '0' <= hashCheck[5] < '8' and result[int(int(hashCheck[5]))] == None:
+        if "0" <= hashCheck[5] < "8" and result[int(int(hashCheck[5]))] == None:
             result[int(int(hashCheck[5]))] = hashCheck[6]
 
     return "".join(result)

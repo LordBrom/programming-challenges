@@ -1,7 +1,6 @@
-
-def part1(data):
+def part1(data, test=False) -> str:
     return "not implemented"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "not implemented"

@@ -1,5 +1,4 @@
-
-def part1(data):
+def part1(data, test=False) -> str:
     floor = 0
     for d in data:
         if d == "(":
@@ -9,7 +8,7 @@ def part1(data):
     return floor
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     floor = 0
     result = None
     for i in range(len(data)):

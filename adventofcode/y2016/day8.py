@@ -1,10 +1,9 @@
 import re
 
 
-class Screen():
+class Screen:
     def __init__(self, screenWidth=50, screenHeight=6) -> None:
-        self.pixels = [[False for x in range(
-            screenWidth)] for y in range(screenHeight)]
+        self.pixels = [[False for x in range(screenWidth)] for y in range(screenHeight)]
 
     def __str__(self) -> str:
         result = "=================================================="
@@ -48,7 +47,7 @@ class Screen():
         return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     reStr = "(?:(rect) |rotate (column|row) )(?:([0-9]+)x([0-9]+)|(?:x|y)=([0-9]+) by ([0-9]+))"
     screen = Screen()
     for d in data:
@@ -62,7 +61,7 @@ def part1(data):
     return screen.countPixels()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     reStr = "(?:(rect) |rotate (column|row) )(?:([0-9]+)x([0-9]+)|(?:x|y)=([0-9]+) by ([0-9]+))"
     screen = Screen()
     for d in data:

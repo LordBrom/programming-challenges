@@ -2,7 +2,7 @@ import copy
 import sys
 
 
-class Fighter():
+class Fighter:
     def __init__(self, name, hp, damage, mana=0, hpDecay=0, debug=False) -> None:
         self.name = name
         self.hp = hp
@@ -46,14 +46,20 @@ class Fighter():
 
         if self.poisonTimer >= 0:
             if self.debug:
-                print("Poison deals 3 damage; its timer is now {}.".format(
-                    self.poisonTimer))
+                print(
+                    "Poison deals 3 damage; its timer is now {}.".format(
+                        self.poisonTimer
+                    )
+                )
             self.hp -= 3
 
         if self.rechargeTimer >= 0:
             if self.debug:
-                print("Recharge provides 101 mana; its timer is now {}.".format(
-                    self.rechargeTimer))
+                print(
+                    "Recharge provides 101 mana; its timer is now {}.".format(
+                        self.rechargeTimer
+                    )
+                )
             self.mana += 101
 
         if self.debug and self.shieldTimer == 0:
@@ -93,8 +99,13 @@ def findBest(player, boss, manaUsage=0, spellUsed=[], bestFound=sys.maxsize):
     if boss.hp <= 0:
         return True, manaUsage, spellUsed
 
-    spells = [('Magic Missile', 53), ('Drain', 73),
-              ('Shield', 113), ('Poison', 173), ('Recharge', 229)]
+    spells = [
+        ("Magic Missile", 53),
+        ("Drain", 73),
+        ("Shield", 113),
+        ("Poison", 173),
+        ("Recharge", 229),
+    ]
 
     best = bestFound
     bestCast = []
@@ -157,8 +168,13 @@ def findBest(player, boss, manaUsage=0, spellUsed=[], bestFound=sys.maxsize):
 def fightFighters(player, boss, useSpells=[]):
     manaUsed = 0
 
-    spells = [('Magic Missile', 53), ('Drain', 73),
-              ('Shield', 113), ('Poison', 173), ('Recharge', 229)]
+    spells = [
+        ("Magic Missile", 53),
+        ("Drain", 73),
+        ("Shield", 113),
+        ("Poison", 173),
+        ("Recharge", 229),
+    ]
 
     turn = 0
 
@@ -194,12 +210,14 @@ def fightFighters(player, boss, useSpells=[]):
         player.mana -= spells[castSpell][1]
 
         if castSpell == 0:
-            print("Player casts {}, dealing 4 damage.".format(
-                spells[castSpell][0]))
+            print("Player casts {}, dealing 4 damage.".format(spells[castSpell][0]))
             player.dealDamage(boss, 4)
         elif castSpell == 1:
-            print("Player casts {}, dealing 2 damage, and healing 2 hit points.".format(
-                spells[castSpell][0]))
+            print(
+                "Player casts {}, dealing 2 damage, and healing 2 hit points.".format(
+                    spells[castSpell][0]
+                )
+            )
             player.dealDamage(boss, 2)
             player.hp += 2
         elif castSpell == 2:
@@ -238,13 +256,13 @@ def getBoss(data, debug=False):
     return Fighter("Boss", bossHP, bossDamage, debug=debug)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     boss = getBoss(data)
     player = Fighter("Player", 50, 0, 500)
     return findBest(player, boss)[1]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     boss = getBoss(data)
     player = Fighter("Player", 50, 0, 500, 1)
 

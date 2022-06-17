@@ -1,5 +1,4 @@
-
-class Light():
+class Light:
     def __init__(self, x, y, state, keepOn=False) -> None:
         self.x = x
         self.y = y
@@ -46,15 +45,18 @@ class Light():
                 self.state = True
 
 
-class Board():
+class Board:
     def __init__(self, inData, cornersOn=False) -> None:
         self.lights = []
 
         for x in range(len(inData)):
             row = []
             for y in range(len(inData[x])):
-                keepOn = cornersOn and x in [
-                    0, len(inData) - 1] and y in [0, len(inData[x]) - 1]
+                keepOn = (
+                    cornersOn
+                    and x in [0, len(inData) - 1]
+                    and y in [0, len(inData[x]) - 1]
+                )
                 row.append(Light(x, y, inData[x][y], keepOn))
             self.lights.append(row)
 
@@ -94,13 +96,13 @@ class Board():
         return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     board = Board(data)
     board.takeSteps()
     return board.getLightOnCount()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     board = Board(data, True)
     board.takeSteps()
     return board.getLightOnCount()

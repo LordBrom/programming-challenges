@@ -1,4 +1,3 @@
-
 def decodeMessage(message, part1=True):
     letterCounts = [{} for x in range(len(message[0]))]
     for word in message:
@@ -12,14 +11,13 @@ def decodeMessage(message, part1=True):
         mod = 1
 
     for letterCount in letterCounts:
-        result += sorted(list(letterCount.items()),
-                         key=lambda x: mod * x[1])[0][0]
+        result += sorted(list(letterCount.items()), key=lambda x: mod * x[1])[0][0]
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return decodeMessage(data)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return decodeMessage(data, False)

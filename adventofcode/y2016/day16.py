@@ -1,4 +1,3 @@
-
 from tabnanny import check
 from venv import create
 
@@ -17,7 +16,7 @@ def expandData(data):
 
 def createChecksum(data):
     checksum = ""
-    for i in range(0, len(data)-1, 2):
+    for i in range(0, len(data) - 1, 2):
         if data[i] == data[i + 1]:
             checksum += "1"
         else:
@@ -26,7 +25,7 @@ def createChecksum(data):
     return checksum
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     diskSize = 272
     while len(data) < diskSize:
         data = expandData(data)
@@ -37,7 +36,7 @@ def part1(data):
     return checksum
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     diskSize = 35651584
     while len(data) < diskSize:
         data = expandData(data)

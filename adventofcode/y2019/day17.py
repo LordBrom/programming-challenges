@@ -1,7 +1,7 @@
 from intcode import IntcodeComputer
 
 
-class AsciiView():
+class AsciiView:
     def __init__(self, intCode) -> None:
         self.comp = IntcodeComputer(intCode)
         self.asciiView = self.comp.run(None, False)
@@ -53,16 +53,16 @@ class AsciiView():
 def appendInput(buildStr, newInput):
     for i in newInput:
         buildStr.append(ord(i))
-    buildStr.append(ord('\n'))
+    buildStr.append(ord("\n"))
     return buildStr
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     asciiView = AsciiView(data.split(","))
     return asciiView.countIntersections()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     data = data.split(",")
     data[0] = 2
 

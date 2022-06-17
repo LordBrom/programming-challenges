@@ -1,4 +1,3 @@
-
 from gettext import find
 from textwrap import fill
 
@@ -63,9 +62,9 @@ def manhattanDistance(point1, point2):
     return diffX + diffY
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return manhattanDistance([0, 0], findNum(int(data)))
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return findNum(int(data), True)

@@ -2,14 +2,9 @@ import math
 import random
 
 
-class ALU():
+class ALU:
     def __init__(self) -> None:
-        self.val = {
-            "w": 0,
-            "x": 0,
-            "y": 0,
-            "z": 0
-        }
+        self.val = {"w": 0, "x": 0, "y": 0, "z": 0}
 
     def __str__(self) -> str:
         return str(self.val)
@@ -93,7 +88,7 @@ def randModalNum():
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     num = 99893999291969
 
     while True:
@@ -107,7 +102,7 @@ def part1(data):
     return None
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     num = 34171911181210
 
     while True:

@@ -2,7 +2,7 @@ import sys
 import re
 
 
-class Location():
+class Location:
     def __init__(self, name) -> None:
         self.name = name
         self.distances = {}
@@ -22,7 +22,8 @@ class Location():
             if not next in visited:
 
                 check = self.distances[next] + locations[next].followPath(
-                    locations, visited.copy(), part1)
+                    locations, visited.copy(), part1
+                )
 
                 if part1 and (best == None or check < best):
                     best = check
@@ -35,7 +36,7 @@ class Location():
         return best
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     reStr = "(.+) to (.+) = ([0-9]+)"
     locations = {}
     for d in data:
@@ -59,7 +60,7 @@ def part1(data):
     return best
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     reStr = "(.+) to (.+) = ([0-9]+)"
     locations = {}
     for d in data:

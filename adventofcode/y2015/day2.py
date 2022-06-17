@@ -1,5 +1,4 @@
-
-class Box():
+class Box:
     def __init__(self, inLine) -> None:
         data = inLine.split("x")
         self.length = int(data[0])
@@ -16,8 +15,7 @@ class Box():
 
     def getNeededRibbon(self):
         largest = max(self.length, self.width, self.height)
-        wrap = ((2 * self.length) + (2 * self.width) +
-                (2 * self.height) - (2 * largest))
+        wrap = (2 * self.length) + (2 * self.width) + (2 * self.height) - (2 * largest)
         bow = self.length * self.width * self.height
         return wrap + bow
 
@@ -29,7 +27,7 @@ def makeBoxes(data):
     return boxes
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     boxes = makeBoxes(data)
     result = 0
     for box in boxes:
@@ -38,7 +36,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     boxes = makeBoxes(data)
     result = 0
     for box in boxes:

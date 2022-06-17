@@ -10,9 +10,9 @@ def getDecompressedLength(string, once=True):
             openParentheses = index
             index = string.find(")", index)
             closeParentheses = index
-            expandMarker = string[openParentheses + 1: closeParentheses]
+            expandMarker = string[openParentheses + 1 : closeParentheses]
             expandSplit = expandMarker.split("x")
-            expandString = string[index + 1:index + int(expandSplit[0]) + 1]
+            expandString = string[index + 1 : index + int(expandSplit[0]) + 1]
 
             if once:
                 expandLength = len(expandString)
@@ -29,9 +29,9 @@ def getDecompressedLength(string, once=True):
     return total
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return getDecompressedLength(data)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return getDecompressedLength(data, False)

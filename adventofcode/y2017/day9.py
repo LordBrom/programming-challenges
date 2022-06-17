@@ -1,4 +1,3 @@
-
 from gc import garbage
 
 
@@ -42,8 +41,7 @@ def count_groups(string, groupVal=1):
             index += 1
         elif string[index] == "{":
             index = find_closing(string, index, string[index])
-            newResult, newGarbage = count_groups(
-                string[start:index], groupVal + 1)
+            newResult, newGarbage = count_groups(string[start:index], groupVal + 1)
             result += groupVal + newResult
             garbage += newGarbage
 
@@ -69,9 +67,9 @@ def remove_escaped(string):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return count_groups(data)[0]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return len(remove_escaped(count_groups(data)[1]))

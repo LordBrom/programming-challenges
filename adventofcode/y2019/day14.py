@@ -4,7 +4,7 @@ import math
 import random
 
 
-class RecipeDictionary():
+class RecipeDictionary:
     def __init__(self, data, debug=False):
         self.debug = debug
         self.dictionary = {}
@@ -17,18 +17,18 @@ class RecipeDictionary():
             self.dictionary[r].printRecipe()
 
     def produceOutput(self, product):
-        fore = self.dictionary[product[0]].produceAmount(
-            self.dictionary, product[1])
+        fore = self.dictionary[product[0]].produceAmount(self.dictionary, product[1])
         back = self.dictionary[product[0]].produceAmount(
-            self.dictionary, product[1], {}, "", -1)
+            self.dictionary, product[1], {}, "", -1
+        )
 
-        if fore[0]['ORE'] < back[0]['ORE']:
+        if fore[0]["ORE"] < back[0]["ORE"]:
             return fore
         else:
             return back
 
 
-class Recipe():
+class Recipe:
     def __init__(self, inLine, debug):
         self.debug = debug
         self.input = []
@@ -46,13 +46,14 @@ class Recipe():
 
     def produceAmount(self, dictionary, amount, inventory={}, space="", sortVal=1):
         timesProduced = math.ceil(amount / self.output[0])
-        self.debugPrint([space, "producing", amount,
-                        self.output[1], "from inventory", inventory])
+        self.debugPrint(
+            [space, "producing", amount, self.output[1], "from inventory", inventory]
+        )
 
         requirements = {}
         newRequirements = {}
 
-        self.input = sorted(self.input, key=lambda x: sortVal*x[0])
+        self.input = sorted(self.input, key=lambda x: sortVal * x[0])
 
         for i in self.input:
             if i[1] == "ORE":
@@ -65,19 +66,32 @@ class Recipe():
                     leftOversUsed = min(inputNeeded, inventory[i[1]])
                     inputNeeded -= leftOversUsed
                     inventory[i[1]] -= leftOversUsed
-                    self.debugPrint([space, "Using", leftOversUsed, "from inventory",
-                                    inventory[i[1]], "leftovers remain"])
+                    self.debugPrint(
+                        [
+                            space,
+                            "Using",
+                            leftOversUsed,
+                            "from inventory",
+                            inventory[i[1]],
+                            "leftovers remain",
+                        ]
+                    )
 
                 if inputNeeded != 0:
                     forward = dictionary[i[1]].produceAmount(
-                        dictionary, inputNeeded, inventory.copy(), space + "    ",)
+                        dictionary,
+                        inputNeeded,
+                        inventory.copy(),
+                        space + "    ",
+                    )
                     backward = dictionary[i[1]].produceAmount(
-                        dictionary, inputNeeded, inventory.copy(), space + "    ", -1)
+                        dictionary, inputNeeded, inventory.copy(), space + "    ", -1
+                    )
                     newRequirements = forward[0]
                     inventory = forward[1]
 
                     if "ORE" in forward[0] and "ORE" in backward[0]:
-                        if forward[0]['ORE'] < backward[0]['ORE']:
+                        if forward[0]["ORE"] < backward[0]["ORE"]:
                             newRequirements = forward[0]
                             inventory = forward[1]
                         else:
@@ -102,8 +116,18 @@ class Recipe():
         remainder = (self.output[0] * timesProduced) - amount
         inventory[self.output[1]] += remainder
 
-        self.debugPrint([space, self.output[1], "created using", requirements, "with",
-                        remainder, "left over", inventory])
+        self.debugPrint(
+            [
+                space,
+                self.output[1],
+                "created using",
+                requirements,
+                "with",
+                remainder,
+                "left over",
+                inventory,
+            ]
+        )
 
         return requirements, inventory
 
@@ -127,18 +151,18 @@ class Recipe():
             print(outStr)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     recipeDictionary = RecipeDictionary(data)
     return recipeDictionary.produceOutput(["FUEL", 1])[0]["ORE"]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     recipeDictionary = RecipeDictionary(data)
     best = sys.maxsize
 
     cargoSize = 1000000000000
 
-    #num = math.floor(cargoSize / part1(data))
+    # num = math.floor(cargoSize / part1(data))
     num = 6972985
     result = 0
     while result <= cargoSize:

@@ -1,5 +1,4 @@
-
-class Debugger():
+class Debugger:
     def __init__(self, inStuff) -> None:
         self.registers = [int(x) for x in inStuff.split("	")]
         self.stateCheck = []
@@ -26,12 +25,12 @@ class Debugger():
         return steps
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     debugger = Debugger(data)
     return debugger.run()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     debugger = Debugger(data)
     debugger.run()
     debugger.stateCheck = []

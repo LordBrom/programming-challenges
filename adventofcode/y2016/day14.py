@@ -26,7 +26,8 @@ def getNextHash(data, index, stretchCount=1, lookUp={}):
         if foundChar:
             for m in range(1000):
                 subResult, lookUp = stretchHash(
-                    data, index + (m + 1), stretchCount, lookUp)
+                    data, index + (m + 1), stretchCount, lookUp
+                )
                 if hasRepeatingChar(subResult, 5, char)[0]:
                     return result, index, lookUp
         index += 1
@@ -42,7 +43,7 @@ def stretchHash(string, index, count, lookUp):
     return string, lookUp
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     i = -1
     lookUp = {}
     for n in range(64):
@@ -51,7 +52,7 @@ def part1(data):
     return i
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     i = -1
     lookUp = {}
     for n in range(64):

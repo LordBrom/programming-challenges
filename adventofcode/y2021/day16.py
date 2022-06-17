@@ -2,29 +2,31 @@ import sys
 
 
 def hexToBin(hexStr):
-    hexToBinKey = {"0": "0000",
-                   "1": "0001",
-                   "2": "0010",
-                   "3": "0011",
-                   "4": "0100",
-                   "5": "0101",
-                   "6": "0110",
-                   "7": "0111",
-                   "8": "1000",
-                   "9": "1001",
-                   "A": "1010",
-                   "B": "1011",
-                   "C": "1100",
-                   "D": "1101",
-                   "E": "1110",
-                   "F": "1111", }
+    hexToBinKey = {
+        "0": "0000",
+        "1": "0001",
+        "2": "0010",
+        "3": "0011",
+        "4": "0100",
+        "5": "0101",
+        "6": "0110",
+        "7": "0111",
+        "8": "1000",
+        "9": "1001",
+        "A": "1010",
+        "B": "1011",
+        "C": "1100",
+        "D": "1101",
+        "E": "1110",
+        "F": "1111",
+    }
     result = ""
     for l in hexStr:
         result += hexToBinKey[l]
     return result
 
 
-class Packet():
+class Packet:
     def __init__(self):
         self.version = None
         self.typeID = None
@@ -90,7 +92,7 @@ def parseLiteral(data, pos):
     keepGoing = "1"
     while keepGoing == "1":
         keepGoing = data[index]
-        newPart = data[index+1:index+5]
+        newPart = data[index + 1 : index + 5]
         result += newPart
         index += 5
     return (int(result, 2), index)
@@ -98,8 +100,8 @@ def parseLiteral(data, pos):
 
 def parsePacket(data, pos=0):
     packet = Packet()
-    packet.version = int(data[pos:pos+3], 2)
-    packet.typeID = int(data[pos+3:pos+6], 2)
+    packet.version = int(data[pos : pos + 3], 2)
+    packet.typeID = int(data[pos + 3 : pos + 6], 2)
     pos += 6
     if packet.typeID == 4:
         packet.literal, pos = parseLiteral(data, pos)
@@ -107,14 +109,14 @@ def parsePacket(data, pos=0):
         packet.lengthType = int(data[pos])
         pos += 1
         if packet.lengthType == 0:
-            packetLength = int(data[pos:pos+15], 2)
+            packetLength = int(data[pos : pos + 15], 2)
             pos += 15
             stopPos = pos + packetLength
             while pos < stopPos:
                 newPacket, pos = parsePacket(data, pos)
                 packet.subPackets.append(newPacket)
         else:
-            packetCount = int(data[pos:pos+11], 2)
+            packetCount = int(data[pos : pos + 11], 2)
             pos += 11
             for i in range(packetCount):
                 newPacket, pos = parsePacket(data, pos)
@@ -123,11 +125,11 @@ def parsePacket(data, pos=0):
     return packet, pos
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     packet = parsePacket(hexToBin(data[0]))[0]
     return packet.countVersions()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     packet = parsePacket(hexToBin(data[0]))[0]
     return packet.getValue()

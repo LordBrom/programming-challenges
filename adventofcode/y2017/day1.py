@@ -1,4 +1,3 @@
-
 def part1(data):
     result = 0
     for i in range(len(data)):
@@ -7,7 +6,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for i in range(len(data)):
         if data[i] == data[int(i + (len(data) / 2)) % len(data)]:

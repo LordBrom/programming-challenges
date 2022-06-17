@@ -1,4 +1,3 @@
-
 def iterateString(string):
     result = ""
 
@@ -14,14 +13,14 @@ def iterateString(string):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     string = data
     for i in range(40):
         string = iterateString(string)
     return len(string)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     string = data
     for i in range(50):
         string = iterateString(string)

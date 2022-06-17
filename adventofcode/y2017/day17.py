@@ -1,5 +1,4 @@
-
-class SpinLock():
+class SpinLock:
     def __init__(self, stepCount) -> None:
         self.currentPosition = 0
         self.numbers = [0]
@@ -15,7 +14,7 @@ class SpinLock():
         return result
 
     def step(self):
-        newPos = (self.currentPosition + self.totalSteps)
+        newPos = self.currentPosition + self.totalSteps
         newPos %= len(self.numbers)
         self.numbers.insert(newPos + 1, len(self.numbers))
         self.currentPosition = newPos + 1
@@ -27,7 +26,7 @@ class SpinLock():
             return self.numbers[1]
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     data = int(data)
     spinLock = SpinLock(data)
     for i in range(2017):
@@ -35,7 +34,7 @@ def part1(data, test=False):
     return spinLock.result()
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     data = int(data)
 
     oneNum = None

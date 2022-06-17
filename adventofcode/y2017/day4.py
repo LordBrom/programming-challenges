@@ -1,4 +1,3 @@
-
 def has_duplicate_words(string):
     words = string.split(" ")
     setCheck = set(words)
@@ -31,7 +30,7 @@ def count_letters(word):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for d in data:
         if not has_duplicate_words(d):
@@ -39,7 +38,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for d in data:
         if has_duplicate_words(d):

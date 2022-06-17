@@ -1,6 +1,4 @@
-
-
-class HashString():
+class HashString:
     def __init__(self, lengths, hashSize=256) -> None:
         self.lengths = [int(x) for x in lengths.split(",")]
         self.nums = list(range(hashSize))
@@ -43,9 +41,9 @@ class HashString():
     def dense_hash(self):
         result = []
         for i in range(16):
-            s = i*16
+            s = i * 16
             step = 0
-            for j in range(s, s+16):
+            for j in range(s, s + 16):
                 step ^= self.nums[j]
             result.append(step)
         return result
@@ -61,7 +59,7 @@ class HashString():
         return result
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     length = 256
     if test:
         length = 5
@@ -70,7 +68,7 @@ def part1(data, test=False):
     return hashString.checkSum()
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     extraLengths = "17,31,73,47,23"
     lengths = ""
     if data == []:

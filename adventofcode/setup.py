@@ -2,6 +2,7 @@ import sys
 
 
 def main(args=None):
+    year = input("Year: ")
     day = input("Day: ")
 
     default = ' \n\
@@ -12,9 +13,9 @@ def part1(data, test=False) -> str: \n\
 def part2(data, test=False) -> str: \n\
     return "not implemented" \n\
 '
-    mainPath = "day" + day + ".py"
-    inputPath = "inputs/day" + day + ".in"
-    testPath = "testInputs/day" + day + ".in"
+    mainPath = "y" + year + "/day" + day + ".py"
+    inputPath = "y" + year + "/inputs/day" + day + ".in"
+    testPath = "y" + year + "/testInputs/day" + day + ".in"
 
     main = open(mainPath, "x")
     main.write(default)

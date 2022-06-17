@@ -52,7 +52,7 @@ def isNiceStringPart2(checkString, debug=False):
     return rule1 and rule2
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for d in data:
         if isNiceString(d):
@@ -60,7 +60,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for d in data:
         if isNiceStringPart2(d):

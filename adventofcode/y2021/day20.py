@@ -1,7 +1,7 @@
 import math
 
 
-class Image():
+class Image:
     def __init__(self, enhancementAlg, image):
         self.enhancementAlg = enhancementAlg
         self.pixels = {}
@@ -18,8 +18,9 @@ class Image():
         fullImageOffset = math.floor(fullImageSize / 2)
         for x in range(len(image)):
             for y in range(len(image[x])):
-                self.image[(x + fullImageOffset) - imageOffset][(y +
-                                                                 fullImageOffset) - imageOffset] = image[x][y] == "#"
+                self.image[(x + fullImageOffset) - imageOffset][
+                    (y + fullImageOffset) - imageOffset
+                ] = (image[x][y] == "#")
 
     def __str__(self) -> str:
         result = "-------------------------"
@@ -81,7 +82,7 @@ class Image():
             self.image[x][0] = False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     enhancementAlg = data.pop(0)
     data.pop(0)
     image = Image(enhancementAlg, data)
@@ -89,7 +90,7 @@ def part1(data):
     return image.countPixels()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     enhancementAlg = data.pop(0)
     data.pop(0)
     image = Image(enhancementAlg, data)

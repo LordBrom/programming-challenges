@@ -1,4 +1,3 @@
-
 from hashlib import md5
 
 
@@ -6,7 +5,7 @@ def getOpenDoors(passCode):
     md5Result = md5(passCode.encode()).hexdigest()
     result = []
     for i in range(4):
-        if md5Result[i] in ['b', 'c', 'd', 'e', 'f']:
+        if md5Result[i] in ["b", "c", "d", "e", "f"]:
             result.append(i)
 
     return result
@@ -46,15 +45,17 @@ def followPath(code, path="", position=[0, 0], shortest=True):
         check = followPath(code, newPath, newPosition, shortest)
         if shortest and (best == None or (check != None and len(check) < len(best))):
             best = check
-        elif not shortest and (best == None or (check != None and len(check) > len(best))):
+        elif not shortest and (
+            best == None or (check != None and len(check) > len(best))
+        ):
             best = check
 
     return best
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return followPath(data)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return len(followPath(data, shortest=False))

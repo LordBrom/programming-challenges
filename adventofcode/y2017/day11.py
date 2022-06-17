@@ -1,7 +1,7 @@
 import sys
 
 
-class HexTile():
+class HexTile:
     def __init__(self, x, y, z) -> None:
         self.x = x
         self.y = y
@@ -14,7 +14,7 @@ class HexTile():
         return max(abs(self.x), abs(self.y), abs(self.z))
 
 
-class HexGrid():
+class HexGrid:
     def __init__(self) -> None:
         self.tiles = {}
         centerTile = HexTile(0, 0, 0)
@@ -41,7 +41,8 @@ class HexGrid():
             elif step == "nw":
                 nextCoords = [current.x - 1, current.y, current.z + 1]
             nextCoordsStr = "{}_{}_{}".format(
-                nextCoords[0], nextCoords[1], nextCoords[2])
+                nextCoords[0], nextCoords[1], nextCoords[2]
+            )
 
             if not nextCoordsStr in self.tiles:
                 newTile = HexTile(nextCoords[0], nextCoords[1], nextCoords[2])
@@ -53,11 +54,11 @@ class HexGrid():
         return current.get_dist(), furthest
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     hexGrid = HexGrid()
     return hexGrid.follow_path(data.split(","))[0]
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     hexGrid = HexGrid()
     return hexGrid.follow_path(data.split(","))[1]

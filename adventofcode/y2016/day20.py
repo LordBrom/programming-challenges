@@ -1,19 +1,24 @@
-
-class IpBlockRange():
+class IpBlockRange:
     def __init__(self, start, end) -> None:
         self.start = start
         self.end = end
 
     def __str__(self) -> str:
-        return "Blocking {} to {}, ({} IPs blocked)".format(self.start, self.end, self.end - self.start)
+        return "Blocking {} to {}, ({} IPs blocked)".format(
+            self.start, self.end, self.end - self.start
+        )
 
     def __eq__(self, __o: object) -> bool:
-        return isinstance(__o, IpBlockRange) and self.start == __o.start and self.end == __o.end
+        return (
+            isinstance(__o, IpBlockRange)
+            and self.start == __o.start
+            and self.end == __o.end
+        )
 
-    def __lt__(self, __o: 'IpBlockRange') -> bool:
+    def __lt__(self, __o: "IpBlockRange") -> bool:
         return self.start < __o.start
 
-    def checkRange(self, other: 'IpBlockRange'):
+    def checkRange(self, other: "IpBlockRange"):
         if (self.start - 1) <= other.start <= (self.end + 1):
             self.end = max(self.end, other.end)
             return True
@@ -46,12 +51,12 @@ def proccessIpRanges(data):
     return ipRanges
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     ipRanges = proccessIpRanges(data)
     return ipRanges[0].end + 1
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     maxIp = 4294967295
     ipRanges = proccessIpRanges(data)
 

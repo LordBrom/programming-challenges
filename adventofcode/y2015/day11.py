@@ -1,6 +1,5 @@
-
 def isValid(password):
-    invalidChars = [ord('i') - 97, ord('o') - 97, ord('l') - 97]
+    invalidChars = [ord("i") - 97, ord("o") - 97, ord("l") - 97]
 
     hasThreeConsecutive = False
     firstPair = None
@@ -9,17 +8,20 @@ def isValid(password):
 
     for i in range(len(password)):
         if not hasThreeConsecutive and i < len(password) - 2:
-            if password[i] == password[i+1] - 1 and password[i] == password[i+2] - 2:
+            if (
+                password[i] == password[i + 1] - 1
+                and password[i] == password[i + 2] - 2
+            ):
                 hasThreeConsecutive = True
 
         if password[i] in invalidChars:
             invalidChar = True
 
         if not hasTwoPairs and i < len(password) - 1:
-            if password[i] == password[i+1]:
+            if password[i] == password[i + 1]:
                 if firstPair == None:
                     firstPair = i
-                elif firstPair < i-1:
+                elif firstPair < i - 1:
                     hasTwoPairs = True
 
     return hasThreeConsecutive and not invalidChar and hasTwoPairs
@@ -49,7 +51,7 @@ def numToPassword(num):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     startPassword = passwordToNum(data)
     password = incrementPassword(startPassword)
     while not isValid(password):
@@ -57,7 +59,7 @@ def part1(data):
     return numToPassword(password)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     startPassword = passwordToNum(part1(data))
     password = incrementPassword(startPassword)
     while not isValid(password):

@@ -1,7 +1,7 @@
 import re
 
 
-class TowerProgram():
+class TowerProgram:
     def __init__(self, name, weight) -> None:
         self.name = name
         self.weight = weight
@@ -15,13 +15,14 @@ class TowerProgram():
         result = str(self)
         for program in self.heldPrograms:
             if subTowers:
-                result += "\n{}{}".format(offset,
-                                          program.print_tower(subTowers, offset + "  "))
+                result += "\n{}{}".format(
+                    offset, program.print_tower(subTowers, offset + "  ")
+                )
             else:
                 result += "\n{}{}".format(offset, program)
         return result
 
-    def add_sub_program(self, subProgram: 'TowerProgram'):
+    def add_sub_program(self, subProgram: "TowerProgram"):
         self.heldPrograms.append(subProgram)
 
     def get_root_parent(self):
@@ -87,13 +88,13 @@ def parseInput(data):
     return towerPrograms
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     towerPrograms = parseInput(data)
     name = list(towerPrograms.keys())[0]
     return towerPrograms[name].get_root_parent()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     towerPrograms = parseInput(data)
     name = list(towerPrograms.keys())[0]
     rootTower = towerPrograms[name].get_root_parent()

@@ -33,10 +33,14 @@ def parseData(data):
 
 
 def manhattanDistance(point1, point2):
-    return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1]) + abs(point1[2] - point2[2])
+    return (
+        abs(point1[0] - point2[0])
+        + abs(point1[1] - point2[1])
+        + abs(point1[2] - point2[2])
+    )
 
 
-class Beacon():
+class Beacon:
     def __init__(self, x, y, z):
         self.x = x
         self.y = y
@@ -46,7 +50,7 @@ class Beacon():
         return str(self.x) + "," + str(self.y) + "," + str(self.z)
 
     def __eq__(self, other) -> bool:
-        if 'x' in other:
+        if "x" in other:
             return self.x == other.x and self.y == other.y and self.z == other.z
         else:
             return self.x == other[0] and self.y == other[1] and self.z == other[2]
@@ -81,8 +85,8 @@ class Beacon():
         x = point[a]
         y = point[b]
         result = [0, 0, 0]
-        result[a] = round(x * math.cos(math.pi/2) + y * math.sin(math.pi/2))
-        result[b] = round(-x * math.sin(math.pi/2) + y * math.cos(math.pi/2))
+        result[a] = round(x * math.cos(math.pi / 2) + y * math.sin(math.pi / 2))
+        result[b] = round(-x * math.sin(math.pi / 2) + y * math.cos(math.pi / 2))
         result[c] = point[c]
         return Beacon(result[a], result[b], result[c])
 
@@ -90,7 +94,7 @@ class Beacon():
         return Beacon(self.x + offset[0], self.y + offset[1], self.z + offset[2])
 
 
-class Scanner():
+class Scanner:
     def __init__(self, num, beacons):
         self.num = num
         self.offset = None
@@ -154,15 +158,15 @@ class Scanner():
                     offset = otherBeacon.diff(beacon)
                     count = 0
                     checked = 0
-                    minToCheck = (
-                        len(otherScanner.beaconRotations[rotation]) - 12) + 1
+                    minToCheck = (len(otherScanner.beaconRotations[rotation]) - 12) + 1
                     for check in otherScanner.beaconRotations[rotation]:
                         checked += 1
                         if check.point(offset) in self.beacons:
                             count += 1
                             if count >= 12:
                                 self.addBeacons(
-                                    otherScanner.beaconRotations[rotation], offset)
+                                    otherScanner.beaconRotations[rotation], offset
+                                )
                                 return True, offset
                         if checked >= minToCheck + count:
                             break
@@ -175,7 +179,7 @@ class Scanner():
                 self.beacons.append(newBeacon)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     scanners = parseData(data)
     scannersFound = [0]
     noneFound = True
@@ -197,7 +201,7 @@ def part1(data):
     return len(scanners[0].beacons)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     scanners = parseData(data)
     scannersFound = [0]
     scanners[0].offset = [0, 0, 0]
@@ -216,7 +220,8 @@ def part2(data):
         for j in range(len(scanners)):
             if i == j:
                 continue
-            result = max(result, manhattanDistance(
-                scanners[i].offset, scanners[j].offset))
+            result = max(
+                result, manhattanDistance(scanners[i].offset, scanners[j].offset)
+            )
 
     return result

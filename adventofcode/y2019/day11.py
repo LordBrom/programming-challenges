@@ -73,13 +73,13 @@ class PaintJob:
                 self.botPosY -= 1
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     paintJob = PaintJob()
     paintJob.start_job(data[0].split(","))
     return len(paintJob.painted)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     paintJob = PaintJob(85, WHITE)
     paintJob.start_job(data[0].split(","))
     paintJob.print_job()

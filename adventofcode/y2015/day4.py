@@ -5,17 +5,19 @@ def checkHash(checkString, zeroCount=5):
     hashCheck = hashlib.md5(checkString.encode()).hexdigest()
     if len(hashCheck) < zeroCount + 1:
         return False
-    return hashCheck[:zeroCount] == ("0" * zeroCount) and hashCheck[zeroCount].isnumeric()
+    return (
+        hashCheck[:zeroCount] == ("0" * zeroCount) and hashCheck[zeroCount].isnumeric()
+    )
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     while not checkHash(data + str(result)):
         result += 1
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     while not checkHash(data + str(result), 6):
         result += 1

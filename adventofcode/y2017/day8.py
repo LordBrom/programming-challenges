@@ -10,8 +10,7 @@ def parseInput(data):
         target = reResult.group(1)
         increase = reResult.group(2)
         amount = int(reResult.group(3))
-        condition = [reResult.group(4), reResult.group(
-            5), int(reResult.group(6))]
+        condition = [reResult.group(4), reResult.group(5), int(reResult.group(6))]
         steps.append([target, increase, amount, condition])
 
     return steps
@@ -53,7 +52,7 @@ def run_instructions(instructions):
     return registers, maxVal
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     steps = parseInput(data)
     registers = run_instructions(steps)[0]
     result = 0
@@ -62,6 +61,6 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     steps = parseInput(data)
     return run_instructions(steps)[1]

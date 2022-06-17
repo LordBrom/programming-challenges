@@ -164,7 +164,7 @@ class Droid:
         return minutesPassed
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     droid = Droid(data[0].split(","))
 
     manualPlay = input("Manually control droid(y/)?")
@@ -190,7 +190,7 @@ def part1(data):
     return len(droid.pathToO2) - 1
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     droid = Droid(data[0].split(","))
     droid.mapFloor()
     stepByStep = input("Show each step(y/)?")

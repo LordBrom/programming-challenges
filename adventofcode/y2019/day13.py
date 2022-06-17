@@ -1,9 +1,8 @@
-
 from intcode import IntcodeComputer
 import numpy as np
 
 
-class GameScreen():
+class GameScreen:
     def __init__(self, intcode, setFree=False):
         self.score = 0
         if setFree:
@@ -25,7 +24,7 @@ class GameScreen():
 
     def updateScreen(self, tiles):
         for t in tiles:
-            if (t[0] == -1):
+            if t[0] == -1:
                 self.score = t[2]
             self.screen[t[1]][t[0]] = t[2]
 
@@ -71,8 +70,7 @@ class GameScreen():
             if autoRun and showFrames:
                 self.printScreen()
                 input()
-            compResult = np.array(self.comp.run(
-                nextMove, False)).reshape(-1, 3)
+            compResult = np.array(self.comp.run(nextMove, False)).reshape(-1, 3)
         return self.score
 
     def printScreen(self):
@@ -93,7 +91,7 @@ class GameScreen():
             print(rowStr)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     comp = IntcodeComputer(data[0].split(","))
     tiles = np.array(comp.run(None, False)).reshape(-1, 3)
     result = 0
@@ -103,6 +101,6 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     gameScreen = GameScreen(data[0].split(","), True)
     return gameScreen.runGame()

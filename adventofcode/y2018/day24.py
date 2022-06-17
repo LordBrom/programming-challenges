@@ -3,7 +3,7 @@ import re
 from tkinter import ALL
 
 
-class Unit():
+class Unit:
     def __init__(self, armyNum, unitNum, inData) -> None:
 
         self.armyNum = armyNum
@@ -49,7 +49,7 @@ class Unit():
             return False
         return self.armyNum == __o.armyNum and self.unitNum == __o.unitNum
 
-    def __lt__(self, __o: 'Unit') -> bool:
+    def __lt__(self, __o: "Unit") -> bool:
         if self.getEffectivePower() == __o.getEffectivePower():
             return self.initiative < __o.initiative
         return self.getEffectivePower() < __o.getEffectivePower()
@@ -57,7 +57,7 @@ class Unit():
     def getEffectivePower(self):
         return self.unitCount * self.damage
 
-    def checkDamageTo(self, otherUnit: 'Unit'):
+    def checkDamageTo(self, otherUnit: "Unit"):
         multiplier = 1
         if self.damageType in otherUnit.weaknesses:
             multiplier = 2
@@ -176,7 +176,7 @@ def checkArmy(army):
     return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     armies = parseInput(data)
     armies = doBattle(armies[0], armies[1])
 
@@ -187,12 +187,11 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     armies = parseInput(data)
     boostAmount = 30
     while True:
-        armies = doBattle(
-            armies[0], armies[1], boostAmount)
+        armies = doBattle(armies[0], armies[1], boostAmount)
 
         if not checkArmy(armies[1]) and checkArmy(armies[0]):
             break

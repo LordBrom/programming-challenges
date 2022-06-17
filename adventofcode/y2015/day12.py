@@ -20,11 +20,11 @@ def sumNumbers(jsonObj, ignoreRed=False):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     jsonObj = json.loads(data)
     return sumNumbers(jsonObj)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     jsonObj = json.loads(data)
     return sumNumbers(jsonObj, True)

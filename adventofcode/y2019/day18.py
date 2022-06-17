@@ -1,7 +1,7 @@
 import sys
 
 
-class Key():
+class Key:
     def __init__(self, name, x, y) -> None:
         self.name = name
         self.x = x
@@ -17,7 +17,7 @@ class Key():
         return [self.x, self.y]
 
 
-class PassageMap():
+class PassageMap:
     def __init__(self, data) -> None:
         self.map = []
         self.start = []
@@ -28,7 +28,7 @@ class PassageMap():
             for y in range(len(data[x])):
                 letter = data[x][y]
                 if letter.isalpha() and letter.lower() == letter:
-                    #self.keys[letter] = [x, y]
+                    # self.keys[letter] = [x, y]
                     self.keys[letter] = Key(letter, x, y)
                 elif letter.isalpha() and letter.upper() == letter:
                     self.doors[letter] = [x, y]
@@ -43,8 +43,9 @@ class PassageMap():
                 if key == other:
                     continue
                 test = self.findChar(
-                    other, self.keys[key].getPosition(), list(self.keys.keys()), [])
-                #print("here", test)
+                    other, self.keys[key].getPosition(), list(self.keys.keys()), []
+                )
+                # print("here", test)
                 if test[0] != None:
                     self.keys[key].distToKeys[other] = test[0]
             print(key, self.keys[key].distToKeys)
@@ -84,16 +85,19 @@ class PassageMap():
                 if y < 0 or y >= len(self.map[x]):
                     result.append(None)
                     continue
-                if self.map[x][y].isalpha() and self.map[x][y].upper() == self.map[x][y]:
+                if (
+                    self.map[x][y].isalpha()
+                    and self.map[x][y].upper() == self.map[x][y]
+                ):
                     if not self.map[x][y].lower() in keysFound:
                         result.append(None)
                         continue
-                if self.map[x][y] != '#' and not [x, y] in visited:
+                if self.map[x][y] != "#" and not [x, y] in visited:
                     result.append([x, y])
                 else:
                     result.append(None)
         if sortTowards:
-            #print(pos, sortTowards, result)
+            # print(pos, sortTowards, result)
             sortedResult = []
             if pos[0] < sortTowards.x:
                 # x above
@@ -146,14 +150,14 @@ class PassageMap():
         if best != None and len(best) <= len(path):
             return None, None
         movements = self.getAdjacent(
-            position, path.copy(), keysFound, self.keys[charToFind])
+            position, path.copy(), keysFound, self.keys[charToFind]
+        )
         # best = None
         lastPosition = None
         for m in movements:
             if m == None:
                 continue
-            newPath, newPos = self.findChar(
-                charToFind, m, keysFound, path.copy(), best)
+            newPath, newPos = self.findChar(charToFind, m, keysFound, path.copy(), best)
             if best == None or (newPath != None and len(best) > len(newPath)):
                 best = newPath
                 lastPosition = newPos
@@ -191,7 +195,8 @@ class PassageMap():
             tempKeys = keysFound.copy()
             tempKeys.append(option[0])
             check, checkRoute, checkPath = self.findPath(
-                tempPos, tempPath, tempKeys, best)
+                tempPos, tempPath, tempKeys, best
+            )
             if check != None and (best == None or check < best):
                 best = check
                 bestRoute = checkRoute
@@ -199,13 +204,13 @@ class PassageMap():
         return best, bestRoute, bestPath
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     passageMap = PassageMap(data)
     print(passageMap)
     return
-    #result = passageMap.findPath(passageMap.start, [], [])
+    # result = passageMap.findPath(passageMap.start, [], [])
     # return result[0]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "not implemented"

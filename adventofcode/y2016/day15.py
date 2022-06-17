@@ -2,7 +2,7 @@ from ast import parse
 import re
 
 
-class Disc():
+class Disc:
     def __init__(self, num, count, pos) -> None:
         self.num = int(num)
         self.count = int(count)
@@ -10,7 +10,9 @@ class Disc():
         self.time = 0
 
     def __str__(self) -> str:
-        return "Disc #{} has {} positions; at time={}, it is at position {}.".format(self.num, self.count, self.time, self.pos)
+        return "Disc #{} has {} positions; at time={}, it is at position {}.".format(
+            self.num, self.count, self.time, self.pos
+        )
 
     def checkTime(self, time):
         return (self.pos + time) % self.count == 0
@@ -18,7 +20,9 @@ class Disc():
 
 def parseInputs(data):
     discs = []
-    reStr = "Disc #([0-9]+) has ([0-9]+) positions; at time=0, it is at position ([0-9]+)."
+    reStr = (
+        "Disc #([0-9]+) has ([0-9]+) positions; at time=0, it is at position ([0-9]+)."
+    )
     for d in data:
         reRes = re.search(reStr, d)
         discs.append(Disc(reRes.group(1), reRes.group(2), reRes.group(3)))
@@ -34,7 +38,7 @@ def dropBall(discs, time):
     return True
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     discs = parseInputs(data)
     time = 0
     while True:
@@ -44,7 +48,7 @@ def part1(data):
     return ""
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     discs = parseInputs(data)
     discs.append(Disc(len(discs), 11, 0))
     time = 0

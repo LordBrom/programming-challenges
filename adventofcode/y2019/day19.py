@@ -1,4 +1,4 @@
-from intcode import IntcodeComputer
+from y2019.intcode import IntcodeComputer
 import math
 
 
@@ -39,7 +39,7 @@ def getScanRow(data, row, printRow=False, offset=0):
     return scanRow, scanRange
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     data = data.split(",")
     scan = 50
     result = 0
@@ -49,7 +49,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     row1000 = getScanRow(data.split(","), 1000)
 
     m2 = 1000 / row1000[1][0]
@@ -62,5 +62,6 @@ def part2(data):
     y1 = math.ceil(y1)
 
     return (x2 * 10000) + y1
+
 
 # not 8651326 :/

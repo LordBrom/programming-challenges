@@ -1,10 +1,15 @@
-
 from functools import reduce
 
 
 def getFactors(n):
-    return list(set(reduce(list.__add__,
-                           ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))))
+    return list(
+        set(
+            reduce(
+                list.__add__,
+                ([i, n // i] for i in range(1, int(n ** 0.5) + 1) if n % i == 0),
+            )
+        )
+    )
 
 
 def countPresents(houseNum, presents=10, maxHouses=False):
@@ -18,7 +23,7 @@ def countPresents(houseNum, presents=10, maxHouses=False):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     house = 1
     house = 786240
 
@@ -30,7 +35,7 @@ def part1(data):
     return house
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     house = 1
 
     while True:

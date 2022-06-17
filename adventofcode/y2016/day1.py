@@ -1,4 +1,3 @@
-
 import re
 
 
@@ -9,7 +8,7 @@ def manhattanDistance(point1, point2):
 
 
 def followPath(path, stopAtHQ=False, start=[0, 0]):
-    reResult = re.findall('(R|L)([0-9]+)', path)
+    reResult = re.findall("(R|L)([0-9]+)", path)
     block = start.copy()
     facing = 0
     visited = []
@@ -46,9 +45,9 @@ def followPath(path, stopAtHQ=False, start=[0, 0]):
     return manhattanDistance(start, block)
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return followPath(data)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return followPath(data, True)

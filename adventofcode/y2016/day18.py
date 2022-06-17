@@ -1,4 +1,3 @@
-
 def getTrapRow(prevTrapRow):
     result = []
 
@@ -13,10 +12,12 @@ def getTrapRow(prevTrapRow):
         else:
             tileR = False
 
-        if (tileL and tileC and not tileR) \
-                or (not tileL and tileC and tileR) \
-                or (tileL and not tileC and not tileR) \
-                or (not tileL and not tileC and tileR):
+        if (
+            (tileL and tileC and not tileR)
+            or (not tileL and tileC and tileR)
+            or (tileL and not tileC and not tileR)
+            or (not tileL and not tileC and tileR)
+        ):
             result.append(True)
         else:
             result.append(False)
@@ -40,14 +41,14 @@ def countSafeTiles(floor):
     return result
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     floor = [parseInput(data)]
     while len(floor) < 40:
         floor.append(getTrapRow(floor[-1]))
     return countSafeTiles(floor)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     tileRow = parseInput(data)
     result = tileRow.count(False)
     for i in range(1, 400000):

@@ -1,5 +1,3 @@
-
-
 def path_wire(path):
     posX = 0
     posY = 0
@@ -8,13 +6,13 @@ def path_wire(path):
         wireDir = i[:1]
         wireLen = i[1:]
         for i in range(int(wireLen)):
-            if wireDir == 'R':
+            if wireDir == "R":
                 posX += 1
-            elif wireDir == 'L':
+            elif wireDir == "L":
                 posX -= 1
-            elif wireDir == 'U':
+            elif wireDir == "U":
                 posY += 1
-            elif wireDir == 'D':
+            elif wireDir == "D":
                 posY -= 1
 
             result.append([posX, posY])
@@ -30,13 +28,13 @@ def path_wires(wire1, wire2):
         wireDir = i[:1]
         wireLen = i[1:]
         for i in range(int(wireLen)):
-            if wireDir == 'R':
+            if wireDir == "R":
                 posX += 1
-            elif wireDir == 'L':
+            elif wireDir == "L":
                 posX -= 1
-            elif wireDir == 'U':
+            elif wireDir == "U":
                 posY += 1
-            elif wireDir == 'D':
+            elif wireDir == "D":
                 posY -= 1
 
             wire1Path.append([posX, posY])
@@ -49,13 +47,13 @@ def path_wires(wire1, wire2):
         wireDir = i[:1]
         wireLen = i[1:]
         for i in range(int(wireLen)):
-            if wireDir == 'R':
+            if wireDir == "R":
                 posX += 1
-            elif wireDir == 'L':
+            elif wireDir == "L":
                 posX -= 1
-            elif wireDir == 'U':
+            elif wireDir == "U":
                 posY += 1
-            elif wireDir == 'D':
+            elif wireDir == "D":
                 posY -= 1
 
             wire2Path.append([posX, posY])
@@ -68,9 +66,9 @@ def path_wires(wire1, wire2):
     return minDist + 1
 
 
-def part1(data):
-    wire1 = data[0].split(',')
-    wire2 = data[1].split(',')
+def part1(data, test=False) -> str:
+    wire1 = data[0].split(",")
+    wire2 = data[1].split(",")
 
     wirePath1 = path_wire(wire1)
     wirePath2 = path_wire(wire2)
@@ -90,7 +88,7 @@ def part1(data):
     return minDist
 
 
-def part2(data):
-    wire1 = data[0].split(',')
-    wire2 = data[1].split(',')
+def part2(data, test=False) -> str:
+    wire1 = data[0].split(",")
+    wire2 = data[1].split(",")
     return path_wires(wire1, wire2)

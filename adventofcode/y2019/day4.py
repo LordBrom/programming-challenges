@@ -1,11 +1,10 @@
-
 def check_valid(num, usePart2Rule=False):
     # Rule 1: It is a six-digit number.
     if len(num) != 6:
         return False
 
     # Rule 4: Going from left to right, the digits never decrease; they only ever increase or stay the same (like 111123 or 135679).
-    if ''.join(sorted(num)) != num:
+    if "".join(sorted(num)) != num:
         return False
 
     # Rule 2: The value is within the range given in your puzzle input. - given
@@ -24,7 +23,7 @@ def check_valid(num, usePart2Rule=False):
     return True
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     data = data[0].split("-")
 
     minRange = data[0]
@@ -38,7 +37,7 @@ def part1(data):
     return count
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     data = data[0].split("-")
 
     minRange = data[0]

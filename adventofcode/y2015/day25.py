@@ -1,8 +1,7 @@
-
 import re
 
 
-class ManualPaper():
+class ManualPaper:
     def __init__(self) -> None:
         self.paper = [[20151125]]
 
@@ -39,11 +38,13 @@ class ManualPaper():
 
 def parseInput(data):
     reResult = re.search(
-        "To continue, please consult the code grid in the manual.  Enter the code at row ([0-9]+), column ([0-9]+).", data)
+        "To continue, please consult the code grid in the manual.  Enter the code at row ([0-9]+), column ([0-9]+).",
+        data,
+    )
     return int(reResult.group(1)), int(reResult.group(2))
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     col, row = parseInput(data)
     manualPaper = ManualPaper()
     x = 0
@@ -53,8 +54,9 @@ def part1(data):
         x, y = manualPaper.getNextPos(x, y)
     return manualPaper.getCodeAtPos(row - 1, col - 1)
 
+
 # 29069289 - high
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "Merry Christmas!!!"

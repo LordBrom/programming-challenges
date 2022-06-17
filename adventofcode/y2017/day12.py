@@ -1,6 +1,4 @@
-
-
-class Program():
+class Program:
     def __init__(self, name) -> None:
         self.name = name
         self.connected = []
@@ -21,7 +19,12 @@ class Program():
             if not prog.name in visited:
                 visited.append(prog.name)
                 visited.extend(
-                    [x for x in prog.get_connected(visited, groupNum) if not x in visited])
+                    [
+                        x
+                        for x in prog.get_connected(visited, groupNum)
+                        if not x in visited
+                    ]
+                )
         return visited
 
 
@@ -40,12 +43,12 @@ def parse_input(data):
     return programs
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     programs = parse_input(data)
-    return len(programs['0'].get_connected())
+    return len(programs["0"].get_connected())
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     programs = parse_input(data)
     groupNum = 0
     for prog in programs:

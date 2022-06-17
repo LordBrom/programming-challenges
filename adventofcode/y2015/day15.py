@@ -1,10 +1,9 @@
-
 import re
 
 RE_STR = "(.+): capacity ([-0-9]+), durability ([-0-9]+), flavor ([-0-9]+), texture ([-0-9]+), calories ([-0-9]+)"
 
 
-class Ingredients():
+class Ingredients:
     def __init__(self, inStr) -> None:
         reResult = re.search(RE_STR, inStr)
         self.name = reResult.group(1)
@@ -82,9 +81,9 @@ def getBest(data, ignoreCals=True):
     return best
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     return getBest(data)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return getBest(data, False)

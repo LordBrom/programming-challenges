@@ -1,4 +1,3 @@
-
 from posixpath import split
 
 
@@ -17,7 +16,7 @@ def multiStrip(string):
     return string
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     result = 0
     for d in data:
         if isValidTriangle(multiStrip(d).split(" ")):
@@ -25,12 +24,12 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     for i in range(0, len(data), 3):
         firstRow = multiStrip(data[i]).split(" ")
-        secondRow = multiStrip(data[i+1]).split(" ")
-        lastRow = multiStrip(data[i+2]).split(" ")
+        secondRow = multiStrip(data[i + 1]).split(" ")
+        lastRow = multiStrip(data[i + 2]).split(" ")
 
         if isValidTriangle([firstRow[0], secondRow[0], lastRow[0]]):
             result += 1

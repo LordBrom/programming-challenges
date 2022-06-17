@@ -15,8 +15,9 @@ def bruteForcePart2(elfCount, debug=False):
         targetElf = index + math.floor(len(elves) / 2)
         targetElf %= len(elves)
         if debug:
-            print("elf {} takes elf {}'s presents".format(
-                elves[index], elves[targetElf]))
+            print(
+                "elf {} takes elf {}'s presents".format(elves[index], elves[targetElf])
+            )
         del elves[targetElf]
         if targetElf < index:
             index -= 1
@@ -42,13 +43,12 @@ def bruteForcePart1(elfCount, debug=False):
             nextElf %= elfCount
         outElves.append((nextElf) % elfCount)
         if debug:
-            print("elf {} takes elf {}'s presents".format(
-                index + 1, (nextElf + 1)))
+            print("elf {} takes elf {}'s presents".format(index + 1, (nextElf + 1)))
             input()
     return index + 1
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     binFormat = format(int(data), "b")
     large = "1" + ("0" * (len(binFormat) - 1))
     oneLarger = "1" + ("0" * (len(binFormat)))
@@ -56,5 +56,5 @@ def part1(data):
     return int(oneLarger, 2) - (((int(large, 2) - int(small, 2)) * 2) - 1)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return bruteForcePart2(int(data))

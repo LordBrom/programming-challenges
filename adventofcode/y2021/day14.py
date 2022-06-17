@@ -1,4 +1,3 @@
-
 from functools import lru_cache
 
 RULES = {}
@@ -44,7 +43,7 @@ def doStep(pair, steps):
     return result.copy()
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     dataParsed = parseInput(data)
     polymer = dataParsed[0]
     global RULES
@@ -55,7 +54,7 @@ def part1(data):
     result = addToResult(result, polymer, True)
 
     for i in range(len(polymer) - 1):
-        pair = polymer[i:i+2]
+        pair = polymer[i : i + 2]
         step = doStep(pair, 10)
         result = addToResult(result, step)
 
@@ -65,7 +64,7 @@ def part1(data):
     return results[-1] - results[0]
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     dataParsed = parseInput(data)
     polymer = dataParsed[0]
     global RULES
@@ -76,7 +75,7 @@ def part2(data):
     result = addToResult(result, polymer, True)
 
     for i in range(len(polymer) - 1):
-        pair = polymer[i:i+2]
+        pair = polymer[i : i + 2]
         step = doStep(pair, 40)
         result = addToResult(result, step)
 

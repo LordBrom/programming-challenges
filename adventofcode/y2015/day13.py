@@ -13,8 +13,12 @@ def findSeatOrder(people, person, seated=[], happiness=0):
 
     for next in people[person]:
         if not next in seated:
-            check, checkSeated = findSeatOrder(people, next, seated.copy(
-            ), happiness + getHappiness(people, person, next))
+            check, checkSeated = findSeatOrder(
+                people,
+                next,
+                seated.copy(),
+                happiness + getHappiness(people, person, next),
+            )
             if check > best:
                 best = check
                 bestSteated = checkSeated
@@ -34,25 +38,23 @@ def parseInput(data):
         if not reResult.group(1) in people:
             people[reResult.group(1)] = {}
         if reResult.group(2) == "gain":
-            people[reResult.group(1)][reResult.group(4)
-                                      ] = int(reResult.group(3))
+            people[reResult.group(1)][reResult.group(4)] = int(reResult.group(3))
         else:
-            people[reResult.group(1)][reResult.group(4)
-                                      ] = -int(reResult.group(3))
+            people[reResult.group(1)][reResult.group(4)] = -int(reResult.group(3))
     return people
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     people = parseInput(data)
-    happiness, order = findSeatOrder(people, 'Alice', [], 0)
+    happiness, order = findSeatOrder(people, "Alice", [], 0)
     return happiness
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     people = parseInput(data)
-    people['You'] = {}
+    people["You"] = {}
     for person in people:
-        people[person]['You'] = 0
-        people['You'][person] = 0
-    happiness, order = findSeatOrder(people, 'Alice', [], 0)
+        people[person]["You"] = 0
+        people["You"][person] = 0
+    happiness, order = findSeatOrder(people, "Alice", [], 0)
     return happiness

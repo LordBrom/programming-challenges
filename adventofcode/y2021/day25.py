@@ -1,4 +1,4 @@
-class Trench():
+class Trench:
     def __init__(self, data) -> None:
         self.trench = []
         for d in data:
@@ -38,7 +38,9 @@ class Trench():
             for y in range(len(self.trench[x])):
                 if self.trench[x][y] == 0:
                     continue
-                elif (moveEast and self.trench[x][y] == 1) or (not moveEast and self.trench[x][y] == 2):
+                elif (moveEast and self.trench[x][y] == 1) or (
+                    not moveEast and self.trench[x][y] == 2
+                ):
                     newTrench[x][y] = self.trench[x][y]
                 else:
                     nextX, nextY = self.nextSpot([x, y])
@@ -63,7 +65,7 @@ class Trench():
         return pos[0], pos[1]
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     trench = Trench(data)
     found = False
     result = 0
@@ -74,5 +76,5 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     return "Merry Christmas!!!"

@@ -2,7 +2,7 @@ import sys
 import heapq
 
 
-class Tile():
+class Tile:
     def __init__(self, x, y) -> None:
         self.x = x
         self.y = y
@@ -42,13 +42,17 @@ class Tile():
         adjacent = [(-1, 0), (0, 1), (1, 0), (0, -1)]
         neighbors = []
         for dx, dy in adjacent:
-            nx, ny = self.x+dx, self.y+dy
-            if 0 <= nx < len(grid) and 0 <= ny < len(grid[nx]) and not grid[nx][ny].isWall:
+            nx, ny = self.x + dx, self.y + dy
+            if (
+                0 <= nx < len(grid)
+                and 0 <= ny < len(grid[nx])
+                and not grid[nx][ny].isWall
+            ):
                 neighbors.append((nx, ny))
         return neighbors
 
 
-class OfficeSpace():
+class OfficeSpace:
     def __init__(self, num, target=[31, 39]) -> None:
         self.num = num
         self.target = target
@@ -123,11 +127,11 @@ class OfficeSpace():
                 heapq.heappush(dist_heap, (n_cost, n))
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     office = OfficeSpace(int(data))
     return office.dijkstra()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     office = OfficeSpace(int(data))
     return office.dijkstraMaxLength()

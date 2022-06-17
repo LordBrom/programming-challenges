@@ -1,4 +1,4 @@
-class PlantPots():
+class PlantPots:
     def __init__(self, initial, stepKey) -> None:
         self.state = initial
         self.stepKey = stepKey
@@ -18,7 +18,7 @@ class PlantPots():
             plantStr = self.makePlantStr(i)
             if plantStr in self.stepKey:
                 nextStr = self.stepKey[plantStr]
-                if nextStr == '#' or i >= 0:
+                if nextStr == "#" or i >= 0:
                     nextState += self.stepKey[plantStr]
                     if i < 0:
                         self.zeroPot += 1
@@ -40,7 +40,7 @@ class PlantPots():
     def getResult(self):
         result = 0
         for i in range(len(self.state)):
-            if self.state[i] == '#':
+            if self.state[i] == "#":
                 result += i - self.zeroPot
         return result
 
@@ -55,7 +55,7 @@ def parseInput(data):
     return initialState, key
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     initial, stepKey = parseInput(data)
     plantPots = PlantPots(initial, stepKey)
     for i in range(20):
@@ -63,7 +63,7 @@ def part1(data):
     return plantPots.getResult()
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     initial, stepKey = parseInput(data)
     plantPots = PlantPots(initial, stepKey)
     for i in range(100):

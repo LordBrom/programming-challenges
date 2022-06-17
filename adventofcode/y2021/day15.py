@@ -5,7 +5,7 @@ def getNeighbors(x, y, grid):
     adjacent = [(-1, 0), (0, 1), (1, 0), (0, -1)]
     neighbors = []
     for dx, dy in adjacent:
-        nx, ny = x+dx, y+dy
+        nx, ny = x + dx, y + dy
         if 0 <= nx < len(grid[0]) and 0 <= ny < len(grid):
             neighbors.append((nx, ny))
     return neighbors
@@ -13,7 +13,7 @@ def getNeighbors(x, y, grid):
 
 def dijkstra(grid):
     start = (0, 0)
-    end = (len(grid[0])-1, len(grid)-1)
+    end = (len(grid[0]) - 1, len(grid) - 1)
     dist_heap = [(0, start)]
     visited = set()
 
@@ -31,14 +31,14 @@ def dijkstra(grid):
             heapq.heappush(dist_heap, (n_cost, n))
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     cave = []
     for d in data:
         cave.append([int(x) for x in d])
     return dijkstra(cave)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     cave = []
 
     for yi in range(5):

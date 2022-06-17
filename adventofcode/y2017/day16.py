@@ -1,7 +1,7 @@
 from collections import deque
 
 
-class ProgramDance():
+class ProgramDance:
     def __init__(self, dancerCount=16) -> None:
         self.dancers = deque([chr(i + 97) for i in range(dancerCount)])
 
@@ -35,7 +35,7 @@ class ProgramDance():
         self.exchange(posA, posB)
 
 
-def part1(data, test=False):
+def part1(data, test=False) -> str:
     if test:
         dance = ProgramDance(5)
     else:
@@ -46,7 +46,7 @@ def part1(data, test=False):
     return dance
 
 
-def part2(data, test=False):
+def part2(data, test=False) -> str:
     dance = ProgramDance()
     danceTimes = 1000000000
     # doing the dance 42 times, brings you back to the original order

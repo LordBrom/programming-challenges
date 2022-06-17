@@ -3,7 +3,7 @@ import re
 RE_STR = "Step ([A-Z]) must be finished before step ([A-Z]) can begin."
 
 
-class Point():
+class Point:
     def __init__(self, name) -> None:
         self.name = name
         self.before = []
@@ -42,7 +42,7 @@ class Point():
         return True
 
 
-class Worker():
+class Worker:
     def __init__(self, extraTime=60) -> None:
         self.workingOn = "."
         self.progress = 0
@@ -84,7 +84,7 @@ def parsePointList(data):
     return pointList
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     pointList = parsePointList(data)
 
     result = ""
@@ -99,7 +99,7 @@ def part1(data):
     return result
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     pointList = parsePointList(data)
     workerCount = 5
     workers = []

@@ -2,13 +2,15 @@ import sys
 import re
 
 
-class StarPoint():
+class StarPoint:
     def __init__(self, position, velocity) -> None:
         self.position = [position[1], position[0]]
         self.velocity = [velocity[1], velocity[0]]
 
     def __str__(self) -> str:
-        return "position=<{}, {}> velocity=<{}, {}>".format(self.position[0], self.position[1], self.velocity[0], self.velocity[1])
+        return "position=<{}, {}> velocity=<{}, {}>".format(
+            self.position[0], self.position[1], self.velocity[0], self.velocity[1]
+        )
 
     def moveTick(self):
         self.position[0] += self.velocity[0]
@@ -57,7 +59,7 @@ def printStarPoints(starPoints, doPrint=True):
     return False
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     starPoints = parseInput(data)
     while not printStarPoints(starPoints):
         for sp in starPoints:
@@ -65,7 +67,7 @@ def part1(data):
     return "see above"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     starPoints = parseInput(data)
     steps = 0
     while not printStarPoints(starPoints, False):

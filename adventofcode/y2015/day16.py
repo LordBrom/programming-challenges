@@ -1,4 +1,3 @@
-
 import re
 from turtle import pos, position
 
@@ -12,11 +11,11 @@ SUE_DATA = {
     "goldfish": 5,
     "trees": 3,
     "cars": 2,
-    "perfumes": 1
+    "perfumes": 1,
 }
 
 
-class AuntSue():
+class AuntSue:
     def __init__(self, dataString) -> None:
         reStr1 = "Sue ([0-9]+):(.+)"
         reStr2 = "(?: (.+?): ([0-9]+)(?:,|))+?"
@@ -36,8 +35,7 @@ class AuntSue():
                 result += ","
             first = False
 
-            result += " {}: {}".format(possession,
-                                       self.possessions[possession])
+            result += " {}: {}".format(possession, self.possessions[possession])
         return result
 
     def checkPossessions(self, possessions):
@@ -50,10 +48,10 @@ class AuntSue():
     def checkApproxPossessions(self, possessions):
         for possession in possessions:
             if possession in self.possessions:
-                if possession in ['cats', 'trees']:
+                if possession in ["cats", "trees"]:
                     if self.possessions[possession] <= possessions[possession]:
                         return False
-                elif possession in ['pomeranians', 'goldfish']:
+                elif possession in ["pomeranians", "goldfish"]:
                     if self.possessions[possession] >= possessions[possession]:
                         return False
                 else:
@@ -62,7 +60,7 @@ class AuntSue():
         return True
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     auntSues = []
     for d in data:
         auntSues.append(AuntSue(d))
@@ -76,7 +74,7 @@ def part1(data):
         return "didn't find just 1 aunt"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     auntSues = []
     for d in data:
         auntSues.append(AuntSue(d))

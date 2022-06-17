@@ -2,21 +2,22 @@ import sys
 from unittest import result
 
 
-class Room():
+class Room:
     def __init__(self, x, y) -> None:
         self.x = x
         self.y = y
-        self.doors = {
-            'N': None,
-            'S': None,
-            'E': None,
-            'W': None
-        }
+        self.doors = {"N": None, "S": None, "E": None, "W": None}
         self.distFromStart = sys.maxsize
 
     def __str__(self) -> str:
         return "Room at {}, {}. Connects to N: {}, E: {}, S: {}, W: {}".format(
-            self.x, self.y, self.doors['N'] != None, self.doors['E'] != None, self.doors['S'] != None, self.doors['W'] != None)
+            self.x,
+            self.y,
+            self.doors["N"] != None,
+            self.doors["E"] != None,
+            self.doors["S"] != None,
+            self.doors["W"] != None,
+        )
 
     def __eq__(self, __o: object) -> bool:
         if __o != None and __o.x != None and __o.y != None:
@@ -30,25 +31,25 @@ class Room():
         return [self.x, self.y]
 
     def addDoors(self, doors):
-        if 'N' in doors:
-            self.doors['N'] = doors['N']
-        if 'S' in doors:
-            self.doors['S'] = doors['S']
-        if 'E' in doors:
-            self.doors['E'] = doors['E']
-        if 'W' in doors:
-            self.doors['W'] = doors['W']
+        if "N" in doors:
+            self.doors["N"] = doors["N"]
+        if "S" in doors:
+            self.doors["S"] = doors["S"]
+        if "E" in doors:
+            self.doors["E"] = doors["E"]
+        if "W" in doors:
+            self.doors["W"] = doors["W"]
 
     def openDoors(self, visited=[]):
         result = []
-        if not self.doors['N'] in visited and self.doors['N'] != None:
-            result.append('N')
-        if not self.doors['S'] in visited and self.doors['S'] != None:
-            result.append('S')
-        if not self.doors['E'] in visited and self.doors['E'] != None:
-            result.append('E')
-        if not self.doors['W'] in visited and self.doors['W'] != None:
-            result.append('W')
+        if not self.doors["N"] in visited and self.doors["N"] != None:
+            result.append("N")
+        if not self.doors["S"] in visited and self.doors["S"] != None:
+            result.append("S")
+        if not self.doors["E"] in visited and self.doors["E"] != None:
+            result.append("E")
+        if not self.doors["W"] in visited and self.doors["W"] != None:
+            result.append("W")
 
         return result
 
@@ -56,7 +57,7 @@ class Room():
         self.distFromStart = min(self.distFromStart, val)
 
 
-class ConstructionZone():
+class ConstructionZone:
     def __init__(self) -> None:
         self.rooms = {}
         self.rooms["0_0"] = Room(0, 0)
@@ -66,27 +67,27 @@ class ConstructionZone():
         i = 0
         while i < len(path):
             p = path[i]
-            if p in ['N', 'S', 'E', 'W']:
-                if p == 'N':
+            if p in ["N", "S", "E", "W"]:
+                if p == "N":
                     newX = room.x
                     newY = room.y + 1
-                    fromDir = 'S'
-                    toDir = 'N'
-                elif p == 'S':
+                    fromDir = "S"
+                    toDir = "N"
+                elif p == "S":
                     newX = room.x
                     newY = room.y - 1
-                    fromDir = 'N'
-                    toDir = 'S'
-                elif p == 'E':
+                    fromDir = "N"
+                    toDir = "S"
+                elif p == "E":
                     newX = room.x + 1
                     newY = room.y
-                    fromDir = 'W'
-                    toDir = 'E'
-                elif p == 'W':
+                    fromDir = "W"
+                    toDir = "E"
+                elif p == "W":
                     newX = room.x - 1
                     newY = room.y
-                    fromDir = 'E'
-                    toDir = 'W'
+                    fromDir = "E"
+                    toDir = "W"
 
                 if not str(newX) + "_" + str(newY) in self.rooms:
                     self.rooms[str(newX) + "_" + str(newY)] = Room(newX, newY)
@@ -108,13 +109,13 @@ class ConstructionZone():
     def getSubPath(self, path, startPos):
         i = startPos + 1
         openCount = 1
-        while openCount > 1 or path[i] != ')':
+        while openCount > 1 or path[i] != ")":
             if path[i] == ")":
                 openCount -= 1
             elif path[i] == "(":
                 openCount += 1
             i += 1
-        return path[startPos + 1: i], i
+        return path[startPos + 1 : i], i
 
     def getSplitPos(self, path):
         openCount = 0
@@ -125,7 +126,7 @@ class ConstructionZone():
                 openCount -= 1
             elif path[i] == "(":
                 openCount += 1
-            elif openCount == 0 and path[i] == '|':
+            elif openCount == 0 and path[i] == "|":
                 result.append(i)
 
         return result
@@ -148,8 +149,7 @@ class ConstructionZone():
                 openDoors = currentRoom.openDoors(path)
             else:
                 for dir in openDoors:
-                    check = self.followRoute(
-                        currentRoom.doors[dir].xy(), path.copy())
+                    check = self.followRoute(currentRoom.doors[dir].xy(), path.copy())
 
                     if len(check) > len(best):
                         best = check.copy()
@@ -158,27 +158,27 @@ class ConstructionZone():
 
 
 def flipDir(dir):
-    if dir == 'N':
-        return 'S'
+    if dir == "N":
+        return "S"
 
-    if dir == 'S':
-        return 'N'
+    if dir == "S":
+        return "N"
 
-    if dir == 'E':
-        return 'W'
+    if dir == "E":
+        return "W"
 
-    if dir == 'W':
-        return 'E'
+    if dir == "W":
+        return "E"
 
 
-def part1(data):
+def part1(data, test=False) -> str:
     pathReStr = data[1:-1]
     constructionZone = ConstructionZone()
     constructionZone.followPath(pathReStr)
     return len(constructionZone.followRoute()) - 1
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     pathReStr = data[1:-1]
     constructionZone = ConstructionZone()
     constructionZone.followPath(pathReStr)
