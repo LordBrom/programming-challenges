@@ -58,7 +58,7 @@ def part1(data, test=False) -> str:
             screen.rotateCol(int(reResult.group(5)), int(reResult.group(6)))
         elif reResult.group(2) == "row":
             screen.rotateRow(int(reResult.group(5)), int(reResult.group(6)))
-    return screen.countPixels()
+    return str(screen.countPixels())
 
 
 def part2(data, test=False) -> str:

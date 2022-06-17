@@ -24,6 +24,7 @@ def countPresents(houseNum, presents=10, maxHouses=False):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     house = 1
     house = 786240
 
@@ -36,6 +37,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     house = 1
 
     while True:

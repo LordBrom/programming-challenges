@@ -121,4 +121,4 @@ def part2(data, test=False) -> str:
     # But with this, it goes to CaRnFAr. But it gives the same answer.
     # Note for fix, at each step just have a "make change" version and a "don't" version and find best
     replacements["CaRnFAr"] = "F"
-    return breakDownString(replacements, startStr)
+    return str(breakDownString(replacements, startStr))

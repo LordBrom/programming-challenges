@@ -47,7 +47,7 @@ def parseInput(data):
 def part1(data, test=False) -> str:
     people = parseInput(data)
     happiness, order = findSeatOrder(people, "Alice", [], 0)
-    return happiness
+    return str(happiness)
 
 
 def part2(data, test=False) -> str:
@@ -57,4 +57,4 @@ def part2(data, test=False) -> str:
         people[person]["You"] = 0
         people["You"][person] = 0
     happiness, order = findSeatOrder(people, "Alice", [], 0)
-    return happiness
+    return str(happiness)

@@ -59,9 +59,9 @@ def countOverlap(input, countDiagonals=False):
     return resultCount
 
 
-def part1(input):
-    return countOverlap(input)
+def part1(data, test=False) -> str:
+    return countOverlap(data)
 
 
-def part2(input):
-    return countOverlap(input, True)
+def part2(data):
+    return countOverlap(data, True)

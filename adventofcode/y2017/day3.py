@@ -63,8 +63,10 @@ def manhattanDistance(point1, point2):
 
 
 def part1(data, test=False) -> str:
-    return manhattanDistance([0, 0], findNum(int(data)))
+    data = data[0]
+    return str(manhattanDistance([0, 0], findNum(int(data))))
 
 
 def part2(data, test=False) -> str:
-    return findNum(int(data), True)
+    data = data[0]
+    return str(findNum(int(data), True))

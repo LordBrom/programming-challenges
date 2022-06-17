@@ -42,7 +42,7 @@ def checkIngVals(ingVals, checkCalaries=False):
     return result
 
 
-def getBest(data, ignoreCals=True):
+def getBest(data, ignoreCals=True) -> int:
     ingredients = []
     for d in data:
         ingredients.append(Ingredients(d))
@@ -82,8 +82,8 @@ def getBest(data, ignoreCals=True):
 
 
 def part1(data, test=False) -> str:
-    return getBest(data)
+    return str(getBest(data))
 
 
 def part2(data, test=False) -> str:
-    return getBest(data, False)
+    return str(getBest(data, False))

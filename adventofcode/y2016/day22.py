@@ -132,5 +132,5 @@ def part1(data, test=False) -> str:
 
 def part2(data, test=False) -> str:
     nodes = setupNodes(data)
-    printNodes(nodes)
+    # printNodes(nodes)
     return "not implemented"

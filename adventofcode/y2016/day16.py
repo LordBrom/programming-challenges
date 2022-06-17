@@ -26,6 +26,7 @@ def createChecksum(data):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     diskSize = 272
     while len(data) < diskSize:
         data = expandData(data)
@@ -37,6 +38,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     diskSize = 35651584
     while len(data) < diskSize:
         data = expandData(data)

@@ -58,11 +58,11 @@ def part1(data, test=False) -> str:
     lightGrid = LightGrid()
     for d in data:
         lightGrid.doInstruction(d)
-    return lightGrid.countOn()
+    return str(lightGrid.countOn())
 
 
 def part2(data, test=False) -> str:
     lightGrid = LightGrid(False)
     for d in data:
         lightGrid.doInstruction(d)
-    return lightGrid.countOn()
+    return str(lightGrid.countOn())

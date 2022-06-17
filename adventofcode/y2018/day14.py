@@ -56,13 +56,15 @@ class HotChocolate:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     hotChocolate = HotChocolate([3, 7], data)
     while len(hotChocolate.recipe) < int(data) + 10:
         hotChocolate.doRecpie()
-    return hotChocolate.result()
+    return str(hotChocolate.result())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     hotChocolate = HotChocolate([3, 7], data)
     result = False
     while result == False:

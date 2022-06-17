@@ -1,7 +1,7 @@
 import json
 
 
-def sumNumbers(jsonObj, ignoreRed=False):
+def sumNumbers(jsonObj, ignoreRed=False) -> int:
     result = 0
     if isinstance(jsonObj, dict):
         for key in jsonObj:
@@ -21,10 +21,12 @@ def sumNumbers(jsonObj, ignoreRed=False):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     jsonObj = json.loads(data)
-    return sumNumbers(jsonObj)
+    return str(sumNumbers(jsonObj))
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     jsonObj = json.loads(data)
-    return sumNumbers(jsonObj, True)
+    return str(sumNumbers(jsonObj, True))

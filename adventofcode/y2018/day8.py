@@ -23,10 +23,12 @@ def parseNavigationNodes(inData, part2=False, depth=1):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     result = parseNavigationNodes(data.split(" "))
-    return result[0]
+    return str(result[0])
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     result = parseNavigationNodes(data.split(" "), True)
-    return result[0]
+    return str(result[0])

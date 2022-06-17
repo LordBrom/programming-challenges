@@ -72,7 +72,7 @@ class SoundProgram:
 
 def part1(data, test=False) -> str:
     soundProgram = SoundProgram(data)
-    return soundProgram.run()
+    return str(soundProgram.run())
 
 
 def part2(data, test=False) -> str:

@@ -52,6 +52,7 @@ def numToPassword(num):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     startPassword = passwordToNum(data)
     password = incrementPassword(startPassword)
     while not isValid(password):

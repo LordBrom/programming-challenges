@@ -3,7 +3,9 @@ from y2018.TimeDevice import TimeDevice
 
 def part1(data, test=False) -> str:
     insPointerSlot = int(data.pop(0).split(" ")[1])
-    return TimeDevice(data, [0, 0, 0, 0, 0, 0], insPointerSlot).runInstructions()[0]
+    return str(
+        TimeDevice(data, [0, 0, 0, 0, 0, 0], insPointerSlot).runInstructions()[0]
+    )
 
 
 def part2(data, test=False) -> str:

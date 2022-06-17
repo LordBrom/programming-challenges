@@ -30,8 +30,10 @@ def getDecompressedLength(string, once=True):
 
 
 def part1(data, test=False) -> str:
-    return getDecompressedLength(data)
+    data = data[0]
+    return str(getDecompressedLength(data))
 
 
 def part2(data, test=False) -> str:
-    return getDecompressedLength(data, False)
+    data = data[0]
+    return str(getDecompressedLength(data, False))

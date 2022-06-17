@@ -69,7 +69,7 @@ def part1(data, test=False) -> str:
         r.race()
     reindeer.sort()
 
-    return reindeer[-1].raceDist
+    return str(reindeer[-1].raceDist)
 
 
 def part2(data, test=False) -> str:

@@ -45,6 +45,7 @@ def parseInput(data):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     col, row = parseInput(data)
     manualPaper = ManualPaper()
     x = 0
@@ -52,10 +53,7 @@ def part1(data, test=False) -> str:
     while x <= row or y <= col:
         manualPaper.getCodeAtPos(x, y)
         x, y = manualPaper.getNextPos(x, y)
-    return manualPaper.getCodeAtPos(row - 1, col - 1)
-
-
-# 29069289 - high
+    return str(manualPaper.getCodeAtPos(row - 1, col - 1))
 
 
 def part2(data, test=False) -> str:

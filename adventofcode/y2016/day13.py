@@ -128,10 +128,12 @@ class OfficeSpace:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     office = OfficeSpace(int(data))
-    return office.dijkstra()
+    return str(office.dijkstra())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     office = OfficeSpace(int(data))
-    return office.dijkstraMaxLength()
+    return str(office.dijkstraMaxLength())

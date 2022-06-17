@@ -105,12 +105,14 @@ def parseInput(data):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     playerCount, marbleCount = parseInput(data)
     marbleGame = MarbleGame(playerCount, marbleCount)
-    return marbleGame.runGame()
+    return str(marbleGame.runGame())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     playerCount, marbleCount = parseInput(data)
     marbleGame = MarbleGame(playerCount, marbleCount * 100)
-    return marbleGame.runGame()
+    return str(marbleGame.runGame())

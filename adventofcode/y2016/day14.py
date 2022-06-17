@@ -44,6 +44,7 @@ def stretchHash(string, index, count, lookUp):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     i = -1
     lookUp = {}
     for n in range(64):
@@ -53,6 +54,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     i = -1
     lookUp = {}
     for n in range(64):

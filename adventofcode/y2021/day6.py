@@ -1,22 +1,20 @@
-
-
 class Fish:
     def __init__(self, startTimer):
         self.timer = startTimer
 
     def age_day(self):
-        if (self.timer == 0):
+        if self.timer == 0:
             self.timer = 6
             return True
         self.timer -= 1
         return False
 
 
-def part1(input):
+def part1(data, test=False) -> str:
     fishes = []
-    input = input[0].split(",")
+    data = data[0].split(",")
 
-    for i in input:
+    for i in data:
         fishes.append(Fish(int(i)))
 
     days = 80
@@ -33,11 +31,11 @@ def part1(input):
     return len(fishes)
 
 
-def part2(input):
+def part2(data):
     fishTimer = [0 for x in range(9)]
-    input = input[0].split(",")
+    data = data[0].split(",")
 
-    for i in input:
+    for i in data:
         fishTimer[int(i)] += 1
 
     days = 256

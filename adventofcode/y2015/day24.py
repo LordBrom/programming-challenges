@@ -110,11 +110,11 @@ def part1(data, test=False) -> str:
     packages = [int(x) for x in data]
     sleigh = Sleigh(packages)
     sleigh.distributePackages()
-    return prod(sleigh.best[0])
+    return str(prod(sleigh.best[0]))
 
 
 def part2(data, test=False) -> str:
     packages = [int(x) for x in data]
     packages.sort(reverse=True)
     groups = fillContainer(packages, sum(packages) / 4, [])[1]
-    return prod(groups)
+    return str(prod(groups))

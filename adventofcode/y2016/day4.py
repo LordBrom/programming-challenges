@@ -45,4 +45,4 @@ def part2(data, test=False) -> str:
                 roomName += " "
             if roomName.strip() == "northpole object storage":
                 break
-    return sectorID
+    return str(sectorID)

@@ -1,4 +1,3 @@
-
 def findLowPoints(heatMap):
     lowPoints = []
 
@@ -43,9 +42,9 @@ def findBasinSize(heatMap, startPoint, checked=[]):
     return result
 
 
-def part1(input):
+def part1(data, test=False) -> str:
     heatMap = []
-    for i in input:
+    for i in data:
         heatMap.append([int(char) for char in i])
     lowPoints = findLowPoints(heatMap)
 
@@ -56,9 +55,9 @@ def part1(input):
     return result
 
 
-def part2(input):
+def part2(data):
     heatMap = []
-    for i in input:
+    for i in data:
         heatMap.append([int(char) for char in i])
     lowPoints = findLowPoints(heatMap)
 

@@ -17,10 +17,10 @@ def generation(unitStr, debug=False):
     if debug:
         print(unitStr)
     for i in range(len(unitStr)):
-        if i < len(unitStr) - 1 and checkReact(unitStr[i], unitStr[i+1]):
+        if i < len(unitStr) - 1 and checkReact(unitStr[i], unitStr[i + 1]):
             if debug:
-                print("removing " + unitStr[i] + unitStr[i+1])
-            return unitStr[:i] + unitStr[i+2:]
+                print("removing " + unitStr[i] + unitStr[i + 1])
+            return unitStr[:i] + unitStr[i + 2 :]
     return unitStr
 
 
@@ -32,27 +32,29 @@ def runLife(input):
     return len(input)
 
 
-def part1(input):
-    return runLife(input)
+def part1(data, test=False) -> str:
+    data = data[0]
+    return str(runLife(data))
 
 
-def part2(input):
+def part2(data, test=False) -> str:
+    data = data[0]
     checkedList = []
 
     bestRemoved = -1
     best = 0
 
-    for i in range(len(input)):
-        if not input[i] in checkedList:
-            checkedList.append(input[i])
+    for i in range(len(data)):
+        if not data[i] in checkedList:
+            checkedList.append(data[i])
 
-            newInput = input[:]
-            newInput = newInput.replace(input[i].upper(), "")
-            newInput = newInput.replace(input[i].lower(), "")
+            newInput = data[:]
+            newInput = newInput.replace(data[i].upper(), "")
+            newInput = newInput.replace(data[i].lower(), "")
 
             inputCheck = runLife(newInput)
             if bestRemoved == -1 or bestRemoved > inputCheck:
                 bestRemoved = inputCheck
-                best = input[i]
+                best = data[i]
 
-    return bestRemoved
+    return str(bestRemoved)

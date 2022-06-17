@@ -55,10 +55,12 @@ class HexGrid:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     hexGrid = HexGrid()
     return hexGrid.follow_path(data.split(","))[0]
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     hexGrid = HexGrid()
     return hexGrid.follow_path(data.split(","))[1]

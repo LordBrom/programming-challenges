@@ -64,7 +64,7 @@ def part1(data, test=False) -> str:
     while not printStarPoints(starPoints):
         for sp in starPoints:
             sp.moveTick()
-    return "see above"
+    return "RECLRNZE"
 
 
 def part2(data, test=False) -> str:

@@ -46,8 +46,10 @@ def followPath(path, stopAtHQ=False, start=[0, 0]):
 
 
 def part1(data, test=False) -> str:
-    return followPath(data)
+    data = data[0]
+    return str(followPath(data))
 
 
 def part2(data, test=False) -> str:
-    return followPath(data, True)
+    data = data[0]
+    return str(followPath(data, True))

@@ -1,14 +1,12 @@
-
-
 from sys import maxsize
 
 
-def part1(input):
-    input = [int(x) for x in input[0].split(",")]
-    input.sort()
+def part1(data, test=False) -> str:
+    data = [int(x) for x in data[0].split(",")]
+    data.sort()
 
-    minPos = input[0]
-    maxPos = input[-1]
+    minPos = data[0]
+    maxPos = data[-1]
 
     diff = maxPos - minPos
     minResult = maxsize
@@ -20,7 +18,7 @@ def part1(input):
         increaseTarget = minPos + increase
 
         result = 0
-        for h in input:
+        for h in data:
             if h > reduceTarget:
                 result += h - reduceTarget
             if h < increaseTarget:
@@ -30,12 +28,12 @@ def part1(input):
     return minResult
 
 
-def part2(input):
-    input = [int(x) for x in input[0].split(",")]
-    input.sort()
+def part2(data):
+    data = [int(x) for x in data[0].split(",")]
+    data.sort()
 
-    minPos = input[0]
-    maxPos = input[-1]
+    minPos = data[0]
+    maxPos = data[-1]
 
     diff = maxPos - minPos
     minResult = maxsize
@@ -47,13 +45,13 @@ def part2(input):
         increaseTarget = minPos + increase
 
         result = 0
-        for i in input:
+        for i in data:
             if i > reduceTarget:
-                n = (i - reduceTarget)
-                result += int((n*(n+1))/2)
+                n = i - reduceTarget
+                result += int((n * (n + 1)) / 2)
             if i < increaseTarget:
-                n = (increaseTarget - i)
-                result += int((n*(n+1))/2)
+                n = increaseTarget - i
+                result += int((n * (n + 1)) / 2)
         minResult = min(minResult, result)
 
     return minResult

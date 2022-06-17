@@ -68,7 +68,7 @@ def remove_escaped(string):
 
 
 def part1(data, test=False) -> str:
-    return count_groups(data)[0]
+    return str(count_groups(data)[0])
 
 
 def part2(data, test=False) -> str:

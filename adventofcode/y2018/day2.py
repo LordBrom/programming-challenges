@@ -1,10 +1,10 @@
 import math
 
 
-def part1(input):
+def part1(data, test=False) -> str:
     pairs = 0
     trips = 0
-    for id in input:
+    for id in data:
         foundLetter = {}
         for l in id:
             if not l in foundLetter:
@@ -22,18 +22,18 @@ def part1(input):
                 foundTrip = True
                 trips += 1
 
-    return pairs * trips
+    return str(pairs * trips)
 
 
-def part2(input):
+def part2(data, test=False) -> str:
     bestDiff = 0
     bestOne = 0
     bestTwo = 0
-    for index in range(len(input)):
-        id = input[index]
+    for index in range(len(data)):
+        id = data[index]
 
-        for indexCheck in range(index + 1, len(input)):
-            idCheck = input[indexCheck]
+        for indexCheck in range(index + 1, len(data)):
+            idCheck = data[indexCheck]
             currentBest = 0
             for i in range(len(id)):
                 if id[i] == idCheck[i]:
@@ -46,7 +46,7 @@ def part2(input):
 
     result = ""
     for i in range(len(id)):
-        if (input[bestOne][i] == input[bestTwo][i]):
-            result += input[bestOne][i]
+        if data[bestOne][i] == data[bestTwo][i]:
+            result += data[bestOne][i]
 
     return result

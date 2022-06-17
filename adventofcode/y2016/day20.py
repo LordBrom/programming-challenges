@@ -53,7 +53,7 @@ def proccessIpRanges(data):
 
 def part1(data, test=False) -> str:
     ipRanges = proccessIpRanges(data)
-    return ipRanges[0].end + 1
+    return str(ipRanges[0].end + 1)
 
 
 def part2(data, test=False) -> str:

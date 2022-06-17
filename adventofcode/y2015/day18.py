@@ -99,10 +99,10 @@ class Board:
 def part1(data, test=False) -> str:
     board = Board(data)
     board.takeSteps()
-    return board.getLightOnCount()
+    return str(board.getLightOnCount())
 
 
 def part2(data, test=False) -> str:
     board = Board(data, True)
     board.takeSteps()
-    return board.getLightOnCount()
+    return str(board.getLightOnCount())

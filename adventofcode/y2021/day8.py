@@ -4,9 +4,9 @@ RESTR_RIGHT = " ([a-g]+)"
 RESTR_LEFT = "([a-g]+) "
 
 
-def part1(input):
+def part1(data, test=False) -> str:
     result = 0
-    for i in input:
+    for i in data:
         inParsed = i.split("|")
         reResult = re.findall(RESTR_RIGHT, inParsed[1])
 
@@ -48,10 +48,10 @@ def check9(threeKey, str):
     return True
 
 
-def part2(input):
+def part2(data):
     result = 0
     count = 0
-    for i in input:
+    for i in data:
         count += 1
         inParsed = i.split("|")
         leftSide = sorted(re.findall(RESTR_LEFT, inParsed[0]), key=len)

@@ -1,66 +1,142 @@
+import typing
 import sys
 import time
-import y2016.day22 as Day
+from importlib import import_module
+
+OUTPUT = ""
 
 
-def main(args=None):
-    year = "y2016"
-    day = "22"
+def run_all() -> None:
+    for y in range(2019, 2023):
+        global OUTPUT
+        OUTPUT = "y" + str(y) + "/output.txt"
+        file = open(OUTPUT, "w")
+        file.write("")
+        file.close()
 
-    runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
-    runPart1 = input("Run part 1 (y)/else: ")
+        printHorizontalLine()
+        printHorizontalLine()
+        printLine("| year {} {} |".format(y, " " * 67))
+        printHorizontalLine()
+        printLine("| {} | Answer{} | Run Time{} |".format(" " * 6, " " * 44, " " * 7))
+        printHorizontalLine()
+        if y == 2020:
+            continue
 
-    if runTest:
-        inFile = open(year + "/inputs/day" + day + ".in", "r").read().split("\n")
-    else:
-        inFile = open(year + "/testInputs/day" + day + ".in", "r").read().split("\n")
-    inFile.pop()
+        for d in range(1, 26):
+            run_day(str(y), str(d), continuous=True)
 
-    if len(inFile) == 1:
-        inPart1 = inFile.copy()[0]
-        inPart2 = inFile.copy()[0]
-    else:
-        inPart1 = inFile.copy()
-        inPart2 = inFile.copy()
 
-    def outputAnswer(part, answer, time):
-        timeStr = str("{:,.0f}".format(time)) + " ms"
-        print(
-            "| Part {} | {} | {} |".format(
-                part, answer.ljust(50, " "), timeStr.rjust(15, " ")
+def outputAnswer(part, answer, time):
+    # print(answer)
+    timeStr = str("{:,.0f}".format(time)) + " ms"
+    try:
+        printLine(
+            "| Part {} | {} | {} |{}".format(
+                part,
+                answer.ljust(50, " "),
+                timeStr.rjust(15, " "),
+                "" if time < 60000 else " :C",
+            )
+        )
+    except:
+        printLine(
+            "| Part {} | {} | {} |{}".format(
+                part,
+                "!!! NOT STRING !!!".ljust(50, " "),
+                timeStr.rjust(15, " "),
+                "" if time < 60000 else " :C",
             )
         )
 
-    def timeMs():
-        return int(round(time.time() * 1000))
 
-    def printLine():
-        print("-" * 81)
+def timeMs():
+    return int(round(time.time() * 1000))
 
-    printLine()
+
+def printHorizontalLine():
+    printLine("-" * 81)
+
+
+def run_day(
+    year: str,
+    day: str,
+    runTest: bool = False,
+    runPart1: bool = True,
+    continuous: bool = False,
+) -> None:
+    try:
+        Day = import_module("y" + year + ".day" + day)
+    except:
+        return
+
+    inFilePath = ""
+    if runTest:
+        inFilePath = "y" + year + "/testInputs/day" + day + ".in"
+    else:
+        inFilePath = "y" + year + "/inputs/day" + day + ".in"
+    inFile = open(inFilePath, "r").read().split("\n")
+    inFile.pop()
+
+    if not continuous:
+        printHorizontalLine()
     dayDsp = day
     if len(day) == 1:
         dayDsp += " "
-    print("| Day {} | Answer{} | Run Time{} |".format(dayDsp, " " * 44, " " * 7))
-    printLine()
+    if continuous:
+        printLine("| Day {} | {} | {} |".format(dayDsp, " " * 50, " " * 15))
+    else:
+        printLine(
+            "| Day {} | Answer{} | Run Time{} |".format(dayDsp, " " * 44, " " * 7)
+        )
+    printHorizontalLine()
 
-    if runPart1 == "":
-        startTime = timeMs()
-        try:
-            outputAnswer(
-                "1", str(Day.part1(inPart1, not runTest)), timeMs() - startTime
-            )
-        except KeyboardInterrupt:
-            outputAnswer("1", "Interrupted", timeMs() - startTime)
+    if runPart1:
+        run_part("1", Day.part1, inFile.copy(), runTest)
 
-        printLine()
+    run_part("2", Day.part2, inFile.copy(), runTest)
 
+
+def run_part(
+    part: str,
+    dayPart: typing.Callable,
+    inFile: typing.List[str],
+    runTest: bool = False,
+    continuous: bool = False,
+) -> None:
     startTime = timeMs()
+    answer = ""
     try:
-        outputAnswer("2", str(Day.part2(inPart2, not runTest)), timeMs() - startTime)
+        answer = dayPart(inFile.copy(), runTest)
     except KeyboardInterrupt:
-        outputAnswer("2", "Interrupted", timeMs() - startTime)
-    printLine()
+        answer = "Interrupted"
+    except:
+        answer = "Failed"
+    outputAnswer(part, answer, timeMs() - startTime)
+    if not continuous:
+        printHorizontalLine()
+
+
+def printLine(line: str, toFile: bool = True):
+    if toFile:
+        global OUTPUT
+        file = open(OUTPUT, "a")
+        file.write(line + "\n")
+        file.close()
+    else:
+        print(line)
+
+
+def main(args=None) -> None:
+    run_all()
+    return
+    year = "2016"
+    day = "22"
+
+    runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
+    runPart1 = input("Run part 1 (y)/else: ") == ""
+
+    run_day(year, day, runTest, runPart1)
 
 
 if __name__ == "__main__":

@@ -1,18 +1,19 @@
+import typing
 import re
 
 
 class Wire:
-    def __init__(self, wireName, value=None) -> None:
-        self.name = wireName
-        self.value = value
-        self.action = None
-        self.wire1 = None
-        self.wire2 = None
+    def __init__(self, wireName: str, value: typing.Optional[int] = None) -> None:
+        self.name: str = wireName
+        self.value: typing.Optional[int] = value
+        self.action: typing.Optional[str] = None
+        self.wire1: typing.Optional[Wire] = None
+        self.wire2: typing.Optional[Wire] = None
 
     def __str__(self) -> str:
         return "{}: {} {}".format(self.name, self.value, self.action)
 
-    def getValue(self):
+    def getValue(self) -> int:
         if self.value == None:
             if self.action == "SET":
                 self.value = self.wire1.getValue()
@@ -31,7 +32,7 @@ class Wire:
 
 class CircuitBoard:
     def __init__(self) -> None:
-        self.wires = {}
+        self.wires: typing.Dict[str, Wire] = {}
 
     def __str__(self) -> str:
         result = ""
@@ -69,10 +70,10 @@ class CircuitBoard:
                 self.wires[wireName] = Wire(wireName)
             return self.wires[wireName]
 
-    def getWire(self, wire="a"):
+    def getWire(self, wire="a") -> str:
         if wire in self.wires:
-            return self.wires[wire].getValue()
-        return None
+            return str(self.wires[wire].getValue())
+        return ""
 
 
 def part1(data, test=False) -> str:
@@ -87,5 +88,5 @@ def part2(data, test=False) -> str:
     circuitBoard = CircuitBoard()
     for d in data:
         circuitBoard.inputCommand(d)
-    circuitBoard.wires["b"].wire1.value = newBValue
+    circuitBoard.wires["b"].wire1.value = int(newBValue)
     return circuitBoard.getWire()

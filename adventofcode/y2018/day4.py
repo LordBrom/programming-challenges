@@ -14,9 +14,9 @@ class GuardSleepTrack:
         self.days = {}
 
     def add_date(self, date):
-        if (date in self.days):
+        if date in self.days:
             return
-        #print(date + " added to guard " + self.guardID + "'s sched")
+        # print(date + " added to guard " + self.guardID + "'s sched")
         self.days[date] = [False for x in range(60)]
 
     def add_sleep(self, date, start, end):
@@ -62,9 +62,9 @@ class GuardSleepTrack:
             rowStr = str(d) + "  "
             for s in self.days[d]:
                 if s:
-                    rowStr += '  #'
+                    rowStr += "  #"
                 else:
-                    rowStr += '  .'
+                    rowStr += "  ."
             print(rowStr)
 
         print("")
@@ -80,34 +80,28 @@ def buildSchedules(input):
     for i in input:
         reResult = re.search(RESTR, i)
 
-        if reResult.group(RGMSG)[0] == 'G':
+        if reResult.group(RGMSG)[0] == "G":
             if currentGuardId != 0 and isSleeping:
                 result[currentGuardId].add_sleep(
                     reResult.group(RGDATE),
                     sleepStart,
-                    getTime(
-                        reResult.group(RGHOUR),
-                        reResult.group(RGMIN)
-                    )
+                    getTime(reResult.group(RGHOUR), reResult.group(RGMIN)),
                 )
 
             currentGuardId = re.search(REMSG, reResult.group(RGMSG)).group(1)
             if not currentGuardId in result:
                 result[currentGuardId] = GuardSleepTrack(currentGuardId)
 
-        elif reResult.group(RGMSG)[0] == 'f':
+        elif reResult.group(RGMSG)[0] == "f":
             isSleeping = True
             sleepStart = getTime(reResult.group(RGHOUR), reResult.group(RGMIN))
 
-        elif reResult.group(RGMSG)[0] == 'w':
+        elif reResult.group(RGMSG)[0] == "w":
             isSleeping = False
             result[currentGuardId].add_sleep(
                 reResult.group(RGDATE),
                 sleepStart,
-                getTime(
-                    reResult.group(RGHOUR),
-                    reResult.group(RGMIN)
-                )
+                getTime(reResult.group(RGHOUR), reResult.group(RGMIN)),
             )
     return result
 
@@ -116,8 +110,8 @@ def getTime(h, m):
     return (int(h) * 60) + int(m)
 
 
-def part1(input):
-    guardTracks = buildSchedules(input)
+def part1(data, test=False) -> str:
+    guardTracks = buildSchedules(data)
 
     sleepiestGuard = 0
     guardSleep = 0
@@ -129,11 +123,11 @@ def part1(input):
 
     sleepiestHour = guardTracks[sleepiestGuard].find_sleepiest_hour()
 
-    return int(sleepiestGuard) * int(sleepiestHour)
+    return str(int(sleepiestGuard) * int(sleepiestHour))
 
 
-def part2(input):
-    guardTracks = buildSchedules(input)
+def part2(data, test=False) -> str:
+    guardTracks = buildSchedules(data)
 
     sleepiestGuard = 0
     guardSleep = 0
@@ -145,4 +139,4 @@ def part2(input):
 
     sleepiestHour = guardTracks[sleepiestGuard].find_sleepiest_hour()
 
-    return int(sleepiestGuard) * int(sleepiestHour)
+    return str(int(sleepiestGuard) * int(sleepiestHour))

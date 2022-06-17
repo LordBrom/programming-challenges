@@ -99,4 +99,4 @@ def part2(data, test=False) -> str:
     name = list(towerPrograms.keys())[0]
     rootTower = towerPrograms[name].get_root_parent()
 
-    return towerPrograms[rootTower].check_sub_towers()[1]
+    return str(towerPrograms[rootTower].check_sub_towers()[1])

@@ -259,7 +259,7 @@ def getBoss(data, debug=False):
 def part1(data, test=False) -> str:
     boss = getBoss(data)
     player = Fighter("Player", 50, 0, 500)
-    return findBest(player, boss)[1]
+    return str(findBest(player, boss)[1])
 
 
 def part2(data, test=False) -> str:
@@ -269,4 +269,4 @@ def part2(data, test=False) -> str:
     # if fightFighters(player, boss, [3, 1, 4, 3, 2, 4, 3, 1, 0]):
     #    print("win")
     # return
-    return findBest(player, boss, 0, [], sys.maxsize)[1]
+    return str(findBest(player, boss, 0, [], sys.maxsize)[1])

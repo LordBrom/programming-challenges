@@ -11,6 +11,7 @@ def checkHash(checkString, zeroCount=5):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     result = 0
     while not checkHash(data + str(result)):
         result += 1
@@ -18,6 +19,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     result = 0
     while not checkHash(data + str(result), 6):
         result += 1

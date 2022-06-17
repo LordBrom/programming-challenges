@@ -1,7 +1,6 @@
-
-def part1(input):
+def part1(data, test=False) -> str:
     result = 0
-    for i in input:
+    for i in data:
         expecting = []
         errorCharFound = []
         for l in i:
@@ -31,9 +30,9 @@ def part1(input):
     return result
 
 
-def part2(input):
+def part2(data):
     resultScores = []
-    for i in input:
+    for i in data:
         expecting = []
         for l in i:
             isValid = True

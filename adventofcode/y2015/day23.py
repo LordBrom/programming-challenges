@@ -50,10 +50,10 @@ class Computer:
 def part1(data, test=False) -> str:
     comp = Computer(data)
     comp.run()
-    return comp.registers["b"]
+    return str(comp.registers["b"])
 
 
 def part2(data, test=False) -> str:
     comp = Computer(data, 1)
     comp.run()
-    return comp.registers["b"]
+    return str(comp.registers["b"])

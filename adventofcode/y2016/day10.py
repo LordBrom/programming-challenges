@@ -114,4 +114,4 @@ def part2(data, test=False) -> str:
         else:
             i += 1
 
-    return bots["output-0"].low * bots["output-1"].low * bots["output-2"].low
+    return str(bots["output-0"].low * bots["output-1"].low * bots["output-2"].low)

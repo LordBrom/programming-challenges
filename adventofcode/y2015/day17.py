@@ -35,7 +35,7 @@ def fillContainers(containers, setGlobal=False, eggnog=150, index=0, used=[], st
 
 def part1(data, test=False) -> str:
     containers = [int(x) for x in data]
-    return fillContainers(containers)
+    return str(fillContainers(containers))
 
 
 def part2(data, test=False) -> str:

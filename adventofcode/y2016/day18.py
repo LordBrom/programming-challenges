@@ -45,7 +45,7 @@ def part1(data, test=False) -> str:
     floor = [parseInput(data)]
     while len(floor) < 40:
         floor.append(getTrapRow(floor[-1]))
-    return countSafeTiles(floor)
+    return str(countSafeTiles(floor))
 
 
 def part2(data, test=False) -> str:
@@ -54,4 +54,4 @@ def part2(data, test=False) -> str:
     for i in range(1, 400000):
         tileRow = getTrapRow(tileRow)
         result += tileRow.count(False)
-    return result
+    return str(result)

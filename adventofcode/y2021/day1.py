@@ -1,10 +1,10 @@
-def part1(input):
+def part1(data, test=False) -> str:
     result = 0
 
     n = 0
     first = True
 
-    for i in input:
+    for i in data:
         if not first:
             if int(i) > int(n):
                 result += 1
@@ -14,9 +14,9 @@ def part1(input):
     return result
 
 
-def part2(input):
+def part2(data):
     windowSum = []
-    for i in range(len(input) - 2):
-        windowSum.append(int(input[i]) + int(input[i + 1]) + int(input[i + 2]))
+    for i in range(len(data) - 2):
+        windowSum.append(int(data[i]) + int(data[i + 1]) + int(data[i + 2]))
 
     return part1(windowSum)

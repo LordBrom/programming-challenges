@@ -24,7 +24,7 @@ class Grid:
             rowStr = ""
             for y in range(len(self.grid[x])):
                 if part1:
-                    if (self.grid[x][y][1] == -1):
+                    if self.grid[x][y][1] == -1:
                         rowStr += " ."
                     else:
                         rowStr += " " + str(self.grid[x][y][0]) + ""
@@ -61,7 +61,12 @@ class Grid:
                 results[point] += 1
 
                 if not point in infResults:
-                    if x == len(self.grid) - 1 or y == len(self.grid[x]) - 1 or y == 0 or x == 0:
+                    if (
+                        x == len(self.grid) - 1
+                        or y == len(self.grid[x]) - 1
+                        or y == 0
+                        or x == 0
+                    ):
                         infResults.append(point)
 
         for i in infResults:
@@ -89,17 +94,17 @@ def parseInput(input):
     return result
 
 
-def part1(input):
-    grid = Grid(parseInput(input))
+def part1(data, test=False) -> str:
+    grid = Grid(parseInput(data))
     grid.fill_areas()
 
     result = 0
     pointCounts = grid.count_points()
     for i in pointCounts:
         result = max(int(result), pointCounts[i])
-    return result
+    return str(result)
 
 
-def part2(input):
-    grid = Grid(parseInput(input))
-    return len(grid.count_near_points())
+def part2(data, test=False) -> str:
+    grid = Grid(parseInput(data))
+    return str(len(grid.count_near_points()))

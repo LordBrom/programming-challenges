@@ -26,12 +26,14 @@ class Debugger:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     debugger = Debugger(data)
-    return debugger.run()
+    return str(debugger.run())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     debugger = Debugger(data)
     debugger.run()
     debugger.stateCheck = []
-    return debugger.run()
+    return str(debugger.run())

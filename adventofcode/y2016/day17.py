@@ -54,8 +54,10 @@ def followPath(code, path="", position=[0, 0], shortest=True):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     return followPath(data)
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     return str(len(followPath(data, shortest=False)))

@@ -9,7 +9,8 @@ class BingoBoard:
 
         for x in range(5):
             reResults = re.search(
-                "[ ]?([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)",  nums[x])
+                "[ ]?([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)", nums[x]
+            )
             for y in range(5):
                 self.board[x][y][0] = reResults.group(y + 1)
 
@@ -72,7 +73,7 @@ def parseInput(input):
     i = 0
     while i < len(input):
         newBoard = []
-        for x in range(i, i+5):
+        for x in range(i, i + 5):
             newBoard.append(input[x])
         result[1].append(BingoBoard(newBoard))
         i += 6
@@ -80,8 +81,8 @@ def parseInput(input):
     return result
 
 
-def part1(input):
-    parsedInput = parseInput(input)
+def part1(data, test=False) -> str:
+    parsedInput = parseInput(data)
     selectedNums = parsedInput[0]
     boards = parsedInput[1]
 
@@ -93,8 +94,8 @@ def part1(input):
     return "not found"
 
 
-def part2(input):
-    parsedInput = parseInput(input)
+def part2(data):
+    parsedInput = parseInput(data)
     selectedNums = parsedInput[0]
     boards = parsedInput[1]
 

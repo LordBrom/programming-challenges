@@ -60,15 +60,17 @@ class HashString:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     length = 256
     if test:
         length = 5
     hashString = HashString(data, length)
     hashString.doTwists()
-    return hashString.checkSum()
+    return str(hashString.checkSum())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     extraLengths = "17,31,73,47,23"
     lengths = ""
     if data == []:

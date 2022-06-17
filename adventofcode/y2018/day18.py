@@ -111,7 +111,7 @@ def part1(data, test=False) -> str:
     for t in range(10):
         lumberArea.minutePass()
 
-    return lumberArea.result()
+    return str(lumberArea.result())
 
 
 def part2(data, test=False) -> str:
@@ -119,4 +119,4 @@ def part2(data, test=False) -> str:
     for t in range(1000000000):
         lumberArea.minutePass()
 
-    return lumberArea.result()
+    return str(lumberArea.result())

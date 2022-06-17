@@ -60,7 +60,7 @@ def part1(data, test=False) -> str:
     plantPots = PlantPots(initial, stepKey)
     for i in range(20):
         plantPots.takeStep()
-    return plantPots.getResult()
+    return str(plantPots.getResult())
 
 
 def part2(data, test=False) -> str:
@@ -71,4 +71,4 @@ def part2(data, test=False) -> str:
         plantPots.takeStep()
     currentResult = plantPots.getResult()
 
-    return currentResult + ((50000000000 - 100) * (currentResult - lastResult))
+    return str(currentResult + ((50000000000 - 100) * (currentResult - lastResult)))

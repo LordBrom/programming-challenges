@@ -63,4 +63,4 @@ def part1(data, test=False) -> str:
 
 def part2(data, test=False) -> str:
     steps = parseInput(data)
-    return run_instructions(steps)[1]
+    return str(run_instructions(steps)[1])

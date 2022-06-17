@@ -3,11 +3,11 @@ import re
 RESTR = "([a-z]+) ([0-9]+)"
 
 
-def part1(input):
+def part1(data, test=False) -> str:
     position = 0
     depth = 0
 
-    for i in input:
+    for i in data:
         reResults = re.search(RESTR, i)
 
         if reResults.group(1) == "forward":
@@ -20,12 +20,12 @@ def part1(input):
     return position * depth
 
 
-def part2(input):
+def part2(data):
     aim = 0
     position = 0
     depth = 0
 
-    for i in input:
+    for i in data:
         reResults = re.search(RESTR, i)
 
         if reResults.group(1) == "forward":

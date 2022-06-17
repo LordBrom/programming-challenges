@@ -11,6 +11,7 @@ def getNextHash(data, index):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     result = ""
     i = 0
 
@@ -22,6 +23,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     result = [None for x in range(8)]
     i = 0
 

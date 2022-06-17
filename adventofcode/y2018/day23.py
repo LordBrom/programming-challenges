@@ -85,8 +85,4 @@ def part2(data, test=False) -> str:
                 if check > best:
                     best = check
                     bestPos = checkPos
-    return manhattanDistance([0, 0, 0], bestPos)
-
-
-# 10383357 - low
-# 167596085 - high
+    return str(manhattanDistance([0, 0, 0], bestPos))

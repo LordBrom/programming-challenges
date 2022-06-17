@@ -27,14 +27,16 @@ class SpinLock:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     data = int(data)
     spinLock = SpinLock(data)
     for i in range(2017):
         spinLock.step()
-    return spinLock.result()
+    return str(spinLock.result())
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     data = int(data)
 
     oneNum = None

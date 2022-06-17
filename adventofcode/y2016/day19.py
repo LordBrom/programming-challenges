@@ -49,6 +49,7 @@ def bruteForcePart1(elfCount, debug=False):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     binFormat = format(int(data), "b")
     large = "1" + ("0" * (len(binFormat) - 1))
     oneLarger = "1" + ("0" * (len(binFormat)))
@@ -57,4 +58,5 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     return bruteForcePart2(int(data))

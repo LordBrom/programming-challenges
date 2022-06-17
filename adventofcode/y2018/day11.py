@@ -63,12 +63,14 @@ def parseInput(data):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     powerLevels = parseInput(data)
     largest = checkPowerLevels(powerLevels)
     return "{},{}".format(largest[0][0], largest[0][1])
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     powerLevels = parseInput(data)
     largest = checkPowerLevels(powerLevels, True)
     return "{},{},{}".format(largest[0][0], largest[0][1], largest[2])

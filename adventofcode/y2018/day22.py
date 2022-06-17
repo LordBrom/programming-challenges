@@ -246,11 +246,11 @@ def parseInput(data):
 
 def part1(data, test=False) -> str:
     depth, target = parseInput(data)
-    return CaveSystem(depth, target).determineDanger()
+    return str(CaveSystem(depth, target).determineDanger())
 
 
 def part2(data, test=False) -> str:
     depth, target = parseInput(data)
     caveSystem = CaveSystem(depth, target)
     caveSystem.followPath()
-    return caveSystem.caves[target[0]][target[1]].distance
+    return str(caveSystem.caves[target[0]][target[1]].distance)

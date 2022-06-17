@@ -36,6 +36,7 @@ class ProgramDance:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     if test:
         dance = ProgramDance(5)
     else:
@@ -47,6 +48,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     dance = ProgramDance()
     danceTimes = 1000000000
     # doing the dance 42 times, brings you back to the original order
