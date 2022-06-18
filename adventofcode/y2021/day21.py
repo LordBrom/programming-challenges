@@ -104,4 +104,4 @@ def part2(data, test=False) -> str:
     p1Result = re.search(RE_STR, data[0])
     p2Result = re.search(RE_STR, data[1])
     result = runGame(int(p1Result.group(2)), int(p2Result.group(2)))
-    return max(result[0], result[1])
+    return str(max(result[0], result[1]))

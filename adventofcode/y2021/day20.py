@@ -87,7 +87,7 @@ def part1(data, test=False) -> str:
     data.pop(0)
     image = Image(enhancementAlg, data)
     image.enhance(2)
-    return image.countPixels()
+    return str(image.countPixels())
 
 
 def part2(data, test=False) -> str:
@@ -95,4 +95,4 @@ def part2(data, test=False) -> str:
     data.pop(0)
     image = Image(enhancementAlg, data)
     image.enhance(50)
-    return image.countPixels()
+    return str(image.countPixels())

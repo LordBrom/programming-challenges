@@ -174,7 +174,7 @@ class TorusMaze:
 
 def part1(data, test=False) -> str:
     torusMaze = TorusMaze(data)
-    return torusMaze.findPath()
+    return str(torusMaze.findPath())
 
 
 def part2(data, test=False) -> str:

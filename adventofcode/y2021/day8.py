@@ -14,7 +14,7 @@ def part1(data, test=False) -> str:
             if len(r) == 2 or len(r) == 3 or len(r) == 4 or len(r) == 7:
                 result += 1
 
-    return result
+    return str(result)
 
 
 def check3(oneKey, str):
@@ -48,7 +48,7 @@ def check9(threeKey, str):
     return True
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     result = 0
     count = 0
     for i in data:
@@ -129,4 +129,4 @@ def part2(data):
                     break
         result += num
 
-    return result
+    return str(result)

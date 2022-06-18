@@ -198,4 +198,4 @@ def part2(data, test=False) -> str:
     result = droid.turnOnO2(stepByStep)
     if displayMap.lower() == "y" or displayMap.lower() == "1":
         print(droid)
-    return result
+    return str(result)

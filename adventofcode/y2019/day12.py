@@ -73,7 +73,7 @@ def part1(data, test=False) -> str:
     for step in range(1000):
         system.takeStep()
 
-    return system.getSystemEnergy()
+    return str(system.getSystemEnergy())
 
 
 def part2(data, test=False) -> str:

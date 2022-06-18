@@ -40,6 +40,7 @@ def getScanRow(data, row, printRow=False, offset=0):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     data = data.split(",")
     scan = 50
     result = 0
@@ -50,6 +51,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     row1000 = getScanRow(data.split(","), 1000)
 
     m2 = 1000 / row1000[1][0]

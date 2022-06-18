@@ -47,7 +47,7 @@ def isNiceStringPart2(checkString, debug=False):
     if debug and not rule1:
         print("Does not contain two pairs")
     if debug and not rule2:
-        print("Does not contain two same letters, with annother in between")
+        print("Does not contain two same letters, with another in between")
 
     return rule1 and rule2
 

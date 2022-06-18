@@ -11,10 +11,10 @@ def part1(data, test=False) -> str:
         n = i
         first = False
 
-    return result
+    return str(result)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     windowSum = []
     for i in range(len(data) - 2):
         windowSum.append(int(data[i]) + int(data[i + 1]) + int(data[i + 2]))

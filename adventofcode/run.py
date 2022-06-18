@@ -7,7 +7,7 @@ OUTPUT = ""
 
 
 def run_all() -> None:
-    for y in range(2019, 2023):
+    for y in range(2021, 2022):
         global OUTPUT
         OUTPUT = "y" + str(y) + "/output.txt"
         file = open(OUTPUT, "w")

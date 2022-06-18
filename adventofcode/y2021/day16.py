@@ -127,9 +127,9 @@ def parsePacket(data, pos=0):
 
 def part1(data, test=False) -> str:
     packet = parsePacket(hexToBin(data[0]))[0]
-    return packet.countVersions()
+    return str(packet.countVersions())
 
 
 def part2(data, test=False) -> str:
     packet = parsePacket(hexToBin(data[0]))[0]
-    return packet.getValue()
+    return str(packet.getValue())

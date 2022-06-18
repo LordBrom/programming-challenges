@@ -25,10 +25,10 @@ def part1(data, test=False) -> str:
                 result += increaseTarget - h
         minResult = min(minResult, result)
 
-    return minResult
+    return str(minResult)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     data = [int(x) for x in data[0].split(",")]
     data.sort()
 
@@ -54,4 +54,4 @@ def part2(data):
                 result += int((n * (n + 1)) / 2)
         minResult = min(minResult, result)
 
-    return minResult
+    return str(minResult)

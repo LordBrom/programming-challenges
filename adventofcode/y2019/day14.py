@@ -153,7 +153,7 @@ class Recipe:
 
 def part1(data, test=False) -> str:
     recipeDictionary = RecipeDictionary(data)
-    return recipeDictionary.produceOutput(["FUEL", 1])[0]["ORE"]
+    return str(recipeDictionary.produceOutput(["FUEL", 1])[0]["ORE"])
 
 
 def part2(data, test=False) -> str:

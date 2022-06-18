@@ -90,11 +90,11 @@ def part1(data, test=False) -> str:
         for b in boards:
             b.check_num(i)
             if b.check_win():
-                return int(i) * b.count_unchecked()
+                return str(int(i) * b.count_unchecked())
     return "not found"
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     parsedInput = parseInput(data)
     selectedNums = parsedInput[0]
     boards = parsedInput[1]
@@ -109,5 +109,5 @@ def part2(data):
             if boards[b].check_win():
                 wonBoard.append(b)
                 if len(wonBoard) == len(boards):
-                    return int(i) * boards[b].count_unchecked()
+                    return str(int(i) * boards[b].count_unchecked())
     return "not found"

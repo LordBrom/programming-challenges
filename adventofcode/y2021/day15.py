@@ -35,7 +35,7 @@ def part1(data, test=False) -> str:
     cave = []
     for d in data:
         cave.append([int(x) for x in d])
-    return dijkstra(cave)
+    return str(dijkstra(cave))
 
 
 def part2(data, test=False) -> str:
@@ -49,4 +49,4 @@ def part2(data, test=False) -> str:
                     row.append((((int(n) + xi + yi) - 1) % 9) + 1)
 
             cave.append(row.copy())
-    return dijkstra(cave)
+    return str(dijkstra(cave))

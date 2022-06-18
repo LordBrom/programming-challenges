@@ -31,12 +31,14 @@ class FlawedFrequencyTransmission:
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     fft = FlawedFrequencyTransmission(data, [0, 1, 0, -1])
     fft.takeSteps()
     return fft.transmission[:8]
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     realMessage = ""
     for i in range(10000):
         realMessage += data

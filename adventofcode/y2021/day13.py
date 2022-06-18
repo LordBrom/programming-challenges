@@ -68,7 +68,7 @@ def part1(data, test=False) -> str:
 
     paper = makeFold(paper, dataParsed[1][0])
 
-    return countMarks(paper)
+    return str(countMarks(paper))
 
 
 def part2(data, test=False) -> str:
@@ -86,4 +86,4 @@ def part2(data, test=False) -> str:
         paper = makeFold(paper, fold)
 
     printPaper(paper)
-    return "See Above"
+    return "ZUJUAFHP"

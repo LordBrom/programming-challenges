@@ -61,7 +61,7 @@ def part1(data, test=False) -> str:
     results = list(result.values())
     results.sort()
 
-    return results[-1] - results[0]
+    return str(results[-1] - results[0])
 
 
 def part2(data, test=False) -> str:
@@ -82,4 +82,4 @@ def part2(data, test=False) -> str:
     results = list(result.values())
     results.sort()
 
-    return results[-1] - results[0]
+    return str(results[-1] - results[0])

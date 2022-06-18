@@ -58,11 +58,13 @@ def appendInput(buildStr, newInput):
 
 
 def part1(data, test=False) -> str:
+    data = data[0]
     asciiView = AsciiView(data.split(","))
     return asciiView.countIntersections()
 
 
 def part2(data, test=False) -> str:
+    data = data[0]
     data = data.split(",")
     data[0] = 2
 

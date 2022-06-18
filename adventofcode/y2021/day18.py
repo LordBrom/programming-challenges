@@ -198,7 +198,7 @@ def part1(data, test=False) -> str:
         result.reduce()
     result.reduce()
 
-    return result.getMagnitude()
+    return str(result.getMagnitude())
 
 
 def part2(data, test=False) -> str:

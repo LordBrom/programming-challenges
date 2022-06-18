@@ -10,7 +10,7 @@ def part1(data, test=False) -> str:
     comp = IntcodeComputer(inFile)
     comp.run()
 
-    return comp.get_intcode()[0]
+    return str(comp.get_intcode()[0])
 
 
 def part2(data, test=False) -> str:

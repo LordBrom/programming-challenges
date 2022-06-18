@@ -23,7 +23,7 @@ def part1(data, test=False) -> str:
             gamma += "1"
             epsilon += "0"
 
-    return int(gamma, 2) * int(epsilon, 2)
+    return str(int(gamma, 2) * int(epsilon, 2))
 
 
 def getOxy(inputs, num=0):
@@ -60,5 +60,5 @@ def getCoTwo(inputs, num=0):
     return getCoTwo(nextBits, num + 1)
 
 
-def part2(data):
-    return int(getOxy(data), 2) * int(getCoTwo(data), 2)
+def part2(data, test=False) -> str:
+    return str(int(getOxy(data), 2) * int(getCoTwo(data), 2))

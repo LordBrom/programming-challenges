@@ -27,10 +27,10 @@ def part1(data, test=False) -> str:
                     if l == ">" and not ">" in errorCharFound:
                         errorCharFound.append(">")
                         result += 25137
-    return result
+    return str(result)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     resultScores = []
     for i in data:
         expecting = []
@@ -64,4 +64,4 @@ def part2(data):
             resultScores.append(score)
     resultScores.sort()
 
-    return resultScores[int((len(resultScores) - 1) / 2)]
+    return str(resultScores[int((len(resultScores) - 1) / 2)])

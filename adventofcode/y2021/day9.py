@@ -52,10 +52,10 @@ def part1(data, test=False) -> str:
     for p in lowPoints:
         result += int(heatMap[p[0]][p[1]]) + 1
 
-    return result
+    return str(result)
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     heatMap = []
     for i in data:
         heatMap.append([int(char) for char in i])
@@ -71,4 +71,4 @@ def part2(data):
     for i in range(3):
         result *= basins[i]
 
-    return result
+    return str(result)

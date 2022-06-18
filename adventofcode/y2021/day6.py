@@ -28,10 +28,10 @@ def part1(data, test=False) -> str:
         for nf in newFish:
             fishes.append(nf)
 
-    return len(fishes)
+    return str(len(fishes))
 
 
-def part2(data):
+def part2(data, test=False) -> str:
     fishTimer = [0 for x in range(9)]
     data = data[0].split(",")
 
@@ -57,4 +57,4 @@ def part2(data):
     for x in fishTimer:
         result += x
 
-    return result
+    return str(result)

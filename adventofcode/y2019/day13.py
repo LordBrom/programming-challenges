@@ -103,4 +103,4 @@ def part1(data, test=False) -> str:
 
 def part2(data, test=False) -> str:
     gameScreen = GameScreen(data[0].split(","), True)
-    return gameScreen.runGame()
+    return str(gameScreen.runGame())

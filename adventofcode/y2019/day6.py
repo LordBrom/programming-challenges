@@ -98,4 +98,4 @@ def part2(data, test=False) -> str:
         if not parent == GALAXY_CENTER:
             GALAXY[parent].add_child_object(child)
 
-    return GALAXY["YOU"].find_destination("SAN")
+    return str(GALAXY["YOU"].find_destination("SAN"))

@@ -91,4 +91,4 @@ def part1(data, test=False) -> str:
 def part2(data, test=False) -> str:
     wire1 = data[0].split(",")
     wire2 = data[1].split(",")
-    return path_wires(wire1, wire2)
+    return str(path_wires(wire1, wire2))
