@@ -1,11 +1,5 @@
 import re
-
-
-def manhattanDistance(point1, point2):
-    diffX = abs(point1[0] - point2[0])
-    diffY = abs(point1[1] - point2[1])
-    return diffX + diffY
-
+from aoc import manhattan_distance
 
 def followPath(path, stopAtHQ=False, start=[0, 0]):
     reResult = re.findall("(R|L)([0-9]+)", path)
@@ -31,7 +25,7 @@ def followPath(path, stopAtHQ=False, start=[0, 0]):
                 elif facing == 3:
                     block[1] -= 1
                 if block in visited:
-                    return manhattanDistance(start, block)
+                    return manhattan_distance(start, block)
                 visited.append(block.copy())
         else:
             if facing == 0:
@@ -42,7 +36,7 @@ def followPath(path, stopAtHQ=False, start=[0, 0]):
                 block[0] -= int(res[1])
             elif facing == 3:
                 block[1] -= int(res[1])
-    return manhattanDistance(start, block)
+    return manhattan_distance(start, block)
 
 
 def part1(data, test=False) -> str:

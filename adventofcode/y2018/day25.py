@@ -1,3 +1,6 @@
+from aoc import manhattan_distance
+
+
 class Constellation:
     def __init__(self, id, startStar, distance=3) -> None:
         self.id = id
@@ -17,7 +20,7 @@ class Constellation:
 
     def checkStar(self, newStar):
         for star in self.stars:
-            if manhattanDistance(star, newStar) <= self.distance:
+            if manhattan_distance(star, newStar) <= self.distance:
                 return True
         return False
 
@@ -33,15 +36,6 @@ class Constellation:
     def mergeConstellations(self, other: "Constellation"):
         for otherStar in other.stars:
             self.addStar(otherStar)
-
-
-def manhattanDistance(point1, point2):
-    if len(point1) != len(point2):
-        raise Exception("The 2 points require the same number of coords")
-    result = 0
-    for i in range(len(point1)):
-        result += abs(point1[i] - point2[i])
-    return result
 
 
 def parseInput(data):

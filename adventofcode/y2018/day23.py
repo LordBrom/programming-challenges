@@ -1,5 +1,6 @@
 import sys
 import re
+from aoc import manhattan_distance
 
 
 class NanoBot:
@@ -18,14 +19,7 @@ class NanoBot:
         return [self.x, self.y, self.z]
 
     def inRange(self, posArray):
-        return manhattanDistance(self.posArray(), posArray) <= self.r
-
-
-def manhattanDistance(point1, point2):
-    diffX = abs(point1[0] - point2[0])
-    diffY = abs(point1[1] - point2[1])
-    diffZ = abs(point1[2] - point2[2])
-    return diffX + diffY + diffZ
+        return manhattan_distance(self.posArray(), posArray) <= self.r
 
 
 def parseInput(data):
@@ -85,4 +79,4 @@ def part2(data, test=False) -> str:
                 if check > best:
                     best = check
                     bestPos = checkPos
-    return str(manhattanDistance([0, 0, 0], bestPos))
+    return str(manhattan_distance(tuple([0, 0, 0]), tuple(bestPos)))

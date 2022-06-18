@@ -1,6 +1,7 @@
 import math
 import re
 from typing import List, Tuple
+from aoc import manhattan_distance
 
 RE_SCANNER_STR = "--- scanner ([0-9]+) ---"
 
@@ -30,14 +31,6 @@ def parseData(data):
             beacons.append(newBeacons)
     scanners[scannerNum] = Scanner(scannerNum, beacons.copy())
     return scanners
-
-
-def manhattanDistance(point1, point2):
-    return (
-        abs(point1[0] - point2[0])
-        + abs(point1[1] - point2[1])
-        + abs(point1[2] - point2[2])
-    )
 
 
 class Beacon:
@@ -221,7 +214,7 @@ def part2(data, test=False) -> str:
             if i == j:
                 continue
             result = max(
-                result, manhattanDistance(scanners[i].offset, scanners[j].offset)
+                result, int(manhattan_distance(scanners[i].offset, scanners[j].offset))
             )
 
     return str(result)

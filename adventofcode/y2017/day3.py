@@ -1,5 +1,6 @@
 from gettext import find
 from textwrap import fill
+from aoc import manhattan_distance
 
 
 def findNum(num, part2=False):
@@ -56,15 +57,9 @@ def sumAdjacent(x, y, filledValues):
     return result
 
 
-def manhattanDistance(point1, point2):
-    diffX = abs(point1[0] - point2[0])
-    diffY = abs(point1[1] - point2[1])
-    return diffX + diffY
-
-
 def part1(data, test=False) -> str:
     data = data[0]
-    return str(manhattanDistance([0, 0], findNum(int(data))))
+    return str(manhattan_distance([0, 0], findNum(int(data))))
 
 
 def part2(data, test=False) -> str:
