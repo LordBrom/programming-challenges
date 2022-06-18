@@ -111,13 +111,15 @@ def run_part(
     except KeyboardInterrupt:
         answer = "Interrupted"
     except:
+        if runTest:
+            raise
         answer = "Failed"
     outputAnswer(part, answer, timeMs() - startTime)
     if not continuous:
         printHorizontalLine()
 
 
-def printLine(line: str, toFile: bool = True):
+def printLine(line: str, toFile: bool = False):
     if toFile:
         global OUTPUT
         file = open(OUTPUT, "a")
@@ -128,10 +130,10 @@ def printLine(line: str, toFile: bool = True):
 
 
 def main(args=None) -> None:
-    run_all()
-    return
-    year = "2016"
-    day = "22"
+    # run_all()
+    # return
+    year = "2017"
+    day = "20"
 
     runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
     runPart1 = input("Run part 1 (y)/else: ") == ""
