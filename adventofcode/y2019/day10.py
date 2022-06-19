@@ -1,4 +1,5 @@
 import math
+from typing import Dict, List, Any, Optional
 
 
 def findAsteroids(data):
@@ -60,16 +61,16 @@ def part2(data, test=False) -> str:
 
     asteroids = findAsteroids(data)
 
-    result = 0
+    check = 0
     bestAsteroid = None
     for asteroid in asteroids:
-        newResult = len(count_visible(asteroids, asteroid))
-        if newResult > result:
-            result = newResult
+        newCheck = len(count_visible(asteroids, asteroid))
+        if newCheck > check:
+            check = newCheck
             bestAsteroid = asteroid
 
     angles = []
-    asteroidAngles = {}
+    asteroidAngles: Dict[Any, Any] = {}
 
     for asteroid in asteroids:
         if asteroid == bestAsteroid:
@@ -86,7 +87,7 @@ def part2(data, test=False) -> str:
         asteroidAngles[asteroidAngle] = sorted(asteroids, key=lambda x: x[1])
 
     findCount = 200
-    result = None
+    result: Optional[List[List[int]]] = None
 
     count = 0
     pointer = 0
@@ -94,8 +95,6 @@ def part2(data, test=False) -> str:
         count += 1
         curAngle = angles[pointer]
         asteroid = asteroidAngles[curAngle].pop(0)
-        # print("The", count, "asteroid to be vaporized is at", asteroid[0], "at angle", curAngle, "and distance", asteroid[1])
-        # print("The", count, "asteroid to be vaporized is at", asteroid[0])
         if count == findCount:
             result = asteroid[0]
         if len(asteroidAngles[curAngle]) == 0:
@@ -107,6 +106,4 @@ def part2(data, test=False) -> str:
             pointer += 1
             pointer = pointer % len(angles)
 
-    if result:
-        return str((result[1] * 100) + result[0])
-    return ""
+    return str((result[1] * 100) + result[0])

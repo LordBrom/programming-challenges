@@ -1,4 +1,5 @@
 from math import prod
+from typing import List, Any
 
 
 class Sleigh:
@@ -11,8 +12,8 @@ class Sleigh:
         else:
             self.compartmentTotal = sum(self.allPackages) / 3
 
-        self.options = []
-        self.best = []
+        self.options: List[List[Any]] = []
+        self.best: List[Any] = []
 
         self.useTrunk = useTrunk
 

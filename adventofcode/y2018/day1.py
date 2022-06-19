@@ -1,3 +1,6 @@
+from typing import Dict
+
+
 def part1(data, test=False) -> str:
 
     result = 0
@@ -11,14 +14,13 @@ def part1(data, test=False) -> str:
 def part2(data, test=False) -> str:
 
     result = 0
-    found = {}
+    found: Dict[int, bool] = {}
     i = 0
 
     while True:
         result += int(data[i % len(data)])
         i += 1
-        try:
-            if found[result]:
-                return str(result)
-        except:
+        if result in found:
+            return str(result)
+        else:
             found[result] = True

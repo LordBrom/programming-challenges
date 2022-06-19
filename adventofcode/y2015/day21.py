@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Equipment:
     def __init__(self, cost, damage, armor, name) -> None:
         self.cost = cost
@@ -15,7 +18,7 @@ class Fighter:
         self.damage = damage
         self.armor = armor
         self.equipCost = 0
-        self.equipment = []
+        self.equipment: List[Equipment] = []
 
     def __str__(self) -> str:
         result = "hp: {}; damage: {}; armor: {}".format(

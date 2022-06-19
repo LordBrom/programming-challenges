@@ -1,5 +1,6 @@
 import sys
 import re
+from typing import List
 
 # default: 1000
 sys.setrecursionlimit(3000)
@@ -37,7 +38,7 @@ class SandPit:
                 else:
                     self.pit[i - self.pitOffsetX][int(vein[1]) - self.pitOffsetY] = "#"
 
-        self.water = []
+        self.water: List[List[int]] = []
         self.debug = False
 
     def __str__(self) -> str:

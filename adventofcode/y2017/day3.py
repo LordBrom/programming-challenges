@@ -59,7 +59,7 @@ def sumAdjacent(x, y, filledValues):
 
 def part1(data, test=False) -> str:
     data = data[0]
-    return str(manhattan_distance([0, 0], findNum(int(data))))
+    return str(manhattan_distance(tuple([0, 0]), findNum(int(data))))
 
 
 def part2(data, test=False) -> str:

@@ -1,11 +1,12 @@
 import sys
 import re
+from typing import Dict
 
 
 class Location:
     def __init__(self, name) -> None:
         self.name = name
-        self.distances = {}
+        self.distances: Dict[str, int] = {}
 
     def __str__(self) -> str:
         return self.name

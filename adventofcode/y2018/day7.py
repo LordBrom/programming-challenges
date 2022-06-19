@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 RE_STR = "Step ([A-Z]) must be finished before step ([A-Z]) can begin."
 
@@ -6,8 +7,8 @@ RE_STR = "Step ([A-Z]) must be finished before step ([A-Z]) can begin."
 class Point:
     def __init__(self, name) -> None:
         self.name = name
-        self.before = []
-        self.after = []
+        self.before: List[Point] = []
+        self.after: List[Point] = []
 
     def __str__(self) -> str:
         result = "Step " + self.name + " must be finished before step(s) "

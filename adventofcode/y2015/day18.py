@@ -1,9 +1,11 @@
+from typing import List
+
 class Light:
     def __init__(self, x, y, state, keepOn=False) -> None:
         self.x = x
         self.y = y
         self.state = state == "#"
-        self.adjacent = []
+        self.adjacent: List[Light] = []
         self.step = 0
         self.lastState = None
         self.keepOn = keepOn

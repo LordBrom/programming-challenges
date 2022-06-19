@@ -1,3 +1,5 @@
+from typing import Dict
+
 OPCODES = [
     "addr",
     "addi",
@@ -17,7 +19,7 @@ OPCODES = [
     "eqrr",
 ]
 
-OPCODE_KEY = {}
+OPCODE_KEY: Dict[int, str] = {}
 
 
 class OpcodeSample:

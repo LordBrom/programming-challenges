@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 
 class Node:
@@ -7,7 +8,7 @@ class Node:
         self.y = y
         self.size = size
         self.used = used
-        self.adjacent = []
+        self.adjacent: List[Node] = []
 
     def __eq__(self, __o: object) -> bool:
         return isinstance(__o, Node) and self.x == __o.x and self.y == __o.y

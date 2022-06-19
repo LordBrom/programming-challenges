@@ -1,6 +1,7 @@
 import sys
 import heapq
 from enum import Enum
+from typing import List, Optional
 
 
 class CaveType(Enum):
@@ -36,7 +37,7 @@ class Cave:
         self.geologicIndex = None
         self.type = None
         self.distance = sys.maxsize
-        self.gearOptions = None
+        self.gearOptions: Optional[List[Gear]] = None
         self.cameFromCave = None
         self.isTarget = False
         self.geoSet = False

@@ -1,7 +1,10 @@
+from typing import List
+
+
 class Debugger:
     def __init__(self, inStuff) -> None:
         self.registers = [int(x) for x in inStuff.split("	")]
-        self.stateCheck = []
+        self.stateCheck: List[int] = []
 
     def __str__(self) -> str:
         return str(self.registers)

@@ -1,3 +1,4 @@
+from typing import Dict
 from hashlib import md5
 
 
@@ -46,7 +47,7 @@ def stretchHash(string, index, count, lookUp):
 def part1(data, test=False) -> str:
     data = data[0]
     i = -1
-    lookUp = {}
+    lookUp: Dict[int, str] = {}
     for n in range(64):
         i += 1
         hashString, i, lookUp = getNextHash(data, i, 1, lookUp)
@@ -56,11 +57,8 @@ def part1(data, test=False) -> str:
 def part2(data, test=False) -> str:
     data = data[0]
     i = -1
-    lookUp = {}
+    lookUp: Dict[int, str] = {}
     for n in range(64):
         i += 1
         hashString, i, lookUp = getNextHash(data, i, 2017, lookUp)
     return str(i)
-
-
-# 21074 - high

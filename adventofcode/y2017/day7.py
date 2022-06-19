@@ -1,11 +1,12 @@
 import re
+from typing import List
 
 
 class TowerProgram:
     def __init__(self, name, weight) -> None:
         self.name = name
         self.weight = weight
-        self.heldPrograms = []
+        self.heldPrograms: List[TowerProgram] = []
         self.parent = None
 
     def __str__(self) -> str:

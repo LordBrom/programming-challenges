@@ -1,4 +1,5 @@
 from aoc import manhattan_distance
+from typing import List
 
 
 class Constellation:
@@ -50,7 +51,7 @@ def parseInput(data):
 def part1(data, test=False) -> str:
     stars = parseInput(data)
     count = 0
-    constellations = []
+    constellations: List[Constellation] = []
     for star in stars:
         merged = False
         for constellation in constellations:

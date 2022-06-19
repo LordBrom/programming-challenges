@@ -1,6 +1,6 @@
 from math import floor
 import re
-from tkinter import ALL
+from typing import List
 
 
 class Unit:
@@ -20,8 +20,8 @@ class Unit:
         self.damage = int(reResult.group(4))
         self.damageType = reResult.group(5)
         self.initiative = int(reResult.group(6))
-        self.weaknesses = []
-        self.immunities = []
+        self.weaknesses: List[str] = []
+        self.immunities: List[str] = []
 
         if reResult.group(3) != None:
             group3Split = reResult.group(3).split("; ")

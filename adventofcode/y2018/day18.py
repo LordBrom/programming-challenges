@@ -1,8 +1,10 @@
+from typing import List
+
 class Acre:
     def __init__(self, start) -> None:
         self.state = start
         self.nextState = None
-        self.adjacent = []
+        self.adjacent: List[Acre] = []
 
     def __str__(self) -> str:
         return self.state

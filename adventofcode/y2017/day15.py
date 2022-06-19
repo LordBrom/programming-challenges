@@ -1,6 +1,3 @@
-from math import floor
-
-
 class Generator:
     def __init__(self, start, factor, submitVal) -> None:
         self.product = start
@@ -29,8 +26,6 @@ class Judge:
 
         self.result = 0
         self.useQueue = useQueue
-        self.queA = []
-        self.queB = []
         self.debug = debug
         if self.debug:
             print("--Gen. A--  --Gen. B--")

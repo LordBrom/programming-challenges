@@ -1,7 +1,10 @@
+from typing import List
+
+
 class Program:
     def __init__(self, name) -> None:
         self.name = name
-        self.connected = []
+        self.connected: List[Program] = []
         self.groupNum = None
 
     def __str__(self) -> str:
