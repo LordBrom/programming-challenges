@@ -1,13 +1,14 @@
 import sys
 import heapq
 import numpy as np
+from typing import List, Dict
 
 
 class MazeTile:
     def __init__(self, x, y, floorType) -> None:
         self.x = x
         self.y = y
-        self.neighbors = []
+        self.neighbors: List[MazeTile] = []
         self.floorType = floorType
         self.walkable = self.floorType == "."
         self.distance = sys.maxsize
@@ -46,7 +47,7 @@ class TorusMaze:
             self.maxWidth = max(self.maxWidth, len(row))
 
         self.map = []
-        warpIDKey = {}
+        warpIDKey: Dict[int, List[int]] = {}
         warpTiles = []
         for x in range(len(self.rawMap)):
             mapRow = []
@@ -89,8 +90,8 @@ class TorusMaze:
 
         for warpID in warpIDKey:
             if len(warpIDKey[warpID]) == 2:
-                warp1 = warpIDKey[warpID][0]
-                warp2 = warpIDKey[warpID][1]
+                warp1 = warpIDKey[warpID]
+                warp2 = warpIDKey[warpID]
                 self.map[warp1[0]][warp1[1]].addNeighbors([warp2], self.map)
                 self.map[warp2[0]][warp2[1]].addNeighbors([warp1], self.map)
 

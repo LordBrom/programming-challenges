@@ -1,3 +1,4 @@
+from typing import List, Optional
 from y2019.intcode import IntcodeComputer
 import sys
 
@@ -13,14 +14,14 @@ class Droid:
         self.minX = -1
         self.minY = -1
 
-        self.walls = []
-        self.paths = [[0, 0]]
-        self.oxygen = None
+        self.walls: List[List[int]] = []
+        self.paths: List[List[int]] = [[0, 0]]
+        self.oxygen: Optional[List[int]] = None
 
-        self.path = []
-        self.pathToO2 = []
+        self.path: List[List[int]] = []
+        self.pathToO2: List[List[int]] = []
 
-        self.oxygenFilled = []
+        self.oxygenFilled: List[List[int]] = []
 
     def __str__(self) -> str:
         result = "------------------------"

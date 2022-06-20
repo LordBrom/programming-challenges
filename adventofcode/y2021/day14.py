@@ -1,6 +1,7 @@
+from typing import Dict
 from functools import lru_cache
 
-RULES = {}
+RULES: Dict = {}
 
 
 def parseInput(data):
@@ -49,7 +50,7 @@ def part1(data, test=False) -> str:
     global RULES
     RULES = dataParsed[1]
 
-    result = {}
+    result: Dict = {}
 
     result = addToResult(result, polymer, True)
 
@@ -70,7 +71,7 @@ def part2(data, test=False) -> str:
     global RULES
     RULES = dataParsed[1]
 
-    result = {}
+    result: Dict = {}
 
     result = addToResult(result, polymer, True)
 

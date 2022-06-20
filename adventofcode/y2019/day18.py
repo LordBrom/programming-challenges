@@ -1,3 +1,4 @@
+from typing import Dict, Any
 import sys
 
 
@@ -6,7 +7,7 @@ class Key:
         self.name = name
         self.x = x
         self.y = y
-        self.distToKeys = {}
+        self.distToKeys: Dict[Any, Any] = {}
 
     def __eq__(self, __o: object) -> bool:
         if not isinstance(__o, Key):
@@ -28,7 +29,6 @@ class PassageMap:
             for y in range(len(data[x])):
                 letter = data[x][y]
                 if letter.isalpha() and letter.lower() == letter:
-                    # self.keys[letter] = [x, y]
                     self.keys[letter] = Key(letter, x, y)
                 elif letter.isalpha() and letter.upper() == letter:
                     self.doors[letter] = [x, y]
@@ -45,7 +45,6 @@ class PassageMap:
                 test = self.findChar(
                     other, self.keys[key].getPosition(), list(self.keys.keys()), []
                 )
-                # print("here", test)
                 if test[0] != None:
                     self.keys[key].distToKeys[other] = test[0]
             print(key, self.keys[key].distToKeys)

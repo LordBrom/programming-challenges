@@ -1,3 +1,4 @@
+from typing import List
 import re
 
 RE_STR = "(on|off) x=([-0-9]+)..([-0-9]+),y=([-0-9]+)..([-0-9]+),z=([-0-9]+)..([-0-9]+)"
@@ -102,7 +103,7 @@ def part1(data, test=False) -> str:
 
 
 def part2(data, test=False) -> str:
-    cubes = []
+    cubes: List = []
     for d in data:
         reResult = re.search(RE_STR, d)
         toggle = reResult.group(1) == "on"

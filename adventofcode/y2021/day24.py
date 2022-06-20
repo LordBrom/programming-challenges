@@ -1,3 +1,4 @@
+from typing import List
 import math
 import random
 
@@ -74,7 +75,7 @@ def checkNum(data, num):
     return alu.val["z"]
 
 
-CHECKED = []
+CHECKED: List = []
 
 
 def randModalNum():

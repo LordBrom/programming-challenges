@@ -1,3 +1,4 @@
+from typing import List
 from y2019.intcode import IntcodeComputer
 
 
@@ -8,7 +9,7 @@ class AsciiView:
         self.asciiView.pop()
 
         self.view = []
-        newRow = []
+        newRow: List[int] = []
         for i in self.asciiView:
             if i == 10:
                 self.view.append(newRow.copy())
@@ -68,7 +69,7 @@ def part2(data, test=False) -> str:
     data = data.split(",")
     data[0] = 2
 
-    inputData = []
+    inputData: List[str] = []
     inputData = appendInput(inputData, "A,B,A,C,A,A,C,B,C,B")
     inputData = appendInput(inputData, "L,12,L,8,R,12")
     inputData = appendInput(inputData, "L,10,L,8,L,12,R,12")
@@ -76,7 +77,7 @@ def part2(data, test=False) -> str:
     inputData = appendInput(inputData, "n")
 
     comp = IntcodeComputer(data)
-    result = 0
+    result = []
     for i in inputData:
         result = comp.run(i, False)
 

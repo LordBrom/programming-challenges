@@ -98,8 +98,6 @@ otherTickets.pop()
 
 rules = parse_rules(rulesRaw)
 
-validTickets = []
-
 tickets = TicketSet(otherTickets + myTicket, rules)
 
 result = 1

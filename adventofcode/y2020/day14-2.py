@@ -49,10 +49,10 @@ for i in inFile:
 			mem = int(address, 2)
 			if not mem in memory:
 				memory[mem] = value
-			memory[mem] = int(iSplit[1])
+			memory[mem] = iSplit[1]
 
 count = 0
 for mem in memory:
-	count += memory[mem]
+	count += int(memory[mem])
 
 print(count)

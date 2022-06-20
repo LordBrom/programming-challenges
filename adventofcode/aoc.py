@@ -8,7 +8,7 @@ def manhattan_distance(point1: tuple, point2: tuple) -> float:
 
 
 class Point:
-    def __init__(self, x: int, y: int, z: int) -> None:
+    def __init__(self, x: int, y: int, z: int = 0) -> None:
         self.x = x
         self.y = y
         self.z = z

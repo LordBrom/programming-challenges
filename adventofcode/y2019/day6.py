@@ -1,7 +1,5 @@
+from typing import Dict
 import re
-
-GALAXY_CENTER = "COM"
-GALAXY = {}
 
 
 class ObjectMass:
@@ -52,6 +50,10 @@ class ObjectMass:
             return best
         else:
             return 1 + best
+
+
+GALAXY_CENTER = "COM"
+GALAXY: Dict[str, ObjectMass] = {}
 
 
 def part1(data, test=False) -> str:

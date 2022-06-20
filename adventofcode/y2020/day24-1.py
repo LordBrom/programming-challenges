@@ -1,4 +1,6 @@
-blackTiles = []
+from typing import List
+
+blackTiles: List[List[int]] = []
 
 inFile = open("day24.in", "r").read().split("\n")
 inFile.pop()

@@ -1,9 +1,7 @@
 inFile = open("day15.in", "r").read().split("\n")
 inFile.pop()
 
-nums = inFile[0].split(",")
-for i, val in enumerate(nums):
-    nums[i] = int(val)
+nums = [int(x) for x in inFile[0].split(",")]
 
 
 def list_rindex(li, x, b=None):
