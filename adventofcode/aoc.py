@@ -24,6 +24,10 @@ class Point:
             and self.z == __o.z
         )
 
+    def __hash__(self):
+        return hash((self.x, self.y, self.z))
+        # return hash(self.x * 10000 + self.y * 100 + self.z)
+
     def as_tuple(self) -> tuple:
         return (self.x, self.y, self.z)
 
