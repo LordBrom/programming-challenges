@@ -1,76 +1,59 @@
-from typing import List
-from y2019.intcode import IntcodeComputer
-
-
-def appendInput(buildStr, newInput):
-    for i in newInput:
-        buildStr.append(ord(i))
-    buildStr.append(ord("\n"))
-    return buildStr
+from y2019.intcode import AsciiComputer
 
 
 def part1(data, test=False) -> str:
 
-    comp = IntcodeComputer(data[0].split(","))
+    comp = AsciiComputer(data[0].split(","))
 
-    inputData: List[int] = []
+    comp.append_input("NOT C J")
+    comp.append_input("NOT B T")
+    comp.append_input("OR T J")
+    comp.append_input("NOT A T")
+    comp.append_input("OR T J")
 
-    inputData = appendInput(inputData, "NOT C J")
-    inputData = appendInput(inputData, "NOT B T")
-    inputData = appendInput(inputData, "OR T J")
-    inputData = appendInput(inputData, "NOT A T")
-    inputData = appendInput(inputData, "OR T J")
+    comp.append_input("NOT D T")
+    comp.append_input("NOT J J")
+    comp.append_input("OR J T")
+    comp.append_input("NOT T J")
 
-    inputData = appendInput(inputData, "NOT D T")
-    inputData = appendInput(inputData, "NOT J J")
-    inputData = appendInput(inputData, "OR J T")
-    inputData = appendInput(inputData, "NOT T J")
+    comp.append_input("WALK")
 
-    inputData = appendInput(inputData, "WALK")
-
-    result = []
-    for i in inputData:
-        result = comp.run(i, False)
+    ascii, result = comp.run()
 
     if test:
-        outStr = ""
-        for l in result:
-            if l < 100000:
-                outStr += chr(l)
-        print(outStr)
+        print(ascii)
 
     return str(result[-1])
 
 
 def part2(data, test=False) -> str:
 
-    comp = IntcodeComputer(data[0].split(","))
+    comp = AsciiComputer(data[0].split(","))
 
-    inputData: List[str] = []
+    comp.append_input("NOT C J")
+    comp.append_input("NOT B T")
+    comp.append_input("OR T J")
+    comp.append_input("NOT A T")
+    comp.append_input("OR T J")
 
-    inputData = appendInput(inputData, "NOT C J")
-    inputData = appendInput(inputData, "NOT B T")
-    inputData = appendInput(inputData, "OR T J")
-    inputData = appendInput(inputData, "NOT A T")
-    inputData = appendInput(inputData, "OR T J")
+    comp.append_input("NOT J J")
 
-    inputData = appendInput(inputData, "NOT J J")
+    comp.append_input("NOT D T")
+    comp.append_input("OR T J")
 
-    inputData = appendInput(inputData, "NOT D T")
-    inputData = appendInput(inputData, "OR T J")
+    comp.append_input("NOT E T")
+    comp.append_input("NOT T T")
+    comp.append_input("OR H T")
+    comp.append_input("NOT T T")
+    comp.append_input("OR T J")
 
-    inputData = appendInput(inputData, "NOT E T")
-    inputData = appendInput(inputData, "NOT T T")
-    inputData = appendInput(inputData, "OR H T")
-    inputData = appendInput(inputData, "NOT T T")
-    inputData = appendInput(inputData, "OR T J")
+    comp.append_input("NOT J J")
 
-    inputData = appendInput(inputData, "NOT J J")
+    comp.append_input("RUN")
 
-    inputData = appendInput(inputData, "RUN")
+    ascii, result = comp.run()
 
-    result = []
-    for i in inputData:
-        result = comp.run(i, False)
+    if test:
+        print(ascii)
 
     return str(result[-1])
