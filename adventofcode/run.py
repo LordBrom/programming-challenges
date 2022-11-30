@@ -132,8 +132,8 @@ def printLine(line: str, toFile: bool = False):
 def main(args=None) -> None:
     # run_all()
     # return
-    year = "2017"
-    day = "25"
+    year = "2022"
+    day = "1"
 
     runTest = input("(1) Run test; (2/else) Run actual: ") == "1"
     runPart1 = input("Run part 1 (y)/else: ") == ""
