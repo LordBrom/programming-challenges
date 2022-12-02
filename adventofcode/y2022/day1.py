@@ -19,9 +19,5 @@ def part2(data, test=False) -> str:
 			continue
 		elves[-1] += int(n)
 
-	maxElf = 0
-	for e in elves:
-		maxElf = max(e, maxElf)
-
 	elves.sort()
 	return str(elves[-1] + elves[-2] + elves[-3])
