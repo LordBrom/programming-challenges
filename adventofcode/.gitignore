@@ -3,3 +3,6 @@ other.py
 .mypy*
 
 output.txt
+
+*/output/*
+*/testInputs/*

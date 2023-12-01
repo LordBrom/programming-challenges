@@ -7,6 +7,15 @@ def manhattan_distance(point1: tuple, point2: tuple) -> float:
     return result
 
 
+def get_neighbors(grid, x, y):
+    adjacent = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    neighbors = []
+    for dx, dy in adjacent:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < len(grid[0]) and 0 <= ny < len(grid):
+            neighbors.append((nx, ny))
+    return neighbors
+
 class Point:
     def __init__(self, x: int, y: int, z: int = 0) -> None:
         self.x = x
