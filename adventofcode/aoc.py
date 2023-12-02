@@ -1,3 +1,5 @@
+import os
+
 def manhattan_distance(point1: tuple, point2: tuple) -> float:
     if len(point1) != len(point2):
         raise Exception("The 2 points require the same number of coords")
@@ -14,6 +16,18 @@ def get_neighbors(grid, x, y):
         nx, ny = x + dx, y + dy
         if 0 <= nx < len(grid[0]) and 0 <= ny < len(grid):
             neighbors.append((nx, ny))
+    return neighbors
+
+
+def get_neighbors_touple(grid, x, y, z):
+    adjacent = [(-1, 0, 0), (0, 1, 0), (1, 0, 0), (0, -1, 0), \
+				(-1, 0, -1), (0, 1, -1), (1, 0, -1), (0, -1, -1), \
+				(-1, 0, 1), (0, 1, 1), (1, 0, 1), (0, -1, 1)]
+    neighbors = []
+    for dx, dy, dz in adjacent:
+        nx, ny, nz = x + dx, y + dy, z + dz
+        if 0 <= nx < len(grid[0]) and 0 <= ny < len(grid) and 0 <= nz < len(grid):
+            neighbors.append((nx, ny, nz))
     return neighbors
 
 class Point:
@@ -44,3 +58,26 @@ class Point:
         self.x += other.x
         self.y += other.y
         self.z += other.z
+
+class AoC_Base():
+	def __init__(self, data, day = ""):
+		self.day = day
+		self.outFile = None
+
+	def part1(self):
+		return "Not Implemented"
+
+	def part2(self):
+		return "Not Implemented"
+
+	def output(self, str):
+		if self.outFile == None:
+			self.create_output()
+		self.outFile.write(str + "\n")
+
+	def create_output(self):
+		if not os.path.exists("output"):
+			os.makedirs("output")
+
+		self.outFile = open(f"output/day{self.day}.out", "w")
+
