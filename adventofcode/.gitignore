@@ -2,7 +2,11 @@ other.py
 
 .mypy*
 
-output.txt
+output.*
 
-*/output/*
+/output/*
 */testInputs/*
+
+
+test.in
+test.py
