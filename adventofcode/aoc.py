@@ -9,8 +9,10 @@ def manhattan_distance(point1: tuple, point2: tuple) -> float:
     return result
 
 
-def get_neighbors(grid, x, y):
+def get_neighbors(grid, x, y, diagonal = False):
     adjacent = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    if diagonal:
+        adjacent = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1,-1), (0, -1)]
     neighbors = []
     for dx, dy in adjacent:
         nx, ny = x + dx, y + dy
