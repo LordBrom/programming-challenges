@@ -6,6 +6,7 @@ output.*
 
 /output/*
 */testInputs/*
+*/Inputs/*
 
 
 test.in
