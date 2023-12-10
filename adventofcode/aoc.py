@@ -1,3 +1,6 @@
+import os
+from math import gcd
+
 def manhattan_distance(point1: tuple, point2: tuple) -> float:
     if len(point1) != len(point2):
         raise Exception("The 2 points require the same number of coords")
@@ -6,6 +9,13 @@ def manhattan_distance(point1: tuple, point2: tuple) -> float:
         result += abs(point1[i] - point2[i])
     return result
 
+def least_common_multiple(nums):
+    lcm = 1
+
+    for num in nums:
+        lcm = lcm*num//gcd(lcm, num)
+
+    return lcm
 
 def get_neighbors(grid, x, y, diagonal = False):
     adjacent = [(-1, 0), (0, 1), (1, 0), (0, -1)]
